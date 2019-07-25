@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "362455099884",
+    "firebase_url": "https://tripair-be218.firebaseio.com",
+    "project_id": "tripair-be218",
+    "storage_bucket": "tripair-be218.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362455099884:android:a97b0d68844d81d9",
+        "android_client_info": {
+          "package_name": "com.example.tripair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362455099884-786tettj8n2kj9jacm08t2b8942un33g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo8SnPXPrEQ-i847DZfNfNq_CSYPrSF70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362455099884-786tettj8n2kj9jacm08t2b8942un33g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
