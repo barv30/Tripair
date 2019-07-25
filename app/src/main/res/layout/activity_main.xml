@@ -76,7 +76,7 @@
         android:autoText="false"
         android:background="#EFC533"
         android:onClick="onSignInClicked"
-        android:text="@string/common_signin_button_text"
+        android:text="Sign In"
         android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/signUpButton"

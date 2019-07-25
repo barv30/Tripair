@@ -9,17 +9,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dataUser.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private String userEmail;
     private String userPassword;
     private FirebaseAuth m_Auth;
+    private String first_name = "orel";
+    FirebaseDatabase database =  FirebaseDatabase.getInstance();
+
 
     public void getEmailAndPassword ()
     {
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSignInClicked(View v){
 
+        DatabaseReference mRef =  database.getReference();
+       // User user = new User("bar","vaida");
+      //  mRef.child("userProfile").push().setValue(user);
         getEmailAndPassword();
         m_Auth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
