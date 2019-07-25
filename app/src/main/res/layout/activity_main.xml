@@ -53,7 +53,6 @@
         android:layout_marginBottom="64dp"
         android:autoText="false"
         android:background="#EFC533"
-        android:enabled="false"
         android:onClick="onSignInClicked"
         android:text="SIGN IN OR REGISTER"
         android:textColor="@android:color/background_dark"
