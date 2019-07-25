@@ -9,6 +9,27 @@
 
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="145dp"
+        android:layout_height="47dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="64dp"
+        android:autoText="false"
+        android:background="#EFC533"
+        android:onClick="onSignUpClicked"
+        android:text="Sign Up"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPassword"
+        app:layout_constraintVertical_bias="0.094" />
+
     <EditText
         android:id="@+id/userEmail"
         android:layout_width="0dp"
@@ -43,25 +64,25 @@
         app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
     <Button
-        android:id="@+id/login"
-        android:layout_width="157dp"
-        android:layout_height="48dp"
+        android:id="@+id/signInButton"
+        android:layout_width="145dp"
+        android:layout_height="47dp"
         android:layout_gravity="start"
-        android:layout_marginStart="48dp"
+
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="64dp"
         android:autoText="false"
         android:background="#EFC533"
         android:onClick="onSignInClicked"
-        android:text="SIGN IN OR REGISTER"
+        android:text="@string/common_signin_button_text"
         android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintEnd_toStartOf="@+id/signUpButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userPassword"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.094" />
 
     <ProgressBar
         android:id="@+id/loading"
