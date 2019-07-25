@@ -13,4 +13,11 @@
     <string name="languages">Languages:</string>
     <string name="third_language">Third Language:</string>
     <string name="last_name">Last Name:</string>
+    <string name="textview">TextView</string>
+    <string name="picture">Picture:</string>
+    <string name="enter_last_name">Enter last name...</string>
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="man">Man</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="female">Female</string>
 </resources>
