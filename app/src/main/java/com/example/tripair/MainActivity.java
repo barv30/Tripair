@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private String userEmail;
     private String userPassword;
     private FirebaseAuth m_Auth;
-    private String first_name = "orel";
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
 

@@ -9,7 +9,6 @@ public class User {
     private String lastName;
     private Date birthDate;
     private String gender;
-    private String country;
     private ArrayList<String> languages;
     private boolean isSmoking;
     private String aboutMe;
@@ -20,7 +19,6 @@ public class User {
                 String lastName,
                 Date birthDate,
                 String gender,
-                String country,
                 ArrayList<String> languages,
                 boolean isSmoking,
                 String aboutMe)

@@ -12,11 +12,11 @@ import java.util.Collections;
 
 public class PartnerSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner spinnerLanguage;
-
+    private String selectedLanguage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_partner_settings);
         InitializeLanguages();
     }
 
@@ -47,13 +47,15 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         spinnerLanguage.setOnItemSelectedListener(this);
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        if(adapterView.getId() == R.id.languageSpinner)
 
+        if(adapterView.getId() == R.id.languageSpinner) {
             Log.i("Info", "spinnerLanguages");
+           selectedLanguage = adapterView.getSelectedItem().toString();
+         Log.i("Info", selectedLanguage);
+        }
     }
 
     @Override
