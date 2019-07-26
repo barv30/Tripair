@@ -116,26 +116,26 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
     public void saveButtonClicked(View v)
     {
-        boolean isValidInput= true;
-        String isValid = checkIfInputFromUserIsValid();
-        if(isValid != null)
-        {
-            isValidInput = false;
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence text = isValid;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-        }
-        else { // all the input from user is valid
-            //save at database
-            DatabaseReference mRef = database.getReference();
-
-            // if everything ok - move to next page
+//        boolean isValidInput= true;
+//        String isValid = checkIfInputFromUserIsValid();
+//        if(isValid != null)
+//        {
+//            isValidInput = false;
+//            Context context = getApplicationContext();
+//            int duration = Toast.LENGTH_SHORT;
+//            CharSequence text = isValid;
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
+//
+//        }
+//        else { // all the input from user is valid
+//            //save at database
+//            DatabaseReference mRef = database.getReference();
+//
+//            // if everything ok - move to next page
             Intent intent = new Intent(this, TripSettingsActivity.class);
             startActivity(intent);
-        }
+  //      }
     }
 
     private String checkIfInputFromUserIsValid(){
