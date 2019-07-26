@@ -3,7 +3,7 @@ package com.example.tripair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SettingProfile extends AppCompatActivity {
+public class SettingProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
