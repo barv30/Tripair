@@ -6,211 +6,267 @@
     android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#34495E"
     tools:context=".SettingProfileActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/EditProfile"
-            android:layout_width="281dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="217dp"
+            android:id="@+id/editProfile"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
             android:text="@string/edit_profile"
-            android:textIsSelectable="false"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/radioButtonFemale"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/FirstName"
-            android:layout_width="94dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/first_name"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.013"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EditProfile" />
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
 
-        <TextView
+        <EditText
             android:id="@+id/LastName"
-            android:layout_width="96dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/last_name"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FirstName" />
-
-        <TextView
-            android:id="@+id/Gender"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginBottom="17dp"
-            android:text="@string/gender"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/simpleDatePicker"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/BirthDate"
-            android:layout_width="89dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/birth_date"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Gender" />
-
-        <TextView
-            android:id="@+id/Country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="240dp"
-            android:text="@string/country"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BirthDate" />
-
-        <TextView
-            android:id="@+id/Languages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="23dp"
-            android:text="@string/languages"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Country" />
-
-        <TextView
-            android:id="@+id/ThirdLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/third_language"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SecondLanguage" />
-
-        <TextView
-            android:id="@+id/SecondLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/second_language"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FirstLanguage" />
-
-        <TextView
-            android:id="@+id/FirstLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/first_language"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Languages" />
-
-        <TextView
-            android:id="@+id/Smoking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="48dp"
-            android:text="@string/smoking"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ThirdLanguage" />
-
-        <EditText
-            android:id="@+id/EnterFirstName"
-            android:layout_width="207dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="32dp"
-            android:autofillHints=""
             android:ems="10"
-            android:hint="Enter First Name"
+            android:hint="@string/last_name"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toEndOf="@+id/FirstName"
-            app:layout_constraintTop_toBottomOf="@+id/EditProfile" />
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
 
-        <EditText
-            android:id="@+id/enterLastName"
-            android:layout_width="207dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:hint="Enter last name..."
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toEndOf="@+id/LastName"
-            app:layout_constraintTop_toBottomOf="@+id/EnterFirstName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radioButtonMale"
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="219dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="Gender"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <RadioGroup
+                android:id="@+id/groupGender"
+                android:layout_width="258dp"
+                android:layout_height="52dp"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/maleButton"
+                    android:layout_width="84dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male"
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+                <RadioButton
+                    android:id="@+id/femaleButton"
+                    android:layout_width="91dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/female"
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/birthDateText"
+                android:layout_width="115dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="Birth Date"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <LinearLayout
+                android:layout_width="349dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="81dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+                    <Spinner
+                        android:id="@+id/daySpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="81dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Month"
+                        android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+                    <Spinner
+                        android:id="@+id/monthSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="81dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Year"
+                        android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+                    <Spinner
+                        android:id="@+id/yearSpinner"
+                        android:layout_width="81dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/countryText"
+                android:layout_width="243dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:text="Country"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <Spinner
+                android:id="@+id/countrySpinner"
+                android:layout_width="481dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/languages"
+                android:layout_width="166dp"
+                android:layout_height="79dp"
+                android:layout_weight="1"
+                android:text="Languages"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <LinearLayout
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/languagesSpinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Spinner
+                    android:id="@+id/languageSpinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/smokingBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Smoking"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/aboutMeText"
+                android:layout_width="119dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="About Me"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="write here.."
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                    android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorLink="@color/common_google_signin_btn_text_dark_default" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/picture"
+                android:layout_width="wrap_content"
+                android:layout_height="59dp"
+                android:layout_weight="1"
+                android:text="@string/picture"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Male"
-            tools:layout_editor_absoluteX="160dp"
-            tools:layout_editor_absoluteY="173dp" />
+            android:onClick="saveButtonClicked"
+            android:text="Save" />
 
-        <RadioButton
-            android:id="@+id/radioButtonFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:checked="true"
-            android:clickable="true"
-            android:text="Female"
-            app:layout_constraintStart_toEndOf="@+id/radioButtonMale"
-            tools:layout_editor_absoluteY="173dp" />
-
-        <DatePicker
-            android:id="@+id/simpleDatePicker"
-            android:layout_width="240dp"
-            android:layout_height="223dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            tools:layout_editor_absoluteX="127dp"
-            tools:layout_editor_absoluteY="214dp" />
-
-
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

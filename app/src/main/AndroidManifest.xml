@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PartnerSettingsActivity"></activity>
+        <activity android:name=".TripSettingsActivity"></activity>
+        <activity android:name=".HomePageActivity" />
+        <activity android:name=".SettingProfileActivity" />
+        <activity android:name=".PartnerSettingsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

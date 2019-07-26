@@ -1,205 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PartnerSettingsActivity">
+    android:background="#34495E"
+    tools:context=".SettingProfileActivity">
 
-
-    <TextView
-        android:id="@+id/headLine"
-        android:layout_width="281dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:text="Choose Your Partner"
-        android:textIsSelectable="false"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/ageRange"
-        android:layout_width="93dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:text="Age Range:"
-        app:layout_constraintEnd_toStartOf="@+id/ageRangeList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headLine" />
-
-    <Spinner
-        android:id="@+id/ageRangeList"
-        android:layout_width="259dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ageRange"
-        app:layout_constraintTop_toBottomOf="@+id/headLine"
-        app:layout_constraintVertical_bias="0.035" />
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="47dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="8dp"
-        android:text="Gender"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageRange"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/languages"
-        android:layout_width="93dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/first_language"
-        app:layout_constraintEnd_toStartOf="@+id/languagesList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/maleBox"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Male"
-        app:layout_constraintBottom_toTopOf="@+id/languagesList"
-        app:layout_constraintEnd_toStartOf="@+id/femaleBox"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/gender"
-        app:layout_constraintTop_toBottomOf="@+id/ageRangeList"
-        app:layout_constraintVertical_bias="0.0" />
+        android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/femaleBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="568dp"
-        android:text="Female"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageRangeList"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/headLine"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:text="Choose Your Partner"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/languagesList"
-        android:layout_width="259dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/femaleBox"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/everyLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="464dp"
-        android:text="every language i speak"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/ageRange"
+                android:layout_width="92dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Age Range"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
-    <TextView
-        android:id="@+id/smoking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="412dp"
-        android:text="@string/smoking"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/languages"
-        app:layout_constraintVertical_bias="0.861" />
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Min Age"
+                android:inputType="numberSigned"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
+                android:textSize="14sp" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="237dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:layout_marginBottom="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/smoking"
-        app:layout_constraintTop_toBottomOf="@+id/everyLanguage"
-        app:layout_constraintVertical_bias="1.0">
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Max Age"
+                android:inputType="numberSigned"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="14sp" />
 
-        <RadioButton
-            android:id="@+id/dontCare"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:text="Gender"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+            <RadioGroup
+                android:layout_width="306dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Female"
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/languages"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" First Language"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/languageSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="every language in my profile"
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/smoking"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Smoking"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+            <RadioGroup
+                android:layout_width="327dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/dontWant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="I don't want smoking partner"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+                <RadioButton
+                    android:id="@+id/dontCare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="I don't care"
+                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="I don't care" />
+            android:text="Save and find your partner" />
 
-        <RadioButton
-            android:id="@+id/dontWant"
-            android:layout_width="254dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="I don't want smoking partner" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/savePartnerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginRight="47dp"
-        android:layout_marginBottom="290dp"
-        android:text="Save and find your partner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/everyLanguage"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.962" />
-
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
