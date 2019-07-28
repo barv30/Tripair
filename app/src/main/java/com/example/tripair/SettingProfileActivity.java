@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,14 +19,16 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class SettingProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner spinnerDay;
     private Spinner spinnerMonth;
     private Spinner spinnerYear;
+    private Spinner languagesSpinner1;
+    private Spinner languagesSpinner2;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
 
@@ -37,6 +40,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         InitializeDays();
         InitializeMonths();
         InitializeYears();
+        InitializeLanguages();
 
     }
     @Override
@@ -63,7 +67,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
 
 
-        public void InitializeDays()
+        private void InitializeDays()
         {
             ArrayList<String> days = new ArrayList<>();
             for(Integer i=1;i<=31;i++)
@@ -80,7 +84,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             spinnerDay.setOnItemSelectedListener(this);
         }
 
-    public void InitializeMonths()
+    private void InitializeMonths()
     {
         ArrayList<String> months = new ArrayList<>();
         for(Integer i=1;i<=12;i++)
@@ -97,7 +101,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         spinnerMonth.setOnItemSelectedListener(this);
     }
 
-    public void InitializeYears()
+    private void InitializeYears()
     {
         ArrayList<String> years = new ArrayList<>();
         for(Integer i=1960;i<=2019;i++)
@@ -173,6 +177,45 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         }
         return true;
     }
+
+    private void InitializeLanguages()
+    {
+        ArrayList<String> languages = getLanguagesArr();
+        languagesSpinner1 = (Spinner)findViewById(R.id.languagesSpinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingProfileActivity.this,
+                android.R.layout.simple_spinner_item,languages);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languagesSpinner1.setAdapter(adapter);
+        languagesSpinner1.setOnItemSelectedListener(this);
+
+        languagesSpinner2 = (Spinner)findViewById(R.id.languageSpinner2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SettingProfileActivity.this,
+                android.R.layout.simple_spinner_item,languages);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languagesSpinner2.setAdapter(adapter2);
+        languagesSpinner2.setOnItemSelectedListener(this);
+    }
+
+    private ArrayList<String> getLanguagesArr()
+    {
+        ArrayList<String> languages = new ArrayList<String>();
+        languages.add("Hebrew");
+        languages.add("English");
+        languages.add("Arabic");
+        languages.add("Russian");
+        languages.add("Spanish");
+        languages.add("Chinese");
+        languages.add("Japanese");
+        languages.add("Turkish");
+        languages.add("French");
+        languages.add("German");
+        languages.add("Italian");
+        Collections.sort(languages);
+        return languages;
+    }
+
 }
 
 
