@@ -23,6 +23,12 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private Spinner spinnerCountry;
     private Spinner spinnerCity;
+    private Spinner arriveSpinnerDay;
+    private Spinner arriveSpinnerMonth;
+    private Spinner arriveSpinnerYear;
+    private Spinner leftSpinnerDay;
+    private Spinner leftSpinnerMonth;
+    private Spinner leftSpinnerYear;
     private String selectedCountry;
     private int countryIndex;
     private String selectrdCity;
@@ -36,9 +42,12 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_trip_settings);
         HandleJsonParsing();
         InitializeCountries();
+        InitializeDays();
+        InitializeMonths();
+        InitializeYears();
     }
 
-    public void InitializeCities()
+    private void InitializeCities()
     {
 
         Collections.sort(cities.get(countryIndex));
@@ -110,7 +119,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
 
 
-    public void InitializeCountries()
+    private void InitializeCountries()
     {
 
         Collections.sort(countries);
@@ -146,6 +155,81 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void InitializeDays()
+    {
+        ArrayList<String> days = new ArrayList<>();
+        for(Integer i=1;i<=31;i++)
+        {
+            days.add(i.toString());
+        }
+
+        arriveSpinnerDay = (Spinner)findViewById(R.id.daySpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,days);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arriveSpinnerDay.setAdapter(adapter);
+        arriveSpinnerDay.setOnItemSelectedListener(this);
+
+        leftSpinnerDay = (Spinner)findViewById(R.id.daySpinner);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,days);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        leftSpinnerDay.setAdapter(adapter2);
+        leftSpinnerDay.setOnItemSelectedListener(this);
+    }
+
+    private void InitializeMonths()
+    {
+        ArrayList<String> months = new ArrayList<>();
+        for(Integer i=1;i<=12;i++)
+        {
+            months.add(i.toString());
+        }
+
+        arriveSpinnerMonth = (Spinner)findViewById(R.id.monthSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,months);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arriveSpinnerMonth.setAdapter(adapter);
+        arriveSpinnerMonth.setOnItemSelectedListener(this);
+
+        leftSpinnerMonth = (Spinner)findViewById(R.id.monthSpinner);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,months);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        leftSpinnerMonth.setAdapter(adapter2);
+        leftSpinnerMonth.setOnItemSelectedListener(this);
+    }
+
+    private void InitializeYears()
+    {
+        ArrayList<String> years = new ArrayList<>();
+        for(Integer i=1960;i<=2019;i++)
+        {
+            years.add(i.toString());
+        }
+
+        arriveSpinnerYear = (Spinner)findViewById(R.id.yearSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,years);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arriveSpinnerYear.setAdapter(adapter);
+        arriveSpinnerYear.setOnItemSelectedListener(this);
+
+        leftSpinnerYear = (Spinner)findViewById(R.id.yearSpinner);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+                android.R.layout.simple_spinner_item,years);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        leftSpinnerYear.setAdapter(adapter2);
+        leftSpinnerYear.setOnItemSelectedListener(this);
     }
 }
 
