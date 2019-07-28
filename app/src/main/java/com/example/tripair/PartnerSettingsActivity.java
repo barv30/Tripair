@@ -53,8 +53,8 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         if(adapterView.getId() == R.id.languageSpinner) {
             Log.i("Info", "spinnerLanguages");
-           selectedLanguage = adapterView.getSelectedItem().toString();
-         Log.i("Info", selectedLanguage);
+            selectedLanguage = adapterView.getSelectedItem().toString();
+            Log.i("Info", selectedLanguage);
         }
     }
 

@@ -29,6 +29,8 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Spinner spinnerYear;
     private Spinner languagesSpinner1;
     private Spinner languagesSpinner2;
+    String selectedLanguage1;
+    String selectedLanguage2;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
 
@@ -44,19 +46,18 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
     }
     @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+    public void onItemSelected(AdapterView<?> adapterView, View v, int position, long id) {
 
-        switch (position) {
-            case 0:
-                // Whatever you want to happen when the first item gets selected
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                break;
-
+        if(adapterView.getId() == R.id.languagesSpinner1) {
+            Log.i("Info", "spinnerLanguages");
+            selectedLanguage1 = adapterView.getSelectedItem().toString();
+            Log.i("Info", selectedLanguage1);
+        }
+        else if (adapterView.getId() == R.id.languageSpinner2)
+        {
+            Log.i("Info", "spinnerLanguages");
+            selectedLanguage2 = adapterView.getSelectedItem().toString();
+            Log.i("Info", selectedLanguage2);
         }
     }
 
@@ -120,26 +121,26 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
     public void saveButtonClicked(View v)
     {
-//        boolean isValidInput= true;
-//        String isValid = checkIfInputFromUserIsValid();
-//        if(isValid != null)
-//        {
-//            isValidInput = false;
-//            Context context = getApplicationContext();
-//            int duration = Toast.LENGTH_SHORT;
-//            CharSequence text = isValid;
-//            Toast toast = Toast.makeText(context, text, duration);
-//            toast.show();
-//
-//        }
-//        else { // all the input from user is valid
-//            //save at database
-//            DatabaseReference mRef = database.getReference();
-//
-//            // if everything ok - move to next page
+        boolean isValidInput= true;
+        String isValid = checkIfInputFromUserIsValid();
+        if(isValid != null)
+        {
+            isValidInput = false;
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+        }
+        else { // all the input from user is valid
+            //save at database
+            DatabaseReference mRef = database.getReference();
+
+            // if everything ok - move to next page
             Intent intent = new Intent(this, TripSettingsActivity.class);
             startActivity(intent);
-  //      }
+       }
     }
 
     private String checkIfInputFromUserIsValid(){
@@ -152,13 +153,13 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         if(radioButton ==  null) {
             msgIsValid= "You need to choose gender!";
         }
-        else if (userFirstName.toString() == null || isContainsNumbers(userFirstName.toString()))
+        else if (userFirstName.getText().toString() == null || isContainsNumbers(userFirstName.toString()))
         {
-          msgIsValid = "first name invalid!";
+          msgIsValid = "first name invalid! Only letters allowed";
         }
-        else if(userLastName.toString() == null || isContainsNumbers(userLastName.toString()))
+        else if(userLastName.getText().toString() == null || isContainsNumbers(userLastName.getText().toString()))
         {
-            msgIsValid = "last name invalidS!";
+            msgIsValid = "last name invalid! Only letters allowed";
         }
 
 
