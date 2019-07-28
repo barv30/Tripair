@@ -31,7 +31,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private Spinner leftSpinnerYear;
     private String selectedCountry;
     private int countryIndex;
-    private String selectrdCity;
+    private String selectedCity;
 
     private ArrayList<String> countries = new ArrayList<>();
     private ArrayList<ArrayList<String>> cities = new ArrayList<>();
@@ -147,8 +147,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
         if(adapterView.getId() == R.id.citiesSpinner) {
             Log.i("Info", "spinnerCity");
-            selectrdCity = adapterView.getSelectedItem().toString();
-            Log.i("Info", selectrdCity);
+            selectedCity = adapterView.getSelectedItem().toString();
+            Log.i("Info", selectedCity);
         }
     }
 
@@ -210,7 +210,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private void InitializeYears()
     {
         ArrayList<String> years = new ArrayList<>();
-        for(Integer i=1960;i<=2019;i++)
+        for(Integer i=2019;i<=2030;i++)
         {
             years.add(i.toString());
         }
