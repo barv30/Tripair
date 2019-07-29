@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 
 public class SettingProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -31,7 +32,14 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Spinner languagesSpinner2;
     String selectedLanguage1;
     String selectedLanguage2;
+    private String m_userFirstName;
+    private String m_userLastName;
+    private Date m_userBirthDate;
+    private boolean m_isUserSmoking;
+    private String m_userGender;
+    private String m_aboutUser;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
+
 
 
 
@@ -48,17 +56,38 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View v, int position, long id) {
 
-        if(adapterView.getId() == R.id.languagesSpinner1) {
-            Log.i("Info", "spinnerLanguages");
-            selectedLanguage1 = adapterView.getSelectedItem().toString();
-            Log.i("Info", selectedLanguage1);
-        }
-        else if (adapterView.getId() == R.id.languageSpinner2)
+        switch(adapterView.getId())
         {
-            Log.i("Info", "spinnerLanguages");
-            selectedLanguage2 = adapterView.getSelectedItem().toString();
-            Log.i("Info", selectedLanguage2);
+            case R.id.languagesSpinner1:
+            {
+                Log.i("Info", "spinnerLanguages");
+                selectedLanguage1 = adapterView.getSelectedItem().toString();
+                Log.i("Info", selectedLanguage1);
+                break;
+            }
+            case R.id.languageSpinner2:
+            {
+                Log.i("Info", "spinnerLanguages");
+                selectedLanguage2 = adapterView.getSelectedItem().toString();
+                Log.i("Info", selectedLanguage2);
+                break;
+            }
+            case R.id.daySpinner:
+            {
+                break;
+            }
+            case R.id.monthSpinner:
+            {
+                break;
+            }
+            case R.id.yearSpinner:
+            {
+                break;
+            }
+
         }
+
+
     }
 
     @Override
@@ -123,7 +152,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     {
         boolean isValidInput= true;
         String isValid = checkIfInputFromUserIsValid();
-        if(isValid != null)
+        if(isValid != "")
         {
             isValidInput = false;
             Context context = getApplicationContext();
@@ -146,24 +175,38 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private String checkIfInputFromUserIsValid(){
         String msgIsValid = "";
         EditText userFirstName = (EditText) findViewById(R.id.firstName);
+        String userFirstNameText = userFirstName.getText().toString();
         EditText userLastName = (EditText) findViewById(R.id.LastName);
+        String userLastNameText = userLastName.getText().toString();
+
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.groupGender);
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = (RadioButton)radioGroup.findViewById(radioButtonID);
         if(radioButton ==  null) {
             msgIsValid= "You need to choose gender!";
         }
-        else if (userFirstName.getText().toString() == null || isContainsNumbers(userFirstName.toString()))
+        else if (userFirstNameText == null || isContainsNumbers(userFirstNameText))
         {
           msgIsValid = "first name invalid! Only letters allowed";
         }
-        else if(userLastName.getText().toString() == null || isContainsNumbers(userLastName.getText().toString()))
+        else if(userLastNameText == null || isContainsNumbers(userLastNameText))
         {
             msgIsValid = "last name invalid! Only letters allowed";
+        }
+        else if(selectedLanguage1 == null || selectedLanguage2 == null)
+        {
+            msgIsValid = "you need to choose languages!";
         }
 
 
         // get values from spinners and check if ok
+        if(msgIsValid.equals(""))
+        {
+            m_userFirstName = userFirstNameText;
+            m_userLastName = userLastNameText;
+            m_userGender = radioButton.getText().toString();
+
+        }
         return msgIsValid;
     }
 
