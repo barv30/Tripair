@@ -217,26 +217,22 @@
 
             <TextView
                 android:id="@+id/aboutMeText"
-                android:layout_width="119dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:hint="Write here.."
                 android:text="About Me"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/aboutMeInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed">
-
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="write here.."
-                    android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-                    android:textColorHint="@color/common_google_signin_btn_text_dark_default"
-                    android:textColorLink="@color/common_google_signin_btn_text_dark_default" />
-            </android.support.design.widget.TextInputLayout>
+                android:ems="10"
+                android:hint="Write here.."
+                android:inputType="textPersonName"
+                android:textColorHint="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>
 
