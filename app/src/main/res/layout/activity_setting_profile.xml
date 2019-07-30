@@ -232,6 +232,7 @@
                 android:ems="10"
                 android:hint="Write here.."
                 android:inputType="textPersonName"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textColorHint="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>

@@ -10,4 +10,12 @@ public class TripManager
     {
         tripList = new ArrayList<>();
     }
+
+    public ArrayList<Trip> getTripList() {
+        return tripList;
+    }
+
+    public void setTripList(ArrayList<Trip> tripList) {
+        this.tripList = tripList;
+    }
 }

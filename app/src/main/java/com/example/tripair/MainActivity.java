@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     public void onSignInClicked(View v){
 
         DatabaseReference mRef =  database.getReference();
-       // User user = new User("bar","vaida");
-      //  mRef.child("userProfile").push().setValue(user);
         getEmailAndPassword();
         m_Auth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
