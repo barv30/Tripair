@@ -165,7 +165,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             days.add(i.toString());
         }
 
-        arriveSpinnerDay = (Spinner)findViewById(R.id.daySpinner);
+        arriveSpinnerDay = (Spinner)findViewById(R.id.spinnerArriveDay);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,days);
 
@@ -173,7 +173,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerDay.setAdapter(adapter);
         arriveSpinnerDay.setOnItemSelectedListener(this);
 
-        leftSpinnerDay = (Spinner)findViewById(R.id.daySpinner);
+        leftSpinnerDay = (Spinner)findViewById(R.id.spinnerLeftDay);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,days);
 
@@ -190,7 +190,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             months.add(i.toString());
         }
 
-        arriveSpinnerMonth = (Spinner)findViewById(R.id.monthSpinner);
+        arriveSpinnerMonth = (Spinner)findViewById(R.id.spinnerArriveMonth);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,months);
 
@@ -198,7 +198,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerMonth.setAdapter(adapter);
         arriveSpinnerMonth.setOnItemSelectedListener(this);
 
-        leftSpinnerMonth = (Spinner)findViewById(R.id.monthSpinner);
+        leftSpinnerMonth = (Spinner)findViewById(R.id.spinnerLeftMonth);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,months);
 
@@ -215,7 +215,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             years.add(i.toString());
         }
 
-        arriveSpinnerYear = (Spinner)findViewById(R.id.yearSpinner);
+        arriveSpinnerYear = (Spinner)findViewById(R.id.spinnerArriveYear);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,years);
 
@@ -223,7 +223,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerYear.setAdapter(adapter);
         arriveSpinnerYear.setOnItemSelectedListener(this);
 
-        leftSpinnerYear = (Spinner)findViewById(R.id.yearSpinner);
+        leftSpinnerYear = (Spinner)findViewById(R.id.spinnerLeftYear);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,years);
 

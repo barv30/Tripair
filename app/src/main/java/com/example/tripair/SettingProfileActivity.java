@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,9 +20,13 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class SettingProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -30,14 +35,18 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Spinner spinnerYear;
     private Spinner languagesSpinner1;
     private Spinner languagesSpinner2;
-    String selectedLanguage1;
+    String selectedLanguageNative;
     String selectedLanguage2;
     private String m_userFirstName;
     private String m_userLastName;
     private Date m_userBirthDate;
-    private boolean m_isUserSmoking;
+    private boolean m_isUserSmoking = false;
     private String m_userGender;
     private String m_aboutUser;
+    private int m_dayBirth;
+    private int m_monthBirth;
+    private int m_yearBirth;
+    private Calendar myCal = Calendar.getInstance();
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
 
@@ -47,6 +56,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_profile);
+        m_userBirthDate = new Date();
         InitializeDays();
         InitializeMonths();
         InitializeYears();
@@ -61,8 +71,8 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             case R.id.languagesSpinner1:
             {
                 Log.i("Info", "spinnerLanguages");
-                selectedLanguage1 = adapterView.getSelectedItem().toString();
-                Log.i("Info", selectedLanguage1);
+                selectedLanguageNative = adapterView.getSelectedItem().toString();
+                Log.i("Info", selectedLanguageNative);
                 break;
             }
             case R.id.languageSpinner2:
@@ -74,14 +84,23 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             }
             case R.id.daySpinner:
             {
+                Log.i("Info", "spinnerLanguages");
+                m_dayBirth =Integer.parseInt( adapterView.getSelectedItem().toString());
+                Log.i("Info", String.valueOf(m_dayBirth));
                 break;
             }
             case R.id.monthSpinner:
             {
+                Log.i("Info", "spinnerLanguages");
+                m_monthBirth =Integer.parseInt( adapterView.getSelectedItem().toString());
+                Log.i("Info", String.valueOf(m_monthBirth));
                 break;
             }
             case R.id.yearSpinner:
             {
+                Log.i("Info", "spinnerLanguages");
+                m_yearBirth =Integer.parseInt( adapterView.getSelectedItem().toString());
+                Log.i("Info", String.valueOf(m_yearBirth));
                 break;
             }
 
@@ -97,8 +116,8 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
 
 
-        private void InitializeDays()
-        {
+    private void InitializeDays()
+    {
             ArrayList<String> days = new ArrayList<>();
             for(Integer i=1;i<=31;i++)
             {
@@ -112,7 +131,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerDay.setAdapter(adapter);
             spinnerDay.setOnItemSelectedListener(this);
-        }
+    }
 
     private void InitializeMonths()
     {
@@ -148,11 +167,10 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         spinnerYear.setOnItemSelectedListener(this);
     }
 
-    public void saveButtonClicked(View v)
-    {
+    public void saveButtonClicked(View v) throws ParseException {
         boolean isValidInput= true;
         String isValid = checkIfInputFromUserIsValid();
-        if(isValid != "")
+        if(isValid != null)
         {
             isValidInput = false;
             Context context = getApplicationContext();
@@ -172,42 +190,55 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
        }
     }
 
-    private String checkIfInputFromUserIsValid(){
-        String msgIsValid = "";
+    private String checkIfInputFromUserIsValid() {
         EditText userFirstName = (EditText) findViewById(R.id.firstName);
         String userFirstNameText = userFirstName.getText().toString();
         EditText userLastName = (EditText) findViewById(R.id.LastName);
         String userLastNameText = userLastName.getText().toString();
+        CheckBox checkBoxSmoking = (CheckBox) findViewById(R.id.smokingBox);
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.groupGender);
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = (RadioButton)radioGroup.findViewById(radioButtonID);
         if(radioButton ==  null) {
-            msgIsValid= "You need to choose gender!";
+            return "You need to choose gender!";
         }
         else if (userFirstNameText == null || isContainsNumbers(userFirstNameText))
         {
-          msgIsValid = "first name invalid! Only letters allowed";
+           return "First name invalid! Only letters allowed";
         }
         else if(userLastNameText == null || isContainsNumbers(userLastNameText))
         {
-            msgIsValid = "last name invalid! Only letters allowed";
+             return "Last name invalid! Only letters allowed";
         }
-        else if(selectedLanguage1 == null || selectedLanguage2 == null)
+        else if(selectedLanguageNative.equals("Arabic") && selectedLanguage2.equals("Arabic"))
         {
-            msgIsValid = "you need to choose languages!";
+            return "You need to choose languages!";
+        }
+
+        else if(m_dayBirth == 1 && m_monthBirth == 1 && m_yearBirth ==1960) // need to fix!!!!!
+        {
+            return "You need to choose birth date";
         }
 
 
         // get values from spinners and check if ok
-        if(msgIsValid.equals(""))
-        {
+        else {
+            boolean checked = checkBoxSmoking.isChecked();
+            if(checked)
+            {
+                m_isUserSmoking = true;
+            }
             m_userFirstName = userFirstNameText;
             m_userLastName = userLastNameText;
             m_userGender = radioButton.getText().toString();
+            myCal.set(Calendar.YEAR, m_yearBirth);
+            myCal.set(Calendar.MONTH,m_monthBirth);
+            myCal.set(Calendar.DAY_OF_MONTH, m_dayBirth);
+            m_userBirthDate = myCal.getTime();
 
         }
-        return msgIsValid;
+        return null;
     }
 
     private boolean isContainsNumbers(String str)
@@ -216,10 +247,10 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
         for (char c : chars) {
             if(!Character.isLetter(c)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private void InitializeLanguages()
