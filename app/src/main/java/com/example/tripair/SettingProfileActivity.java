@@ -164,12 +164,11 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         spinnerYear.setOnItemSelectedListener(this);
     }
 
-    public void saveButtonClicked(View v) throws ParseException {
-        boolean isValidInput= true;
+    public void saveButtonClicked(View v)
+    {
         String isValid = checkIfInputFromUserIsValid();
         if(isValid != null)
         {
-            isValidInput = false;
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
             CharSequence text = isValid;

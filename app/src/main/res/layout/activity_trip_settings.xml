@@ -86,7 +86,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -99,7 +99,7 @@
                 android:textSize="16sp" />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/checkBoxRelax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,19 +107,19 @@
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkBoxArt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_weight="1"
                 android:text="Art and History"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkBoxNature"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Tracks"
+                android:text="Nature and Tracks"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
         </LinearLayout>
 

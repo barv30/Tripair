@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +58,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_trip_settings);
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
+        typeTripArr = new ArrayList<>();
         HandleJsonParsing();
         InitializeCountries();
         InitializeDays();
@@ -304,10 +307,43 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
     public void onContinueButtonClicked(View v)
     {
-    Intent intent = new Intent(this, PartnerSettingsActivity.class);
-    startActivity(intent);
+        String isValid = checkIfInputFromUserIsValid();
+        if(isValid!= null)
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+            Intent intent = new Intent(this, PartnerSettingsActivity.class);
+            startActivity(intent);
+        }
     }
 
+    private String checkIfInputFromUserIsValid()
+    {
+        CheckBox checkBoxRelax = (CheckBox) findViewById(R.id.checkBoxRelax);
+        CheckBox checkBoxTracks = (CheckBox) findViewById(R.id.checkBoxNature);
+        CheckBox checkBoxArt = (CheckBox) findViewById(R.id.checkBoxArt);
+        boolean checkedRelax = checkBoxRelax.isChecked();
+        boolean checkedArt = checkBoxArt.isChecked();
+        boolean checkedTracks = checkBoxTracks.isChecked();
+        if(!checkedRelax && !checkedTracks && !checkedArt)
+        {
+            return "You have to choose style trip!";
+        }
+
+        else
+        {
+
+        }
+
+
+        return null;
+    }
 }
 
 

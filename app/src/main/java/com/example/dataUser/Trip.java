@@ -7,8 +7,12 @@ public class Trip {
     private String country;
     private String city;
     private ArrayList<String> styleTrip;
-    private Date arriveDate;
-    private Date leftDate;
+    private int arriveDay;
+    private int arriveMonth;
+    private int arriveYear;
+    private int leftDay;
+    private int leftMonth;
+    private int leftYear;
     private Partner partner;
     private PartnerManager partnerList;
 
@@ -21,12 +25,28 @@ public class Trip {
         return styleTrip;
     }
 
-    public Date getArriveDate() {
-        return arriveDate;
+    public int getArriveDay() {
+        return arriveDay;
     }
 
-    public Date getLeftDate() {
-        return leftDate;
+    public int getArriveMonth() {
+        return arriveMonth;
+    }
+
+    public int getArriveYear() {
+        return arriveYear;
+    }
+
+    public int getLeftDay() {
+        return leftDay;
+    }
+
+    public int getLeftMonth() {
+        return leftMonth;
+    }
+
+    public int getLeftYear() {
+        return leftYear;
     }
 
     public Partner getPartner() {
@@ -45,9 +65,6 @@ public class Trip {
         return country;
     }
 
-    public void setArriveDate(Date arriveDate) {
-        this.arriveDate = arriveDate;
-    }
 
     public void setCity(String city) {
         this.city = city;
@@ -57,9 +74,6 @@ public class Trip {
         this.country = country;
     }
 
-    public void setLeftDate(Date leftDate) {
-        this.leftDate = leftDate;
-    }
 
     public void setPartner(Partner partner) {
         this.partner = partner;
@@ -71,5 +85,29 @@ public class Trip {
 
     public void setPartnerList(PartnerManager partnerList) {
         this.partnerList = partnerList;
+    }
+
+    public void setArriveDay(int arriveDay) {
+        this.arriveDay = arriveDay;
+    }
+
+    public void setArriveMonth(int arriveMonth) {
+        this.arriveMonth = arriveMonth;
+    }
+
+    public void setArriveYear(int arriveYear) {
+        this.arriveYear = arriveYear;
+    }
+
+    public void setLeftDay(int leftDay) {
+        this.leftDay = leftDay;
+    }
+
+    public void setLeftMonth(int leftMonth) {
+        this.leftMonth = leftMonth;
+    }
+
+    public void setLeftYear(int leftYear) {
+        this.leftYear = leftYear;
     }
 }
