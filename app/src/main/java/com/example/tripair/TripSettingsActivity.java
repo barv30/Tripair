@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Trip;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +32,7 @@ import java.util.Iterator;
 
 public class TripSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    FirebaseDatabase database =  FirebaseDatabase.getInstance();
     private Spinner spinnerCountry;
     private Spinner spinnerCity;
     private Spinner arriveSpinnerDay;
@@ -321,6 +324,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
         else {
             Trip trip = initTrip();
+            DatabaseReference mRef = database.getReference();
+            mRef.child("tripSettings").push().setValue(trip);
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             startActivity(intent);
         }
@@ -354,6 +359,10 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         if(!checkedRelax && !checkedTracks && !checkedArt)
         {
             return "You have to choose style trip!";
+        }
+        else if (m_yearLeft < m_yearArrive)
+        {
+            return "Your left date is invalid!";
         }
 
         else

@@ -2,7 +2,6 @@ package com.example.dataUser;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class User {
     private String firstName;
@@ -38,6 +37,7 @@ public class User {
         this.languages = languages;
         this.isSmoking = isSmoking;
         this.aboutMe = aboutMe;
+        this.allTrips = new TripManager();
     }
 
     public ArrayList<String> getLanguages() {

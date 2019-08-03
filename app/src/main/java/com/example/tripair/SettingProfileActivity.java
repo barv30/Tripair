@@ -189,7 +189,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             mRef.child("userProfile").push().setValue(userInput);
 
             // if everything ok - move to next page
-            Intent intent = new Intent(this, TripSettingsActivity.class);
+            Intent intent = new Intent(this, HomePageActivity.class);
             startActivity(intent);
        }
     }
