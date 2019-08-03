@@ -19,6 +19,8 @@ public class Trip {
 
     public Trip() {
         styleTrip = new ArrayList<>();
+        partner = new Partner();
+        partnerList = new PartnerManager();
     }
 
     public ArrayList<String> getStyleTrip() {

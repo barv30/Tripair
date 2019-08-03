@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dataUser.Trip;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -318,9 +320,27 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         else {
+            Trip trip = initTrip();
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             startActivity(intent);
         }
+    }
+
+    private Trip initTrip() {
+        Trip trip = new Trip();
+        trip.setCountry(m_selectedCountry);
+        trip.setCity(m_selectedCity);
+        trip.setArriveDay(m_dayArrive);
+        trip.setArriveMonth(m_monthArrive);
+        trip.setArriveYear(m_yearArrive);
+        trip.setStyleTrip(typeTripArr);
+        if(m_dayLeft!=0 && m_monthLeft!=0 && m_yearLeft!=0)
+        {
+            trip.setLeftDay(m_dayLeft);
+            trip.setLeftYear(m_yearLeft);
+            trip.setLeftMonth(m_monthLeft);
+        }
+        return trip;
     }
 
     private String checkIfInputFromUserIsValid()
@@ -338,7 +358,25 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
         else
         {
+            if(checkedArt)
+            {
+                typeTripArr.add("Art and History");
+            }
+            if(checkedRelax)
+            {
+                typeTripArr.add("Relax");
 
+            }
+            if (checkedTracks)
+            {
+                typeTripArr.add("Tracks and Nature");
+            }
+            if(m_dayLeft == m_dayArrive && m_monthLeft == m_monthArrive && m_yearLeft == m_yearArrive) //the user doesn't choose left date
+            {
+                m_yearLeft=0;
+                m_dayLeft=0;
+                m_monthLeft=0;
+            }
         }
 
 
