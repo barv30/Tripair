@@ -188,7 +188,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             DatabaseReference mRef = database.getReference();
             mRef.child("userProfile").push().setValue(userInput);
 
-            // if everything ok - move to next page
+            // if everything ok - move to home page
             Intent intent = new Intent(this, HomePageActivity.class);
             startActivity(intent);
        }

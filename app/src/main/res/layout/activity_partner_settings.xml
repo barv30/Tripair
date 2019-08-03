@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#34495E"
-    tools:context=".SettingProfileActivity">
+    tools:context=".PartnerSettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/minAge"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,7 +48,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/maxAge"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -75,6 +75,7 @@
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <RadioGroup
+                android:id="@+id/genderGroup"
                 android:layout_width="306dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -119,14 +120,8 @@
                 <Spinner
                     android:id="@+id/languageSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="35dp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="every language in my profile"
-                    android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
             </LinearLayout>
         </LinearLayout>
 
@@ -144,6 +139,7 @@
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
             <RadioGroup
+                android:id="@+id/smokingGroup"
                 android:layout_width="327dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -167,9 +163,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onSaveAndFindButtonClicked"
             android:text="Save and find your partner" />
 
     </LinearLayout>

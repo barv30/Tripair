@@ -2,6 +2,7 @@ package com.example.dataUser;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class User {
     private String firstName;
@@ -13,6 +14,7 @@ public class User {
     private ArrayList<String> languages;
     private boolean isSmoking;
     private String aboutMe;
+    private int age;
     private TripManager allTrips;
 
 
@@ -38,6 +40,14 @@ public class User {
         this.isSmoking = isSmoking;
         this.aboutMe = aboutMe;
         this.allTrips = new TripManager();
+        this.age = calculateAge();
+    }
+
+    private int calculateAge() {
+        Calendar calendar = Calendar.getInstance();
+        int currentYear=calendar.get(Calendar.YEAR);
+        return currentYear - birthYear;
+
     }
 
     public ArrayList<String> getLanguages() {

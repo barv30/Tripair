@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -360,7 +361,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         {
             return "You have to choose style trip!";
         }
-        else if (m_yearLeft < m_yearArrive)
+        else if (m_yearLeft < m_yearArrive && m_yearLeft != calendar.get(Calendar.YEAR))
         {
             return "Your left date is invalid!";
         }
