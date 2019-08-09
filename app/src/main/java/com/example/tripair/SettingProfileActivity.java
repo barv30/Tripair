@@ -183,7 +183,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            User userInput = new User(m_userFirstName,m_userFirstName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
+            User userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
             //save at database
             DatabaseReference mRef = database.getReference();
             mRef.child("userProfile").push().setValue(userInput);
