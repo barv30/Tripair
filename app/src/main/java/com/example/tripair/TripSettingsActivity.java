@@ -330,7 +330,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             TripManager tripManager = new TripManager();
             Trip trip = initTrip();
             DatabaseReference mRef = database.getReference();
-           mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").setValue(trip);
+           mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().setValue(trip);
             //   String tripKey =mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").getKey();
             String tripKey = "111";
             Log.i("Info",tripKey);
