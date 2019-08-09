@@ -1,8 +1,9 @@
 package com.example.dataUser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Partner {
+public class Partner implements Serializable {
     private int minAge;
     private int maxAge;
     private String gender;

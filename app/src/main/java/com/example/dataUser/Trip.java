@@ -1,9 +1,10 @@
 package com.example.dataUser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Trip {
+public class Trip implements Serializable {
     private String country;
     private String city;
     private ArrayList<String> styleTrip;

@@ -104,6 +104,13 @@ public class User implements Serializable {
     }
 
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public boolean isSmoking() {
         return isSmoking;

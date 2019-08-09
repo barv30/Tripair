@@ -329,13 +329,11 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         else {
-            TripManager tripManager = new TripManager();
             Trip trip = initTrip();
             String tripKey = trip.getCountry();
-            tripManager.updateTripList(tripKey, trip);
-            m_user.setAllTrips(tripManager);
+            m_user.getAllTrips().updateTripList(tripKey, trip);
 
-            Log.i("Info",tripManager.getTripList().toString());
+            Log.i("Info",m_user.getAllTrips().getTripList().toString());
 
             DatabaseReference mRef = database.getReference();
             mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(tripKey).push().setValue(trip);

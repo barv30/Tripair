@@ -1,8 +1,9 @@
 package com.example.dataUser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PartnerManager {
+public class PartnerManager implements Serializable {
     public ArrayList<Partner> partnerList;
 
     public ArrayList<Partner> getPartnerList() {

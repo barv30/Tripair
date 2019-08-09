@@ -117,7 +117,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").child(m_tripKey).push().setValue(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").push().setValue(settingOfPartner);
             Intent intent = new Intent(this, TripPageActivity.class);
             startActivity(intent);
         }
