@@ -16,10 +16,14 @@ public class TripManager
     }
 
     public void updateTripList(String key, Trip trip) {
-        tripList.add(Integer.parseInt(key),trip);
+        tripList.add(trip);
     }
 
-    public Trip findInTripList(String key) {
-        return tripList.get(Integer.parseInt(key));
+    public boolean findInTripList(String key) {
+        for (int i =0 ;i < tripList.size(); i++) {
+            if (tripList.get(i).getCountry() == key)
+                return true;
+        }
+        return false;
     }
 }
