@@ -31,6 +31,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Spinner languagesSpinner2;
     String selectedLanguageNative;
     String selectedLanguage2;
+    private String m_user_mail;
     private String m_userFirstName;
     private String m_userLastName;
     private boolean m_isUserSmoking = false;
@@ -51,6 +52,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_setting_profile);
         Intent intent=getIntent();
         m_uid_user = intent.getStringExtra("userUid");
+        m_user_mail = intent.getStringExtra("userEmail");
         //m_user = intent.getExtras();
         InitializeDays();
         InitializeMonths();
@@ -181,11 +183,11 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
+            m_userInput = new User(m_user_mail,m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
             //save at database
             DatabaseReference mRef = database.getReference();
             mRef.child("usersProfile").child(m_uid_user).push().setValue(m_userInput);
-
+            
             // if everything ok - move to home page
             Intent intent = new Intent(this, TripPageActivity.class);
             intent.putExtra("userUid", m_uid_user);

@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.putExtra("userUid" , uid);
+        intent.putExtra("userEmail" , userEmail);
         startActivity(intent);
     }
 

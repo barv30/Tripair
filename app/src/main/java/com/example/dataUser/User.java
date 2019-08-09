@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class User implements Serializable {
+    private String userPassword;
     private String firstName;
     private String lastName;
     private String gender;
@@ -19,7 +20,8 @@ public class User implements Serializable {
     private TripManager allTrips;
 
 
-    public User(String firstName,
+    public User(String userPassword,
+                String firstName,
                 String lastName,
                 int day,
                 int month,
@@ -29,6 +31,7 @@ public class User implements Serializable {
                 boolean isSmoking,
                 String aboutMe)
     {
+        this.userPassword = userPassword;
         this.allTrips = new TripManager() ;
         this.firstName = firstName;
         this.lastName = lastName;
