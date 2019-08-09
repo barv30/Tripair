@@ -13,11 +13,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Partner;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class PartnerSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    FirebaseDatabase database =  FirebaseDatabase.getInstance();
     private Spinner spinnerLanguage;
     private String selectedLanguage;
     private int m_minAge;
@@ -100,7 +103,10 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-        Partner newPartner = initPartner();
+            Partner settingOfPartner = initPartner();
+            //save at database
+            DatabaseReference mRef = database.getReference();
+            mRef.child("usersProfile").child("tripSettings").child("trips").child("parterSetting").push().setValue(settingOfPartner);
         }
     }
 
