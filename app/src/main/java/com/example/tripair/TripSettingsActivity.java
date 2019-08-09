@@ -318,7 +318,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         String isValid = checkIfInputFromUserIsValid();
         if(isValid!= null)
         {
-            Context context = getApplicationContext();56
+            Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
             CharSequence text = isValid;
             Toast toast = Toast.makeText(context, text, duration);
