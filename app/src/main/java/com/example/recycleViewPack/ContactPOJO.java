@@ -1,4 +1,4 @@
-package com.example.tripair;
+package com.example.recycleViewPack;
 
 public class ContactPOJO {
 

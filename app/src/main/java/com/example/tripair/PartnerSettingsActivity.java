@@ -12,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dataUser.Partner;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -74,6 +76,16 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
     }
 
+    private Partner initPartner()
+    {
+        Partner newPartner= new Partner();
+        newPartner.setGender(m_gender);
+        newPartner.setMaxAge(m_maxAge);
+        newPartner.setMinAge(m_minAge);
+        newPartner.setSmoking(m_isSmoking);
+        newPartner.setMainLanguage(m_language);
+        return newPartner;
+    }
     public void onSaveAndFindButtonClicked(View v)
     {
         String isValid = checkIfInputFromUserIsValid();
@@ -88,7 +100,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-
+        Partner newPartner = initPartner();
         }
     }
 

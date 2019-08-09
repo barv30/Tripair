@@ -6,20 +6,15 @@ public class Partner {
     private int minAge;
     private int maxAge;
     private String gender;
-    private ArrayList<String> languages;
+    private String mainLanguage;
     private boolean isSmoking;
 
-    public Partner() {
-        languages = new ArrayList<>();
-    }
+
 
     public String getGender() {
         return gender;
     }
 
-    public ArrayList<String> getLanguages() {
-        return languages;
-    }
 
     public int getMaxAge() {
         return maxAge;
@@ -27,6 +22,10 @@ public class Partner {
 
     public int getMinAge() {
         return minAge;
+    }
+
+    public String getMainLanguage() {
+        return mainLanguage;
     }
 
     public void setGender(String gender) {
@@ -46,8 +45,8 @@ public class Partner {
         isSmoking = smoking;
     }
 
-    public void setLanguages(ArrayList<String> languages) {
-        this.languages = languages;
+    public void setMainLanguage(String mainLanguage) {
+        this.mainLanguage = mainLanguage;
     }
 
     public void setMinAge(int minAge) {
