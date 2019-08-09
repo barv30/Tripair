@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dataUser.User;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,7 +45,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private int m_dayBirth;
     private int m_monthBirth;
     private int m_yearBirth;
-
+    private String m_uid_user;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
 
@@ -54,6 +55,9 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_profile);
+        Intent intent=getIntent();
+        m_uid_user = intent.getStringExtra("userUid");
+        //m_user = intent.getExtras();
         InitializeDays();
         InitializeMonths();
         InitializeYears();
@@ -186,10 +190,11 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             User userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").push().setValue(userInput);
+            mRef.child("usersProfile").child(m_uid_user).push().setValue(userInput);
 
             // if everything ok - move to home page
             Intent intent = new Intent(this, HomePageActivity.class);
+            intent.putExtra("userUid", m_uid_user);
             startActivity(intent);
        }
     }

@@ -53,6 +53,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private int m_yearLeft;
     private ArrayList<String> typeTripArr;
     Calendar calendar = Calendar.getInstance();
+    private String m_uid;
 
 
     private ArrayList<String> countries = new ArrayList<>();
@@ -62,6 +63,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_settings);
+        m_uid = getIntent().getStringExtra("userUid");
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
         typeTripArr = new ArrayList<>();
@@ -316,7 +318,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         String isValid = checkIfInputFromUserIsValid();
         if(isValid!= null)
         {
-            Context context = getApplicationContext();
+            Context context = getApplicationContext();56
             int duration = Toast.LENGTH_SHORT;
             CharSequence text = isValid;
             Toast toast = Toast.makeText(context, text, duration);
@@ -326,7 +328,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         else {
             Trip trip = initTrip();
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child("tripSettings").child("trips").push().setValue(trip);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().setValue(trip);
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             startActivity(intent);
         }

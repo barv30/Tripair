@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.i("Info", "signInWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
-                            openMainPageActivity();
-                         //   updateUI(user); move to home page
+                            String uid = user.getUid();
+                            openMainPageActivity(user,uid);     //  move to home page
+
                         } else {
                             FirebaseAuthException e = (FirebaseAuthException )task.getException();
                             Log.e("LoginActivity", "Failed signing in", e);
@@ -61,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.i("Info", "signInWithEmail:failure", task.getException());
 
-                           // updateUI(null);
                         }
 
-                        // ...
                     }
                 });
     }
@@ -80,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.i("Info", "createUserWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
-                            openSettingsProfileActivity();
-                           // updateUI(user); move to edit profile
+                            String uid = user.getUid();
+                            openSettingsProfileActivity(user,uid);// move to edit profile
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.i("Info", "createUserWithEmail:failure", task.getException());
@@ -93,20 +92,22 @@ public class MainActivity extends AppCompatActivity {
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
                         }
-
-                        // ...
                     }
                 });
     }
 
-    private void openSettingsProfileActivity() {
+    private void openSettingsProfileActivity(FirebaseUser user,String uid) {
         Intent intent = new Intent(this,SettingProfileActivity.class);
+        intent.putExtra("userUid" , uid);
+        intent.putExtra("user" , user);
         startActivity(intent);
     }
 
-    private void openMainPageActivity()
+    private void openMainPageActivity(FirebaseUser user,String uid)
     {
         Intent intent = new Intent(this, HomePageActivity.class);
+        intent.putExtra("userUid" , uid);
+        intent.putExtra("user" , user);
         startActivity(intent);
     }
 
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         m_Auth = FirebaseAuth.getInstance();
-
     }
 }
 

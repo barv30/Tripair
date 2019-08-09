@@ -17,11 +17,13 @@ public class HomePageActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
+    private String m_uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        m_uid = getIntent().getStringExtra("userUid");
     }
 
 
@@ -40,6 +42,7 @@ public class HomePageActivity extends AppCompatActivity {
             case R.id.addTrip:
             {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
+                intent.putExtra("userUid", m_uid);
                 startActivity(intent);
             }
 
