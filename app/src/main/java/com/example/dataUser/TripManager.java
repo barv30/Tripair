@@ -15,7 +15,7 @@ public class TripManager
         return tripList;
     }
 
-    public void setTripList(ArrayList<Trip> tripList) {
-        this.tripList = tripList;
+    public void updateTripList(String key, Trip trip) {
+        this.tripList.add(Integer.parseInt(key),trip);
     }
 }

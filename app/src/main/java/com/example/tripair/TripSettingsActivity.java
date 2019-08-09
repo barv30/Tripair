@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Trip;
+import com.example.dataUser.TripManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -326,11 +327,16 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         else {
+            TripManager tripManager = new TripManager();
             Trip trip = initTrip();
             DatabaseReference mRef = database.getReference();
             mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().setValue(trip);
+            String tripKey= mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().getKey();
+            tripManager.updateTripList(tripKey, trip);
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             intent.putExtra("userUid", m_uid);
+            intent.putExtra("tripKey", tripKey);
+
             startActivity(intent);
         }
     }

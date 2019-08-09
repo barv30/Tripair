@@ -30,12 +30,14 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private String m_language;
     private String m_gender;
     private String m_uid;
+    private String m_tripKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_settings);
         m_uid = getIntent().getStringExtra("userUid");
+        m_tripKey = getIntent().getStringExtra("tripKey");
         InitializeLanguages();
     }
 
@@ -109,7 +111,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child("partnerSetting").push().setValue(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child("partnerSetting").child(m_tripKey).push().setValue(settingOfPartner);
             Intent intent = new Intent(this,HomePageActivity.class);
             startActivity(intent);
         }
