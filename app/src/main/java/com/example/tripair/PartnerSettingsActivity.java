@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Partner;
+import com.example.dataUser.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private String m_gender;
     private String m_uid;
     private String m_tripKey;
+    User m_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         setContentView(R.layout.activity_partner_settings);
         m_uid = getIntent().getStringExtra("userUid");
         m_tripKey = getIntent().getStringExtra("tripKey");
+        m_user = (User) getIntent().getSerializableExtra("user");
         InitializeLanguages();
     }
 
@@ -110,7 +113,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-           // findInTripList()
+           //m_user.getAllTrips().findInTripList(m_tripKey);
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();

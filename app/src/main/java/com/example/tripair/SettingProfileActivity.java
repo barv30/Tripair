@@ -47,7 +47,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private int m_yearBirth;
     private String m_uid_user;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
-    private User m_userInput;
+    User m_userInput;
 
 
 
@@ -195,7 +195,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             // if everything ok - move to home page
             Intent intent = new Intent(this, HomePageActivity.class);
             intent.putExtra("userUid", m_uid_user);
-          //  intent.putExtra("user", m_userInput);
+            intent.putExtra("user", m_userInput);
             startActivity(intent);
        }
     }

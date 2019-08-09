@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.dataUser.Trip;
 import com.example.dataUser.TripManager;
+import com.example.dataUser.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -55,7 +56,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<String> typeTripArr;
     Calendar calendar = Calendar.getInstance();
     private String m_uid;
-
+    User m_user;
 
     private ArrayList<String> countries = new ArrayList<>();
     private ArrayList<ArrayList<String>> cities = new ArrayList<>();
@@ -65,6 +66,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_settings);
         m_uid = getIntent().getStringExtra("userUid");
+        m_user = (User) getIntent().getSerializableExtra("user");
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
         typeTripArr = new ArrayList<>();
@@ -329,17 +331,19 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         else {
             TripManager tripManager = new TripManager();
             Trip trip = initTrip();
+            String tripKey = trip.getCountry();
+            tripManager.updateTripList(tripKey, trip);
+            m_user.setAllTrips(tripManager);
+
+            Log.i("Info",tripManager.getTripList().toString());
+
             DatabaseReference mRef = database.getReference();
-           mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().setValue(trip);
-            //   String tripKey =mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").getKey();
-            String tripKey = "111";
-            Log.i("Info",tripKey);
-           tripManager.updateTripList(tripKey, trip);
-           Log.i("Info",tripManager.getTripList().toString());
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(tripKey).push().setValue(trip);
+
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("tripKey", tripKey);
-
+            intent.putExtra("user", m_user);
             startActivity(intent);
         }
     }
