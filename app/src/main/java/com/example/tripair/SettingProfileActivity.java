@@ -47,7 +47,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private int m_yearBirth;
     private String m_uid_user;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
-
+    private User m_userInput;
 
 
 
@@ -187,14 +187,15 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            User userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
+            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid_user).push().setValue(userInput);
+            mRef.child("usersProfile").child(m_uid_user).push().setValue(m_userInput);
 
             // if everything ok - move to home page
             Intent intent = new Intent(this, HomePageActivity.class);
             intent.putExtra("userUid", m_uid_user);
+          //  intent.putExtra("user", m_userInput);
             startActivity(intent);
        }
     }

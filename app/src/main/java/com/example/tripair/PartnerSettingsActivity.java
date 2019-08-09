@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Partner;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -108,10 +110,11 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
+           // findInTripList()
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child("partnerSetting").child(m_tripKey).push().setValue(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").child(m_tripKey).push().setValue(settingOfPartner);
             Intent intent = new Intent(this,HomePageActivity.class);
             startActivity(intent);
         }

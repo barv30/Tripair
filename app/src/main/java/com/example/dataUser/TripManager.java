@@ -16,6 +16,10 @@ public class TripManager
     }
 
     public void updateTripList(String key, Trip trip) {
-        this.tripList.add(Integer.parseInt(key),trip);
+        tripList.add(Integer.parseInt(key),trip);
+    }
+
+    public Trip findInTripList(String key) {
+        return tripList.get(Integer.parseInt(key));
     }
 }

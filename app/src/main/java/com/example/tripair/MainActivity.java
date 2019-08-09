@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.i("Info", "signInWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
                             String uid = user.getUid();
-                            openMainPageActivity(user,uid);     //  move to home page
+                            openMainPageActivity(uid);     //  move to home page
 
                         } else {
                             FirebaseAuthException e = (FirebaseAuthException )task.getException();
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.i("Info", "createUserWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
                             String uid = user.getUid();
-                            openSettingsProfileActivity(user,uid);// move to edit profile
+                            openSettingsProfileActivity(uid);// move to edit profile
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.i("Info", "createUserWithEmail:failure", task.getException());
@@ -96,18 +96,16 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void openSettingsProfileActivity(FirebaseUser user,String uid) {
+    private void openSettingsProfileActivity(String uid) {
         Intent intent = new Intent(this,SettingProfileActivity.class);
         intent.putExtra("userUid" , uid);
-        intent.putExtra("user" , user);
         startActivity(intent);
     }
 
-    private void openMainPageActivity(FirebaseUser user,String uid)
+    private void openMainPageActivity(String uid)
     {
         Intent intent = new Intent(this, HomePageActivity.class);
         intent.putExtra("userUid" , uid);
-        intent.putExtra("user" , user);
         startActivity(intent);
     }
 
