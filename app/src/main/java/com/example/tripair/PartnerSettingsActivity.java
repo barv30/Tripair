@@ -1,5 +1,6 @@
 package com.example.tripair;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,11 +29,13 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private boolean m_isSmoking;
     private String m_language;
     private String m_gender;
+    private String m_uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_settings);
+        m_uid = getIntent().getStringExtra("userUid");
         InitializeLanguages();
     }
 
@@ -106,7 +109,9 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child("tripSettings").child("trips").child("parterSetting").push().setValue(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child("partnerSetting").push().setValue(settingOfPartner);
+            Intent intent = new Intent(this,HomePageActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -59,7 +59,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         public MyViewHolder(View itemView) {
             super(itemView);
             Log.v("ViewHolder","in View Holder");
-            name = itemView.findViewById(R.id.textView);
+            name = itemView.findViewById(R.id.nameText);
             number = itemView.findViewById(R.id.textView2);
             addedOn = itemView.findViewById(R.id.textView3);
 

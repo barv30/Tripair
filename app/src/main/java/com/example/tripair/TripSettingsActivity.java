@@ -330,6 +330,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             DatabaseReference mRef = database.getReference();
             mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").push().setValue(trip);
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
+            intent.putExtra("userUid", m_uid);
             startActivity(intent);
         }
     }
