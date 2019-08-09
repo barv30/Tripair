@@ -14,19 +14,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dataUser.User;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 
 public class SettingProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -193,7 +187,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             mRef.child("usersProfile").child(m_uid_user).push().setValue(m_userInput);
 
             // if everything ok - move to home page
-            Intent intent = new Intent(this, HomePageActivity.class);
+            Intent intent = new Intent(this, TripPageActivity.class);
             intent.putExtra("userUid", m_uid_user);
           //  intent.putExtra("user", m_userInput);
             startActivity(intent);

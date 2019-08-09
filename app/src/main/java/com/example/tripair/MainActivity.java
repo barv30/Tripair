@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openMainPageActivity(String uid)
     {
-        Intent intent = new Intent(this, HomePageActivity.class);
+        Intent intent = new Intent(this, MainPageActivity.class);
         intent.putExtra("userUid" , uid);
         startActivity(intent);
     }

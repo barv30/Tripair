@@ -1,25 +1,24 @@
 package com.example.tripair;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.support.v7.widget.DefaultItemAnimator;
+        import android.support.v7.widget.DividerItemDecoration;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.widget.Toast;
 
-import java.util.*;
+        import java.util.*;
 
-import com.example.recycleViewPack.ContactPOJO;
-import com.example.recycleViewPack.CustomContactAdapter;
-import com.example.recycleViewPack.OnRecyclerClickListener;
+        import com.example.recycleViewPack.ContactPOJO;
+        import com.example.recycleViewPack.CustomContactAdapter;
+        import com.example.recycleViewPack.OnRecyclerClickListener;
 
-public class HomePageActivity extends AppCompatActivity {
+public class MainPageActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
@@ -28,7 +27,7 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_main_page);
         m_uid = getIntent().getStringExtra("userUid");
         mRecyclerView1 = findViewById(R.id.recycleView);
         //mRecyclerView2 = findViewById(R.id.recyclerView2);
@@ -46,10 +45,10 @@ public class HomePageActivity extends AppCompatActivity {
 
         prepareData();
 
-       // mRecyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-       // mRecyclerView2.setItemAnimator( new DefaultItemAnimator());
-       // mRecyclerView2.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-       // mRecyclerView2.setAdapter(mAdapter);
+        // mRecyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+        // mRecyclerView2.setItemAnimator( new DefaultItemAnimator());
+        // mRecyclerView2.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        // mRecyclerView2.setAdapter(mAdapter);
 
     }
 
