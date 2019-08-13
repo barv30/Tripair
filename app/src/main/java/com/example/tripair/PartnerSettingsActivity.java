@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.example.dataUser.Partner;
 import com.example.dataUser.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,9 +38,10 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_settings);
-        m_uid = getIntent().getStringExtra("userUid");
-        m_tripKey = getIntent().getStringExtra("tripKey");
-        m_user = (User) getIntent().getSerializableExtra("user");
+        Intent intent =getIntent();
+        m_uid = intent.getStringExtra("userUid");
+        m_tripKey = intent.getStringExtra("tripKey");
+        m_user = (User) intent.getSerializableExtra("user");
         InitializeLanguages();
     }
 
@@ -113,12 +112,14 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-           //m_user.getAllTrips().findInTripList(m_tripKey);
+           m_user.getAllTrips().findInTripList(m_tripKey);
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
             mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").push().setValue(settingOfPartner);
-            Intent intent = new Intent(this, TripPageActivity.class);
+            Intent intent = new Intent(this, AllTripsActivity.class);
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("user", m_user);
             startActivity(intent);
         }
     }

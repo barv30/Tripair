@@ -56,7 +56,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<String> typeTripArr;
     Calendar calendar = Calendar.getInstance();
     private String m_uid;
-    User m_user;
+    private User m_user;
 
     private ArrayList<String> countries = new ArrayList<>();
     private ArrayList<ArrayList<String>> cities = new ArrayList<>();
@@ -65,8 +65,9 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_settings);
-        m_uid = getIntent().getStringExtra("userUid");
-        m_user = (User) getIntent().getSerializableExtra("user");
+        Intent intent = getIntent();
+        m_uid = intent.getStringExtra("userUid");
+        m_user = (User) intent.getSerializableExtra("user");
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
         typeTripArr = new ArrayList<>();
