@@ -189,7 +189,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             mRef.child("usersProfile").child(m_uid_user).push().setValue(m_userInput);
 
             // if everything ok - move to home page
-            Intent intent = new Intent(this, MainPageActivity.class);
+            Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid_user);
             intent.putExtra("user", m_userInput);
             startActivity(intent);

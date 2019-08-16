@@ -19,19 +19,20 @@ import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 
-public class TripPageActivity extends AppCompatActivity {
+public class AllTripsActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
     private String m_uid;
-    User m_user;
+    private User m_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip_page);
-        m_uid = getIntent().getStringExtra("userUid");
-        m_user = (User) getIntent().getSerializableExtra("user");
+        setContentView(R.layout.activity_all_trips);
+        Intent intent = getIntent();
+        m_uid = (String) intent.getStringExtra("userUid");
+        m_user = (User) intent.getSerializableExtra("user");
         mRecyclerView1 = findViewById(R.id.recycleView);
         //mRecyclerView2 = findViewById(R.id.recyclerView2);
 
@@ -108,7 +109,7 @@ public class TripPageActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
-                intent.putExtra("user", m_user);
+                intent.putExtra("user", (User) m_user);
                 startActivity(intent);
             }
 

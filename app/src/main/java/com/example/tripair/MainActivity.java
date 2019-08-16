@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.i("Info", "signInWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
                             String uid = user.getUid();
-                            openMainPageActivity(uid);     //  move to home page
+                            openAllTripsActivity(uid);     //  move to home page
 
                         } else {
                             FirebaseAuthException e = (FirebaseAuthException )task.getException();
@@ -99,12 +99,13 @@ public class MainActivity extends AppCompatActivity {
     private void openSettingsProfileActivity(String uid) {
         Intent intent = new Intent(this,SettingProfileActivity.class);
         intent.putExtra("userUid" , uid);
+        intent.putExtra("userEmail" , userEmail);
         startActivity(intent);
     }
 
-    private void openMainPageActivity(String uid)
+    private void openAllTripsActivity(String uid)
     {
-        Intent intent = new Intent(this, MainPageActivity.class);
+        Intent intent = new Intent(this, AllTripsActivity.class);
         intent.putExtra("userUid" , uid);
         intent.putExtra("userEmail" , userEmail);
         startActivity(intent);
