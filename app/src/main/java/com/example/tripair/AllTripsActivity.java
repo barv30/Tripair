@@ -18,6 +18,7 @@ import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
+import com.example.recycleViewPack.TripPOJO;
 
 public class AllTripsActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
@@ -58,38 +59,10 @@ public class AllTripsActivity extends AppCompatActivity {
 
 
     private void prepareData() {
-        ContactPOJO contact = null;
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Dhruvam","9467884671","22/12/1995");
-        mArrayList.add(contact);
+        //ContactPOJO contact = null;
+        TripPOJO trip = null;
+       // trip = new TripPOJO("Israel","Haifa","9467884671","22/12/1995");
+        //mArrayList.add(contact);
 
         mAdapter.notifyDataSetChanged();
     }
