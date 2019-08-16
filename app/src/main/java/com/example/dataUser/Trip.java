@@ -1,5 +1,7 @@
 package com.example.dataUser;
 
+import android.provider.Telephony;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,12 +18,14 @@ public class Trip implements Serializable {
     private int leftYear;
     private Partner partner;
     private PartnerManager partnerList;
+    private ArrayList<User> favPartner;
 
 
     public Trip() {
         styleTrip = new ArrayList<>();
         partner = new Partner();
         partnerList = new PartnerManager();
+        favPartner = new ArrayList<>();
     }
 
     public ArrayList<String> getStyleTrip() {

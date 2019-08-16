@@ -24,7 +24,15 @@ import com.example.recycleViewPack.TripPOJO;
 public class AllTripsActivity extends AppCompatActivity {
     private ArrayList<TripPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
-    private CustomTripAdpater mAdapter;
+    private Intent intentPage= new Intent(this,OptionalPartnerPerTripActivity.class);
+
+    private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
+        @Override
+        public void onRecyclerViewItemClicked(int position, int id) {
+            Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+            startActivity(intentPage);
+        }
+    });
     private String m_uid;
     private User m_user;
 
@@ -36,25 +44,13 @@ public class AllTripsActivity extends AppCompatActivity {
         m_uid = (String) intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
         mRecyclerView1 = findViewById(R.id.recycleView);
-        //mRecyclerView2 = findViewById(R.id.recyclerView2);
 
-        mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
-            @Override
-            public void onRecyclerViewItemClicked(int position, int id) {
-                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-            }
-        });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
 
         prepareData();
-
-       // mRecyclerView2.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-       // mRecyclerView2.setItemAnimator( new DefaultItemAnimator());
-       // mRecyclerView2.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-       // mRecyclerView2.setAdapter(mAdapter);
 
     }
 

@@ -3,37 +3,58 @@ package com.example.recycleViewPack;
 public class ContactPOJO {
 
     private String mName;
-    private String mNumber;
-    private String mAddedOn;
+    private String mDateDest;
+    private String mSmoking;
+    private int mAge;
 
     public ContactPOJO() {}
-    public ContactPOJO(String name, String number, String addedOn) {
+    public ContactPOJO(String name, int day,int month,int year,boolean isSmoking,int age) {
         mName = name;
-        mNumber = number;
-        mAddedOn = addedOn;
+        mDateDest= day+"."+month+"."+year;
+        if(isSmoking)
+        {
+            mSmoking = "Yes";
+        }
+        else
+        {
+            mSmoking="No";
+        }
+        mAge=age;
+
     }
 
-    public String getmAddedOn() {
-        return mAddedOn;
-    }
 
     public String getmName() {
         return mName;
     }
 
-    public String getmNumber() {
-        return mNumber;
+    public int getmAge() {
+        return mAge;
     }
 
-    public void setmAddedOn(String mAddedOn) {
-        this.mAddedOn = mAddedOn;
+    public String getmDateDest() {
+        return mDateDest;
     }
+
+    public String getmSmoking() {
+        return mSmoking;
+    }
+
 
     public void setmName(String mName) {
         this.mName = mName;
     }
 
-    public void setmNumber(String mNumber) {
-        this.mNumber = mNumber;
+
+    public void setmAge(int mAge) {
+        this.mAge = mAge;
+    }
+
+    public void setmDateDest(String mDateDest) {
+        this.mDateDest = mDateDest;
+    }
+
+    public void setmSmoking(String mSmoking) {
+        this.mSmoking = mSmoking;
     }
 }

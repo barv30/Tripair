@@ -36,8 +36,9 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         Log.v("BindViewHolder", "in onBindViewHolder");
         ContactPOJO contact = arrayList.get(position);
         holder.name.setText(contact.getmName());
-        holder.number.setText(contact.getmNumber());
-        holder.addedOn.setText(contact.getmAddedOn());
+        holder.date.setText(contact.getmDateDest());
+        holder.smoke.setText(contact.getmSmoking());
+        holder.age.setText(contact.getmAge());
 
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +56,14 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, number, addedOn;
+        TextView name, date, smoke,age;
         public MyViewHolder(View itemView) {
             super(itemView);
             Log.v("ViewHolder","in View Holder");
             name = itemView.findViewById(R.id.nameText);
-            number = itemView.findViewById(R.id.textView2);
-            addedOn = itemView.findViewById(R.id.textView3);
+            date = itemView.findViewById(R.id.txt_dest_insert);
+            smoke = itemView.findViewById(R.id.txt_smoke_insert);
+            age=itemView.findViewById(R.id.txt_age_insert);
 
         }
 
