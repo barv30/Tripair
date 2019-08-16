@@ -7,6 +7,7 @@ public class TripManager implements Serializable
 {
     private ArrayList<Trip> tripList;
 
+
     public TripManager()
     {
         tripList = new ArrayList<>();
