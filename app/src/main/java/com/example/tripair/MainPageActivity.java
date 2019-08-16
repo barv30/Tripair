@@ -14,6 +14,7 @@ package com.example.tripair;
 
         import java.util.*;
 
+        import com.example.dataUser.User;
         import com.example.recycleViewPack.ContactPOJO;
         import com.example.recycleViewPack.CustomContactAdapter;
         import com.example.recycleViewPack.OnRecyclerClickListener;
@@ -23,12 +24,15 @@ public class MainPageActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
     private String m_uid;
+    private User m_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         m_uid = getIntent().getStringExtra("userUid");
+        m_user = (User) getIntent().getSerializableExtra("user");
+
         mRecyclerView1 = findViewById(R.id.recycleView);
         //mRecyclerView2 = findViewById(R.id.recyclerView2);
 
@@ -105,6 +109,7 @@ public class MainPageActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", m_user);
                 startActivity(intent);
             }
 
