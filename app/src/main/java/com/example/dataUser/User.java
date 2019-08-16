@@ -45,6 +45,7 @@ public class User implements Serializable {
         this.aboutMe = aboutMe;
         this.allTrips = new TripManager();
         this.age = calculateAge();
+
     }
 
     private int calculateAge() {
