@@ -11,7 +11,7 @@ public class TripPOJO
     private int mYear;
 
     TripPOJO(){}
-    TripPOJO(String iCountry, String iCity,int iDay,int iMonth, int iYear)
+    public TripPOJO(String iCountry, String iCity,int iDay,int iMonth, int iYear)
     {
         this.mCountry = iCountry;
         this.mCity = iCity;

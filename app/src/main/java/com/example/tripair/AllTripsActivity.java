@@ -17,13 +17,14 @@ import java.util.*;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomContactAdapter;
+import com.example.recycleViewPack.CustomTripAdpater;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.example.recycleViewPack.TripPOJO;
 
 public class AllTripsActivity extends AppCompatActivity {
-    private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
+    private ArrayList<TripPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
-    private CustomContactAdapter mAdapter;
+    private CustomTripAdpater mAdapter;
     private String m_uid;
     private User m_user;
 
@@ -37,7 +38,7 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1 = findViewById(R.id.recycleView);
         //mRecyclerView2 = findViewById(R.id.recyclerView2);
 
-        mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
+        mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
@@ -59,10 +60,14 @@ public class AllTripsActivity extends AppCompatActivity {
 
 
     private void prepareData() {
-        //ContactPOJO contact = null;
         TripPOJO trip = null;
-       // trip = new TripPOJO("Israel","Haifa","9467884671","22/12/1995");
-        //mArrayList.add(contact);
+        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        mArrayList.add(trip);
+        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        mArrayList.add(trip);
+        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        mArrayList.add(trip);
+
 
         mAdapter.notifyDataSetChanged();
     }
@@ -86,10 +91,6 @@ public class AllTripsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-            case R.id.editPartner:
-            {
-
-            }
         }
         return super.onOptionsItemSelected(item);
     }

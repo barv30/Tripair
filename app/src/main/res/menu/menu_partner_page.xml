@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/itemMenu"
         android:icon="@drawable/ic_menu_black_24dp"
@@ -9,9 +10,15 @@
 
         <menu>
             <item
-                android:id="@+id/addTrip"
-                android:title="Add new trip"/>
+                android:id="@+id/editTrip"
+                android:title="Edit trip settings"/>
 
+            <item
+                android:id="@+id/editPartner"
+                android:title="Edit partner settings"/>
+            <item
+                android:id="@+id/favPartners"
+                android:title="My favorite partners"/>
         </menu>
     </item>
 </menu>

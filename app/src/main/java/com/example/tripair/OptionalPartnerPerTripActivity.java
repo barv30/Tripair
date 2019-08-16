@@ -97,7 +97,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_home_page,menu);
+        inflater.inflate(R.menu.menu_partner_page,menu);
         return true;
     }
 
@@ -105,7 +105,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
-            case R.id.addTrip:
+            case R.id.editTrip:
             {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
@@ -114,6 +114,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             }
 
             case R.id.editPartner:
+            {
+
+            }
+
+            case R.id.favPartners:
             {
 
             }
