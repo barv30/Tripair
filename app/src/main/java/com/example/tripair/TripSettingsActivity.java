@@ -243,7 +243,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
         Integer currentDay=calendar.get(Calendar.DATE);
         ArrayList<String> days = new ArrayList<>();
-        for(Integer i=currentDay;i<=31;i++)
+        for(Integer i=1;i<=31;i++)
         {
             days.add(i.toString());
         }
@@ -267,9 +267,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private void InitializeMonths()
     {
-        Integer currentMonth=calendar.get(Calendar.MONTH) +1 ;
         ArrayList<String> months = new ArrayList<>();
-        for(Integer i=currentMonth;i<=12;i++)
+        for(Integer i=1;i<=12;i++)
         {
             months.add(i.toString());
         }
@@ -366,6 +365,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private String checkIfInputFromUserIsValid()
     {
+        Integer currentDay=calendar.get(Calendar.DATE);
+        Integer currentMonth=calendar.get(Calendar.MONTH) +1 ;
         CheckBox checkBoxRelax = (CheckBox) findViewById(R.id.checkBoxRelax);
         CheckBox checkBoxTracks = (CheckBox) findViewById(R.id.checkBoxNature);
         CheckBox checkBoxArt = (CheckBox) findViewById(R.id.checkBoxArt);
@@ -380,7 +381,10 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         {
             return "Your left date is invalid!";
         }
-
+        else  if(m_dayArrive < currentDay && m_monthArrive == currentMonth || m_monthArrive <currentMonth)
+        {
+            return "Your arrive date is invalid!";
+        }
         else
         {
             if(checkedArt)
@@ -402,6 +406,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
                 m_dayLeft=0;
                 m_monthLeft=0;
             }
+
+
         }
 
 
