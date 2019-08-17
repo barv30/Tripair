@@ -7,9 +7,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.*;
@@ -22,15 +24,17 @@ import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.example.recycleViewPack.TripPOJO;
 
 public class AllTripsActivity extends AppCompatActivity {
-    private ArrayList<TripPOJO> mArrayList = new ArrayList<>();
+    private ArrayList<TripPOJO> mArrayList;
     private RecyclerView mRecyclerView1;
-    private Intent intentPage= new Intent(this,OptionalPartnerPerTripActivity.class);
+    private ArrayList<ContactPOJO> mArrayDemoPartners;
+
+    private Intent intentPage = new Intent(this, OptionalPartnerPerTripActivity.class);
 
     private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
         @Override
         public void onRecyclerViewItemClicked(int position, int id) {
-            Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-            startActivity(intentPage);
+            Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+            onButtonClicked();
         }
     });
     private String m_uid;
@@ -44,9 +48,9 @@ public class AllTripsActivity extends AppCompatActivity {
         m_uid = (String) intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
         mRecyclerView1 = findViewById(R.id.recycleView);
-
+        mArrayList = new ArrayList<>();
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
+        mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
 
@@ -56,12 +60,15 @@ public class AllTripsActivity extends AppCompatActivity {
 
 
     private void prepareData() {
+
+        // get the array of all trips and make array of tripPOJO
+
         TripPOJO trip = null;
-        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        trip = new TripPOJO("Israel", "Haifa", 30, 8, 1994);
         mArrayList.add(trip);
-        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        trip = new TripPOJO("Israel", "Haifa", 30, 8, 1994);
         mArrayList.add(trip);
-        trip = new TripPOJO("Israel","Haifa",30,8,1994);
+        trip = new TripPOJO("Israel", "Haifa", 30, 8, 1994);
         mArrayList.add(trip);
 
 
@@ -71,16 +78,14 @@ public class AllTripsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_home_page,menu);
+        inflater.inflate(R.menu.menu_home_page, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId())
-        {
-            case R.id.addTrip:
-            {
+        switch (item.getItemId()) {
+            case R.id.addTrip: {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", (User) m_user);
@@ -89,5 +94,28 @@ public class AllTripsActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onButtonClicked() {
+        fillArrayDemoOfPartners();
+        Log.i("info", "bla");
+        Intent intent = new Intent(this,OptionalPartnerPerTripActivity.class);
+        intent.putExtra("arrayPartner", mArrayDemoPartners);
+        startActivity(intent);
+    }
+
+    private void fillArrayDemoOfPartners()
+    {
+        mArrayDemoPartners = new ArrayList<>();
+        ContactPOJO contact = null;
+        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        mArrayDemoPartners.add(contact);
+        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        mArrayDemoPartners.add(contact);
+        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        mArrayDemoPartners.add(contact);
+        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        mArrayDemoPartners.add(contact);
+
     }
 }

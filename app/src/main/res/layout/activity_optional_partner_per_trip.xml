@@ -17,25 +17,19 @@
                 android:id="@+id/nameText"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:text="Welcome!"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:text="Your optional partners:"
+                android:textColor="#F1C531"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleView"
                 android:layout_width="match_parent"
-                android:layout_height="246dp"
+                android:layout_height="423dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
 
         </LinearLayout>
     </ScrollView>

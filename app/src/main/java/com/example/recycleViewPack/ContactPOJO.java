@@ -1,6 +1,8 @@
 package com.example.recycleViewPack;
 
-public class ContactPOJO {
+import java.io.Serializable;
+
+public class ContactPOJO implements Serializable {
 
     private String mName;
     private String mDateDest;

@@ -38,7 +38,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.name.setText(contact.getmName());
         holder.date.setText(contact.getmDateDest());
         holder.smoke.setText(contact.getmSmoking());
-        holder.age.setText(contact.getmAge());
+        holder.age.setText(String.valueOf(contact.getmAge()));
 
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override

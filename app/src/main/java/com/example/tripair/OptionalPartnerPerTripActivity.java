@@ -33,6 +33,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
+        mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
@@ -53,15 +54,15 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
 
     private void prepareData() {
-        ContactPOJO contact = null;
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
+//        ContactPOJO contact = null;
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
 
         mAdapter.notifyDataSetChanged();
     }
