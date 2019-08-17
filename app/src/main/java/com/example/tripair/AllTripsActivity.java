@@ -24,7 +24,7 @@ import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.example.recycleViewPack.TripPOJO;
 
 public class AllTripsActivity extends AppCompatActivity {
-    private ArrayList<TripPOJO> mArrayList;
+    private ArrayList<TripPOJO> mArrayList = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     private ArrayList<ContactPOJO> mArrayDemoPartners;
 
@@ -48,7 +48,6 @@ public class AllTripsActivity extends AppCompatActivity {
         m_uid = (String) intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
         mRecyclerView1 = findViewById(R.id.recycleView);
-        mArrayList = new ArrayList<>();
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
