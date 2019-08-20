@@ -2,6 +2,8 @@ package com.example.dataUser;
 
 import android.provider.Telephony;
 
+import com.example.recycleViewPack.ContactPOJO;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +20,7 @@ public class Trip implements Serializable {
     private int leftYear;
     private Partner partner;
     private PartnerManager partnerList;
-    private ArrayList<User> favPartner;
+    private ArrayList<ContactPOJO> favPartner;
 
 
     public Trip() {

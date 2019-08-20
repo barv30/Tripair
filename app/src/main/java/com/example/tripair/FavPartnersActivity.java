@@ -30,12 +30,17 @@ public class FavPartnersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
+        mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favArr");
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+            }
+            public void onRecyclerViewItemFavClicked(int position, int id) {
+                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -47,15 +52,15 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     }
     private void prepareData() {
-        ContactPOJO contact = null;
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-        mArrayList.add(contact);
+//        ContactPOJO contact = null;
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
+//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+//        mArrayList.add(contact);
 
         mAdapter.notifyDataSetChanged();
     }

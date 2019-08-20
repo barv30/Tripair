@@ -12,4 +12,6 @@ public interface OnRecyclerClickListener {
      *            -1 if the item itself clicked
      */
     public void onRecyclerViewItemClicked(int position, int id);
+
+    void onRecyclerViewItemFavClicked(int position, int id);
 }

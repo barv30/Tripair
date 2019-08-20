@@ -7,9 +7,12 @@ package com.example.tripair;
         import android.support.v7.widget.DividerItemDecoration;
         import android.support.v7.widget.LinearLayoutManager;
         import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
+        import android.widget.ImageButton;
+        import android.widget.TextView;
         import android.widget.Toast;
 
         import java.util.*;
@@ -25,6 +28,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private CustomContactAdapter mAdapter;
     private String m_uid;
     private User m_user;
+    private ArrayList<ContactPOJO> mArrayDemoFav = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
             }
+            public void onRecyclerViewItemFavClicked(int position, int id) {
+                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+                addPartnerToFavorites(position);
+
+            }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
@@ -50,6 +59,27 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         prepareData();
 
 
+    }
+
+    private void addPartnerToFavorites(int position) {
+        TextView name, date, smoke,age,leftDate;
+        ImageButton btnFav,btnDelete;
+
+            Log.v("ViewHolder","in View Holder");
+            name = findViewById(R.id.lineTxt);
+            date = findViewById(R.id.txt_dest_insert);
+            leftDate = findViewById(R.id.txt_dateL);
+            smoke = findViewById(R.id.txt_smoke_insert);
+            age=findViewById(R.id.txt_age_insert);
+
+        ContactPOJO contact = new ContactPOJO();
+        contact.setmName(name.getText().toString());
+        contact.setmAge(Integer.parseInt(age.getText().toString()));
+        contact.setmDateDest(date.getText().toString());
+        contact.setmDateLeft(leftDate.getText().toString());
+        contact.setmSmoking(smoke.getText().toString());
+        Integer id  = position;
+        mArrayDemoFav.add(contact);
     }
 
 
@@ -93,7 +123,9 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
             case R.id.favPartners:
             {
-
+                Intent intent = new Intent(this, FavPartnersActivity.class);
+                intent.putExtra("favArr", mArrayDemoFav);
+                startActivity(intent);
             }
         }
         return super.onOptionsItemSelected(item);

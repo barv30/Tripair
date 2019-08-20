@@ -6,13 +6,23 @@ public class ContactPOJO implements Serializable {
 
     private String mName;
     private String mDateDest;
+    private String mDateLeft;
     private String mSmoking;
     private int mAge;
 
     public ContactPOJO() {}
-    public ContactPOJO(String name, int day,int month,int year,boolean isSmoking,int age) {
+    public ContactPOJO(String name, int aday,int amonth,int ayear,
+                       int lday,int lmonth,int lyear,boolean isSmoking,int age) {
         mName = name;
-        mDateDest= day+"."+month+"."+year;
+        mDateDest= aday+"."+amonth+"."+ayear;
+        if(lday == 0 && lmonth == 0 && lyear==0)
+        {
+            mDateLeft = "Unknown";
+        }
+        else
+        {
+            mDateLeft = lday+"."+lmonth+"."+lyear;
+        }
         if(isSmoking)
         {
             mSmoking = "Yes";
@@ -25,6 +35,9 @@ public class ContactPOJO implements Serializable {
 
     }
 
+    public String getmDateLeft() {
+        return mDateLeft;
+    }
 
     public String getmName() {
         return mName;
@@ -47,6 +60,9 @@ public class ContactPOJO implements Serializable {
         this.mName = mName;
     }
 
+    public void setmDateLeft(String mDateLeft) {
+        this.mDateLeft = mDateLeft;
+    }
 
     public void setmAge(int mAge) {
         this.mAge = mAge;

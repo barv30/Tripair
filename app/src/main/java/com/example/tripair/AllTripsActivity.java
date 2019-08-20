@@ -28,14 +28,16 @@ public class AllTripsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView1;
     private ArrayList<ContactPOJO> mArrayDemoPartners;
 
-    private Intent intentPage = new Intent(this, OptionalPartnerPerTripActivity.class);
-
     private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
         @Override
         public void onRecyclerViewItemClicked(int position, int id) {
             Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
             onButtonClicked();
         }
+        public void onRecyclerViewItemFavClicked(int position, int id) {
+
+        }
+
     });
     private String m_uid;
     private User m_user;
@@ -107,13 +109,13 @@ public class AllTripsActivity extends AppCompatActivity {
     {
         mArrayDemoPartners = new ArrayList<>();
         ContactPOJO contact = null;
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        contact = new ContactPOJO("Bar",30,8,1994,0,0,0,true,25);
         mArrayDemoPartners.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        contact = new ContactPOJO("Bar",30,8,1994,0,0,0,true,25);
         mArrayDemoPartners.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        contact = new ContactPOJO("Bar",30,8,1994,1,1,1995,true,25);
         mArrayDemoPartners.add(contact);
-        contact = new ContactPOJO("Bar",30,8,1994,true,25);
+        contact = new ContactPOJO("Bar",30,8,1994,0,0,0,true,25);
         mArrayDemoPartners.add(contact);
 
     }

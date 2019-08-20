@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.tripair.R;
@@ -38,11 +39,21 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.name.setText(contact.getmName());
         holder.date.setText(contact.getmDateDest());
         holder.smoke.setText(contact.getmSmoking());
+        holder.leftDate.setText(contact.getmDateLeft());
         holder.age.setText(String.valueOf(contact.getmAge()));
 
-        holder.name.setOnClickListener(new View.OnClickListener() {
+        holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.btnDelete.setClickable(true);
+                listener.onRecyclerViewItemFavClicked(position,view.getId());
+            }
+        });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.btnDelete.setClickable(false);
                 listener.onRecyclerViewItemClicked(position,view.getId());
             }
         });
@@ -56,14 +67,20 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, date, smoke,age;
+        TextView name, date, smoke,age,leftDate;
+        ImageButton btnFav,btnDelete;
         public MyViewHolder(View itemView) {
             super(itemView);
             Log.v("ViewHolder","in View Holder");
-            name = itemView.findViewById(R.id.nameText);
+            name = itemView.findViewById(R.id.lineTxt);
             date = itemView.findViewById(R.id.txt_dest_insert);
+            leftDate = itemView.findViewById(R.id.txt_dateL);
             smoke = itemView.findViewById(R.id.txt_smoke_insert);
             age=itemView.findViewById(R.id.txt_age_insert);
+            btnFav = itemView.findViewById(R.id. btn_Fav);
+            btnDelete = itemView.findViewById(R.id.btn_deleteFav);
+
+
 
         }
 
