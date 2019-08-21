@@ -28,6 +28,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private CustomContactAdapter mAdapter;
     private String m_uid;
     private User m_user;
+    private String m_tripCountry;
+    private String m_tripCity;
     private ArrayList<ContactPOJO> mArrayDemoFav = new ArrayList<>();
 
     @Override
@@ -37,7 +39,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
+        m_tripCountry = intent.getStringExtra("tripCountry");
+        m_tripCity = intent.getStringExtra("tripCity");
         mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
+
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
@@ -55,7 +60,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-
+        mAdapter.notifyDataSetChanged();
         prepareData();
 
 

@@ -31,7 +31,8 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private String m_language;
     private String m_gender;
     private String m_uid;
-    private String m_tripKey;
+    private String m_tripCountyKey;
+    private String m_tripCityKey;
     User m_user;
 
     @Override
@@ -40,7 +41,8 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         setContentView(R.layout.activity_partner_settings);
         Intent intent =getIntent();
         m_uid = intent.getStringExtra("userUid");
-        m_tripKey = intent.getStringExtra("tripKey");
+        m_tripCountyKey = intent.getStringExtra("tripCountyKey");
+        m_tripCityKey = intent.getStringExtra("tripCityKey");
         m_user = (User) intent.getSerializableExtra("user");
         InitializeLanguages();
     }
@@ -116,7 +118,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").setValue(settingOfPartner);
+           // mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripCountyKey).child(m_tripCityKey).child("partnerSetting").setValue(settingOfPartner);
             Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("user", m_user);

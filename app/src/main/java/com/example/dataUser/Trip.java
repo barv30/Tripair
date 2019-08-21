@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Trip implements Serializable {
+    private String m_ownerID;
     private String country;
     private String city;
     private ArrayList<String> styleTrip;
@@ -118,5 +119,13 @@ public class Trip implements Serializable {
 
     public void setLeftYear(int leftYear) {
         this.leftYear = leftYear;
+    }
+
+    public String getM_ownerID() {
+        return m_ownerID;
+    }
+
+    public void setM_ownerID(String m_ownerID) {
+        this.m_ownerID = m_ownerID;
     }
 }
