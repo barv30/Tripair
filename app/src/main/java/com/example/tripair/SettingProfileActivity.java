@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dataUser.TripManager;
 import com.example.dataUser.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -243,17 +244,18 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
         }
         else {
+            TripManager alltrips = new TripManager();
             ArrayList<String> languagesArr = new ArrayList<>();
             languagesArr.add(selectedLanguageNative);
             if(!selectedLanguage2.equals("None"))
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_user_mail,m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser);
+            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips);
 
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid_user).push().setValue(m_userInput);
+            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
 
 
             if(filePath != null)

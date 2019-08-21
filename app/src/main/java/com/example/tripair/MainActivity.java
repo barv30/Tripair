@@ -11,14 +11,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dataUser.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private String userEmail;
@@ -51,7 +55,26 @@ public class MainActivity extends AppCompatActivity {
                             Log.i("Info", "signInWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
                             String uid = user.getUid();
-                            openAllTripsActivity(uid);     //  move to home page
+                            ValueEventListener UserListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    User user;
+                                    // Get Post object and use the values to update the UI
+                                    if (dataSnapshot.child("usersProfile").child(uid).exists()) {
+                                        user = dataSnapshot.child("usersProfile").child(uid).getValue(User.class);
+                                        openAllTripsActivity(uid, user);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            };
+                            mRef.addValueEventListener(UserListener);
+
+                               //  move to home page
 
                         } else {
                             FirebaseAuthException e = (FirebaseAuthException )task.getException();
@@ -105,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openAllTripsActivity(String uid)
+    private void openAllTripsActivity(String uid, User user)
     {
         Intent intent = new Intent(this, AllTripsActivity.class);
         intent.putExtra("userUid" , uid);
-        intent.putExtra("userEmail" , userEmail);
+        intent.putExtra("user" , user);
         startActivity(intent);
     }
 

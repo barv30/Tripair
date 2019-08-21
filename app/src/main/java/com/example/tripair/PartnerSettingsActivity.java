@@ -112,11 +112,11 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-           m_user.getAllTrips().findInTripList(m_tripKey);
+
             Partner settingOfPartner = initPartner();
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").push().setValue(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripKey).child("partnerSetting").setValue(settingOfPartner);
             Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("user", m_user);

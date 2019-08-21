@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class User implements Serializable {
-    private String userPassword;
     private String firstName;
     private String lastName;
     private String gender;
@@ -19,8 +18,8 @@ public class User implements Serializable {
     private int age;
     private TripManager allTrips;
 
-
-    public User(String userPassword,
+    public User(){}
+    public User(
                 String firstName,
                 String lastName,
                 int day,
@@ -29,10 +28,9 @@ public class User implements Serializable {
                 String gender,
                 ArrayList<String> languages,
                 boolean isSmoking,
-                String aboutMe)
+                String aboutMe,
+                TripManager allTrips)
     {
-        this.userPassword = userPassword;
-        this.allTrips = new TripManager() ;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = day;
@@ -43,9 +41,8 @@ public class User implements Serializable {
         this.languages = languages;
         this.isSmoking = isSmoking;
         this.aboutMe = aboutMe;
-        this.allTrips = new TripManager();
         this.age = calculateAge();
-
+        this.allTrips = new TripManager();
     }
 
     private int calculateAge() {
@@ -73,10 +70,6 @@ public class User implements Serializable {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public TripManager getAllTrips() {
-        return allTrips;
     }
 
     public int getBirthDay() {
@@ -128,10 +121,6 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-    public void setAllTrips(TripManager allTrips) {
-        this.allTrips = allTrips;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -144,6 +133,13 @@ public class User implements Serializable {
         isSmoking = smoking;
     }
 
+    public TripManager getAllTrips() {
+        return allTrips;
+    }
+
+    public void setAllTrips(TripManager allTrips) {
+        this.allTrips = allTrips;
+    }
 }
 
 
