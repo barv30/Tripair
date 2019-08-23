@@ -41,8 +41,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_user = (User)intent.getSerializableExtra("user");
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
-        mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
-
+      //  mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
@@ -56,12 +55,14 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
             }
         });
+        prepareData();
+
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        prepareData();
+        //prepareData();
 
 
     }
@@ -89,15 +90,13 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
 
     private void prepareData() {
-//        ContactPOJO contact = null;
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
+        ContactPOJO contact = null;
+       contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+        mArrayList.add(contact);
+        contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+        mArrayList.add(contact);
+        contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+        mArrayList.add(contact);
 
         mAdapter.notifyDataSetChanged();
     }

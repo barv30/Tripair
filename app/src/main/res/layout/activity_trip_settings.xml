@@ -104,7 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Relax"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="12sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxArt"
@@ -112,7 +113,8 @@
                 android:layout_height="43dp"
                 android:layout_weight="1"
                 android:text="Art and History"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                android:textSize="12sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxNature"
@@ -120,7 +122,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Nature and Tracks"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
