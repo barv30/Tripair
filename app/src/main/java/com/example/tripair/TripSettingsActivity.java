@@ -371,6 +371,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     {
         Integer currentDay=calendar.get(Calendar.DATE);
         Integer currentMonth=calendar.get(Calendar.MONTH) +1 ;
+        Integer currentYear=calendar.get(Calendar.YEAR);
         CheckBox checkBoxRelax = (CheckBox) findViewById(R.id.checkBoxRelax);
         CheckBox checkBoxTracks = (CheckBox) findViewById(R.id.checkBoxNature);
         CheckBox checkBoxArt = (CheckBox) findViewById(R.id.checkBoxArt);
@@ -385,7 +386,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         {
             return "Your left date is invalid!";
         }
-        else  if(m_dayArrive < currentDay && m_monthArrive == currentMonth || m_monthArrive <currentMonth)
+        else  if(m_dayArrive < currentDay && m_monthArrive == currentMonth &&  m_yearArrive ==currentYear|| m_monthArrive <currentMonth && m_yearArrive == currentYear)
         {
             return "Your arrive date is invalid!";
         }
