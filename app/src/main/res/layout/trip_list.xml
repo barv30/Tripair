@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="109dp"
+        android:layout_height="97dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/txt_when"
-                android:layout_width="26dp"
+                android:layout_width="4dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="when:"
@@ -60,7 +60,7 @@
         <ImageButton
             android:id="@+id/btn_open"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="46dp"
             android:background="#34495E"
             app:srcCompat="@android:drawable/ic_menu_send" />
     </LinearLayout>

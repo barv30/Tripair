@@ -41,9 +41,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_user = (User)intent.getSerializableExtra("user");
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
+        TextView lineText = findViewById(R.id.txt_line);
+        lineText.setText("Your optional partners to - "+m_tripCountry+","+m_tripCity);
       //  mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
-
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
@@ -72,7 +73,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         ImageButton btnFav,btnDelete;
 
             Log.v("ViewHolder","in View Holder");
-            name = findViewById(R.id.lineTxt);
+            name = findViewById(R.id.txt_line);
             date = findViewById(R.id.txt_dest_insert);
             leftDate = findViewById(R.id.txt_dateL);
             smoke = findViewById(R.id.txt_smoke_insert);

@@ -14,12 +14,12 @@
 
 
             <TextView
-                android:id="@+id/lineTxt"
+                android:id="@+id/txt_line"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
                 android:text="Your optional partners:"
                 android:textColor="#F1C531"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView

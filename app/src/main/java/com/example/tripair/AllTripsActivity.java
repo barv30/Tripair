@@ -7,12 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import java.util.*;
 import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
-import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.CustomTripAdpater;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.example.recycleViewPack.TripPOJO;
@@ -69,7 +65,7 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-        TextView lineText=findViewById(R.id.lineTxt);
+        TextView lineText=findViewById(R.id.txt_line);
         lineText.setText("Welcome "+ m_user.getFirstName()+"!");
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
@@ -109,7 +105,7 @@ public class AllTripsActivity extends AppCompatActivity {
 
         // get the array of all trips and make array of tripPOJO
         ContactPOJO UserPartner = null;
-        UserPartner = new ContactPOJO(firstName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
+        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
         myListPartnersPerTrip.add(UserPartner);
         mAdapter.notifyDataSetChanged();
     }
@@ -139,7 +135,7 @@ public class AllTripsActivity extends AppCompatActivity {
         fillArrayPartners(position);
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
-        intent.putExtra("tripCounty", tripPojo.getmCountry());
+        intent.putExtra("tripCountry", tripPojo.getmCountry());
         intent.putExtra("tripCity", tripPojo.getmCity());
         intent.putExtra("arrayPartner", myListPartnersPerTrip);
         startActivity(intent);
