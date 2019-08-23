@@ -144,7 +144,6 @@ public class AllTripsActivity extends AppCompatActivity {
 
     private void fillArrayPartners(int position) {
         myListPartnersPerTrip = new ArrayList<>();
-
         TripPOJO tripPojo = mArrayList.get(position);
 
         ValueEventListener UserListener2 = new ValueEventListener() {

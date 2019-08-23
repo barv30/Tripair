@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dataUser.Partner;
+import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,17 +32,18 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private String m_language;
     private String m_gender;
     private String m_uid;
-    private String m_tripCountyKey;
-    private String m_tripCityKey;
+     String m_tripCountyKey;
+     String m_tripCityKey;
     User m_user;
-
+    Trip m_trip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_settings);
         Intent intent =getIntent();
+        m_trip = (Trip) intent.getSerializableExtra("trip");
         m_uid = intent.getStringExtra("userUid");
-        m_tripCountyKey = intent.getStringExtra("tripCountyKey");
+        m_tripCountyKey = intent.getStringExtra("tripCountryKey");
         m_tripCityKey = intent.getStringExtra("tripCityKey");
         m_user = (User) intent.getSerializableExtra("user");
         InitializeLanguages();
@@ -114,11 +116,12 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         else
         {
-
-            Partner settingOfPartner = initPartner();
             //save at database
+            Partner settingOfPartner = initPartner();
+            m_trip.setPartner(settingOfPartner);
             DatabaseReference mRef = database.getReference();
-           // mRef.child("usersProfile").child(m_uid).child("tripSettings").child("trips").child(m_tripCountyKey).child(m_tripCityKey).child("partnerSetting").setValue(settingOfPartner);
+            mRef.child("Trips").child(m_uid).push().setValue(m_trip);
+            mRef.child("Countries").child(m_tripCountyKey).child(m_tripCityKey).push().setValue(m_trip);
             Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("user", m_user);
