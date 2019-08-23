@@ -332,15 +332,10 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             Trip trip = initTrip();
             String tripCountryKey = trip.getCountry();
             String tripCityKey = trip.getCity();
-            //m_user.getAllTrips().updateTripList(tripKey, trip);
 
-           //Log.i("Info",m_user.getAllTrips().getTripList().toString());
-
-            DatabaseReference mRef = database.getReference();
-            mRef.child("Trips").child(m_uid).push().setValue(trip);
-            mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
 
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
+            intent.putExtra("trip",trip);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("tripCountryKey", tripCountryKey);
             intent.putExtra("tripCityKey", tripCityKey);
