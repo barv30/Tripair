@@ -17,13 +17,22 @@ package com.example.tripair;
 
         import java.util.*;
 
+        import com.example.dataUser.Trip;
         import com.example.dataUser.User;
         import com.example.recycleViewPack.ContactPOJO;
         import com.example.recycleViewPack.CustomContactAdapter;
         import com.example.recycleViewPack.OnRecyclerClickListener;
+        import com.example.recycleViewPack.TripPOJO;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
 
 public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
+    Trip m_trip;
+    String m_partnerID;
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
     private String m_uid;
@@ -31,6 +40,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private String m_tripCountry;
     private String m_tripCity;
     private ArrayList<ContactPOJO> mArrayDemoFav = new ArrayList<>();
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference mRef = database.getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +54,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_user = (User)intent.getSerializableExtra("user");
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
+
         TextView lineText = findViewById(R.id.txt_line);
         lineText.setText("Your optional partners to - "+m_tripCountry+","+m_tripCity);
+
       //  mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
@@ -56,16 +71,67 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
             }
         });
-        prepareData();
+       // prepareData();
 
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
+
+        ValueEventListener UserListener2 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.exists()) {
+                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                    for (DataSnapshot ds : children) {
+                        m_trip = ds.getValue(Trip.class);
+                        m_partnerID = m_trip.getM_ownerID();
+                        getUserPartnerAccordingID(m_partnerID);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mRef.child("Countries").child(m_tripCountry).child(m_tripCity).addValueEventListener(UserListener2);
+
+
         mAdapter.notifyDataSetChanged();
-        //prepareData();
+    }
 
 
+    private void getUserPartnerAccordingID(String partnerID) {
+        ValueEventListener UserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User userPartner;
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.exists()) {
+                    userPartner = dataSnapshot.getValue(User.class);
+                    addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), m_trip.getArriveDay(),
+                            m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(), m_trip.getLeftMonth(), m_trip.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
+    }
+
+    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
+
+        // get the array of all trips and make array of tripPOJO
+        ContactPOJO UserPartner = null;
+        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
+        mArrayList.add(UserPartner);
+        mAdapter.notifyDataSetChanged();
     }
 
     private void addPartnerToFavorites(int position) {

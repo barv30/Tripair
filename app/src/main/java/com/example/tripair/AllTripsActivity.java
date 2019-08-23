@@ -50,8 +50,6 @@ public class AllTripsActivity extends AppCompatActivity {
     });
     private String m_uid;
     private User m_user;
-    Trip m_trip;
-    String m_partnerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,7 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
         TextView lineText=findViewById(R.id.txt_line);
-        lineText.setText("Welcome "+ m_user.getFirstName()+"!");
+        lineText.setText("Welcome "+ m_user.getFirstName()+" !");
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,14 +99,6 @@ public class AllTripsActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
-
-        // get the array of all trips and make array of tripPOJO
-        ContactPOJO UserPartner = null;
-        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
-        myListPartnersPerTrip.add(UserPartner);
-        mAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,63 +122,12 @@ public class AllTripsActivity extends AppCompatActivity {
     }
 
     public void onButtonClicked(int position) {
-        fillArrayPartners(position);
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
         intent.putExtra("tripCountry", tripPojo.getmCountry());
         intent.putExtra("tripCity", tripPojo.getmCity());
-        intent.putExtra("arrayPartner", myListPartnersPerTrip);
         startActivity(intent);
     }
 
-    private void fillArrayPartners(int position) {
-        myListPartnersPerTrip = new ArrayList<>();
-        TripPOJO tripPojo = mArrayList.get(position);
 
-        ValueEventListener UserListener2 = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // Get Post object and use the values to update the UI
-                if (dataSnapshot.exists()) {
-                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                    for (DataSnapshot ds : children) {
-                        m_trip = ds.getValue(Trip.class);
-                        m_partnerID = m_trip.getM_ownerID();
-                        getUserPartnerAccordingID(m_partnerID);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mRef.child("Countries").child(tripPojo.getmCountry()).child(tripPojo.getmCity()).addValueEventListener(UserListener2);
-
-    }
-
-    private void getUserPartnerAccordingID(String partnerID) {
-        ValueEventListener UserListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User userPartner;
-                // Get Post object and use the values to update the UI
-                if (dataSnapshot.exists()) {
-                    userPartner = dataSnapshot.getValue(User.class);
-                    addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), m_trip.getArriveDay(),
-                            m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(), m_trip.getLeftMonth(), m_trip.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
-    }
 }
