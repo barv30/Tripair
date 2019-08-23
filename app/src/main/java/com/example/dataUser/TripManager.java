@@ -25,11 +25,11 @@ public class TripManager implements Serializable
         tripList.add(trip);
     }
 
-    public boolean findInTripList(String key) {
+    public Trip findInTripList(String country, String city) {
         for (int i =0 ;i < tripList.size(); i++) {
-            if (tripList.get(i).getCountry() == key)
-                return true;
+            if (tripList.get(i).getCountry().equals(country)  && tripList.get(i).getCity().equals(city))
+                return tripList.get(i);
         }
-        return false;
+        return null;
     }
 }

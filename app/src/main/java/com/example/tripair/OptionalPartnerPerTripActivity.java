@@ -110,8 +110,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
                     userPartner = dataSnapshot.getValue(User.class);
-                    addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), m_trip.getArriveDay(),
-                            m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(), m_trip.getLeftMonth(), m_trip.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                    Trip tripOfPartner = userPartner.getAllTrips().findInTripList(m_tripCountry, m_tripCity);
+                    if (tripOfPartner != null) {
+                        addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
+                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                    }
                 }
 
             }
