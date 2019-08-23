@@ -91,11 +91,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
     private void prepareData() {
         ContactPOJO contact = null;
-       contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+       contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
         mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+        contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
         mArrayList.add(contact);
-        contact = new ContactPOJO("Bar",30,8,2019,30,8,2020,true,25);
+        contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
         mArrayList.add(contact);
 
         mAdapter.notifyDataSetChanged();

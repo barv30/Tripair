@@ -11,9 +11,9 @@ public class ContactPOJO implements Serializable {
     private int mAge;
 
     public ContactPOJO() {}
-    public ContactPOJO(String name, int aday,int amonth,int ayear,
+    public ContactPOJO(String firstName,String lastName, int aday,int amonth,int ayear,
                        int lday,int lmonth,int lyear,boolean isSmoking,int age) {
-        mName = name;
+        mName =firstName +" " +lastName ;
         mDateDest= aday+"."+amonth+"."+ayear;
         if(lday == 0 && lmonth == 0 && lyear==0)
         {
