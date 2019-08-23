@@ -124,6 +124,8 @@ public class AllTripsActivity extends AppCompatActivity {
     public void onButtonClicked(int position) {
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
+        intent.putExtra("userUid", m_uid);
+        intent.putExtra("user", (User) m_user);
         intent.putExtra("tripCountry", tripPojo.getmCountry());
         intent.putExtra("tripCity", tripPojo.getmCity());
         startActivity(intent);

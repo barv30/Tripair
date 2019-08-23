@@ -70,8 +70,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 addPartnerToFavorites(position);
 
             }
-        });
-       // prepareData();
+    });
+
 
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator( new DefaultItemAnimator());
@@ -87,7 +87,9 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                     for (DataSnapshot ds : children) {
                         m_trip = ds.getValue(Trip.class);
                         m_partnerID = m_trip.getM_ownerID();
-                        getUserPartnerAccordingID(m_partnerID);
+                        if (! (m_partnerID.equals(m_uid))) {
+                            getUserPartnerAccordingID(m_partnerID);
+                        }
                     }
                 }
             }
@@ -97,9 +99,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             }
         };
         mRef.child("Countries").child(m_tripCountry).child(m_tripCity).addValueEventListener(UserListener2);
-
-
-        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -153,19 +152,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         contact.setmSmoking(smoke.getText().toString());
         Integer id  = position;
         mArrayDemoFav.add(contact);
-    }
-
-
-    private void prepareData() {
-        ContactPOJO contact = null;
-       contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
-        mArrayList.add(contact);
-        contact = new ContactPOJO("Bar","Vaida",30,8,2019,30,8,2020,true,25);
-        mArrayList.add(contact);
-
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
