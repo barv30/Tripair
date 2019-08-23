@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.*;
@@ -67,7 +69,8 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-
+        TextView lineText=findViewById(R.id.lineTxt);
+        lineText.setText("Welcome "+ m_user.getFirstName()+"!");
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
