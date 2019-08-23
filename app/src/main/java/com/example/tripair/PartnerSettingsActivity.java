@@ -120,7 +120,8 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             Partner settingOfPartner = initPartner();
             m_trip.setPartner(settingOfPartner);
             DatabaseReference mRef = database.getReference();
-            mRef.child("Trips").child(m_uid).push().setValue(m_trip);
+            m_user.getAllTrips().updateTripList(m_trip);
+            mRef.child("usersProfile").child(m_uid).setValue(m_user);
             mRef.child("Countries").child(m_tripCountyKey).child(m_tripCityKey).push().setValue(m_trip);
             Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid);

@@ -73,9 +73,9 @@ public class AllTripsActivity extends AppCompatActivity {
                 Trip trip;
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
-                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                    for (DataSnapshot ds : children) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         trip = ds.getValue(Trip.class);
+
                         addTripToList(trip.getCountry(), trip.getCity(), trip.getArriveDay(), trip.getArriveMonth(), trip.getArriveYear());
                     }
                 }
@@ -87,7 +87,7 @@ public class AllTripsActivity extends AppCompatActivity {
 
             }
         };
-        mRef.child("Trips").child(m_uid).addValueEventListener(UserListener1);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").addValueEventListener(UserListener1);
 
     }
 

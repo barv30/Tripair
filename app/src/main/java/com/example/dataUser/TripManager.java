@@ -21,7 +21,7 @@ public class TripManager implements Serializable
         this.tripList = tripList;
     }
 
-    public void updateTripList(String key, Trip trip) {
+    public void updateTripList(Trip trip) {
         tripList.add(trip);
     }
 
