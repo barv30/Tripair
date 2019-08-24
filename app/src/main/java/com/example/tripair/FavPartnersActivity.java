@@ -88,21 +88,8 @@ public class FavPartnersActivity extends AppCompatActivity {
             }
         };
         mRef.child("userProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).child("favPartner").addValueEventListener(UserListener2);
-
     }
-    private void prepareData() {
-//        ContactPOJO contact = null;
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
-//        contact = new ContactPOJO("Bar",30,8,1994,true,25);
-//        mArrayList.add(contact);
 
-       // mAdapter.notifyDataSetChanged();
-    }
 }
 
 
