@@ -9,10 +9,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,6 +29,10 @@ public class FavPartnersActivity extends AppCompatActivity {
     private CustomContactAdapter mAdapter;
     private String m_uid;
     private User m_user;
+    private int m_tripPosition;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference mRef = database.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +40,7 @@ public class FavPartnersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
-
+        m_tripPosition =  intent.getIntExtra("tripPosition",-1);
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
@@ -48,7 +58,26 @@ public class FavPartnersActivity extends AppCompatActivity {
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
 
-        prepareData();
+        ValueEventListener UserListener2 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.exists()) {
+                    ContactPOJO contact = null;
+                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                    for (DataSnapshot ds : children) {
+                        contact = ds.getValue(ContactPOJO.class);
+                        mArrayList.add(contact);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mRef.child("userProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).child("favPartner").addValueEventListener(UserListener2);
 
     }
     private void prepareData() {
@@ -62,7 +91,7 @@ public class FavPartnersActivity extends AppCompatActivity {
 //        contact = new ContactPOJO("Bar",30,8,1994,true,25);
 //        mArrayList.add(contact);
 
-        mAdapter.notifyDataSetChanged();
+       // mAdapter.notifyDataSetChanged();
     }
 }
 

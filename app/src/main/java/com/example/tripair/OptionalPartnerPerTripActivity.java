@@ -187,6 +187,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             case R.id.favPartners:
             {
                 Intent intent = new Intent(this, FavPartnersActivity.class);
+                intent.putExtra("tripPosition", m_tripPosition);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 startActivity(intent);
