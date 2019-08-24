@@ -36,7 +36,6 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Log.v("BindViewHolder", "in onBindViewHolder");
         ContactPOJO contact = arrayList.get(position);
-        holder.btnDelete.setVisibility(View.INVISIBLE);
         holder.name.setText(contact.getmName());
         holder.date.setText(contact.getmDateDest());
         holder.smoke.setText(contact.getmSmoking());

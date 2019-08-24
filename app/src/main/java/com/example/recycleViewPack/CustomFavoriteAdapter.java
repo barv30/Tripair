@@ -24,7 +24,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
     @Override
     public CustomFavoriteAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.v("CreateViewHolder", "in onCreateViewHolder");
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.partner_list, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorite_list, parent, false);
 
         return new CustomFavoriteAdapter.MyViewHolder(itemView);
     }
@@ -34,7 +34,6 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
     public void onBindViewHolder(CustomFavoriteAdapter.MyViewHolder holder, final int position) {
         Log.v("BindViewHolder", "in onBindViewHolder");
         ContactPOJO contact = arrayList.get(position);
-        holder.btnDelete.setVisibility(View.INVISIBLE);
         holder.name.setText(contact.getmName());
         holder.date.setText(contact.getmDateDest());
         holder.smoke.setText(contact.getmSmoking());
