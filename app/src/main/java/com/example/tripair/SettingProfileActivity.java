@@ -25,8 +25,11 @@ import android.widget.Toast;
 
 import com.example.dataUser.TripManager;
 import com.example.dataUser.User;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -288,6 +291,27 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
                                 progressDialog.setMessage("Uploaded "+(int)progress+"%");
                             }
                         });
+                Task<Uri> urlTask = ref.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return ref.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            String downloadUri = task.getResult().toString();
+                            // need to change
+
+                            mRef.child("Image").child(mAuth.getCurrentUser().getUid()).child("imageUrl").setValue(downloadUri);
+                        }
+                    }
+                });
             }
 
             // if everything ok - move to home page

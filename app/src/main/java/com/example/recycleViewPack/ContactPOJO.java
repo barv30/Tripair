@@ -9,10 +9,12 @@ public class ContactPOJO implements Serializable {
     private String mDateLeft;
     private String mSmoking;
     private int mAge;
+    private String mImage;
+
 
     public ContactPOJO() {}
     public ContactPOJO(String firstName,String lastName, int aday,int amonth,int ayear,
-                       int lday,int lmonth,int lyear,boolean isSmoking,int age) {
+                       int lday,int lmonth,int lyear,boolean isSmoking,int age, String image) {
         mName =firstName +" " +lastName ;
         mDateDest= aday+"."+amonth+"."+ayear;
         if(lday == 0 && lmonth == 0 && lyear==0)
@@ -32,7 +34,12 @@ public class ContactPOJO implements Serializable {
             mSmoking="No";
         }
         mAge=age;
+        mImage=image;
 
+    }
+
+    public String getmImage() {
+        return mImage;
     }
 
     public String getmDateLeft() {
@@ -55,6 +62,9 @@ public class ContactPOJO implements Serializable {
         return mSmoking;
     }
 
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
 
     public void setmName(String mName) {
         this.mName = mName;

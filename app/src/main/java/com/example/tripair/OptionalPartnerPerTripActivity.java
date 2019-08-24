@@ -33,6 +33,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
     Trip m_trip;
     String m_partnerID;
+    String m_image;
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
     private String m_uid;
@@ -106,6 +107,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         ValueEventListener UserListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 User userPartner;
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
@@ -113,8 +115,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                     Trip tripOfPartner = userPartner.getAllTrips().findInTripList(m_tripCountry, m_tripCity);
                     if (tripOfPartner != null) {
                         addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
-                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge()," ");
                     }
+                    String partnerID = m_partnerID;
+                    getURLPartnerAccordingID(partnerID);
+
                 }
 
             }
@@ -127,11 +132,40 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
     }
 
-    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
+    private void getURLPartnerAccordingID(String partnerID) {
+        ValueEventListener UserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String url;
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.exists()) {
+                    url = (String)dataSnapshot.getValue();
+                    String partnerID = m_partnerID;
+                     updateUrlForContanct(url, partnerID);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mRef.child("Image").child(m_partnerID).addValueEventListener(UserListener);
+    }
+    private void updateUrlForContanct(String url, String partnerID) {
+        for (int i = 0; i < mArrayList.size(); i++) {
+            if (partnerID.equals(mArrayList.get(i))) {
+                mArrayList.get(i).setmImage(url);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age, String image) {
 
         // get the array of all trips and make array of tripPOJO
         ContactPOJO UserPartner = null;
-        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
+        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age, image);
         mArrayList.add(UserPartner);
         mAdapter.notifyDataSetChanged();
     }
