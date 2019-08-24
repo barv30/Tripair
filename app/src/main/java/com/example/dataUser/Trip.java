@@ -128,4 +128,19 @@ public class Trip implements Serializable {
     public void setM_ownerID(String m_ownerID) {
         this.m_ownerID = m_ownerID;
     }
+
+    public ArrayList<ContactPOJO> getFavPartner() {
+        if (favPartner == null)
+        {
+            favPartner =  new ArrayList<>();
+        }
+        return favPartner;
+    }
+
+    public void setFavPartner(ArrayList<ContactPOJO> favPartner) {
+        this.favPartner = favPartner;
+    }
+    public void updateFavPartner(ContactPOJO favoritePartner) {
+        this.favPartner.add(favoritePartner);
+    }
 }

@@ -50,6 +50,7 @@ public class AllTripsActivity extends AppCompatActivity {
     });
     private String m_uid;
     private User m_user;
+    Trip m_trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +69,13 @@ public class AllTripsActivity extends AppCompatActivity {
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Trip trip;
+
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        trip = ds.getValue(Trip.class);
+                        m_trip = ds.getValue(Trip.class);
 
-                        addTripToList(trip.getCountry(), trip.getCity(), trip.getArriveDay(), trip.getArriveMonth(), trip.getArriveYear());
+                        addTripToList(m_trip.getCountry(), m_trip.getCity(), m_trip.getArriveDay(), m_trip.getArriveMonth(), m_trip.getArriveYear());
                     }
                 }
 
@@ -124,6 +125,8 @@ public class AllTripsActivity extends AppCompatActivity {
     public void onButtonClicked(int position) {
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
+        intent.putExtra("tripObj",m_trip);
+        intent.putExtra("tripPosition", position);
         intent.putExtra("userUid", m_uid);
         intent.putExtra("user", (User) m_user);
         intent.putExtra("tripCountry", tripPojo.getmCountry());

@@ -22,7 +22,6 @@ package com.example.tripair;
         import com.example.recycleViewPack.ContactPOJO;
         import com.example.recycleViewPack.CustomContactAdapter;
         import com.example.recycleViewPack.OnRecyclerClickListener;
-        import com.example.recycleViewPack.TripPOJO;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -30,7 +29,7 @@ package com.example.tripair;
         import com.google.firebase.database.ValueEventListener;
 
 public class OptionalPartnerPerTripActivity extends AppCompatActivity {
-    private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
+    private ArrayList<ContactPOJO> mOptionalPartnersArray = new ArrayList<>();
     Trip m_trip;
     String m_partnerID;
     private RecyclerView mRecyclerView1;
@@ -39,7 +38,9 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private User m_user;
     private String m_tripCountry;
     private String m_tripCity;
-    private ArrayList<ContactPOJO> mArrayDemoFav = new ArrayList<>();
+    private int m_tripPosition;
+    private Trip m_tripUserObj;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
@@ -54,13 +55,14 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_user = (User)intent.getSerializableExtra("user");
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
-
+        m_tripPosition = intent.getIntExtra("tripPosition",-1);
+        m_tripUserObj = (Trip) intent.getSerializableExtra("tripObj");
         TextView lineText = findViewById(R.id.txt_line);
         lineText.setText("Your optional partners to - "+m_tripCountry+","+m_tripCity);
 
-      //  mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
+      //  mOptionalPartnersArray = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
-        mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
+        mAdapter = new CustomContactAdapter(mOptionalPartnersArray, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
@@ -132,7 +134,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         // get the array of all trips and make array of tripPOJO
         ContactPOJO UserPartner = null;
         UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
-        mArrayList.add(UserPartner);
+        mOptionalPartnersArray.add(UserPartner);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -154,7 +156,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         contact.setmDateLeft(leftDate.getText().toString());
         contact.setmSmoking(smoke.getText().toString());
         Integer id  = position;
-        mArrayDemoFav.add(contact);
+        m_tripUserObj.updateFavPartner(contact);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
     }
 
     @Override
@@ -184,7 +187,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             case R.id.favPartners:
             {
                 Intent intent = new Intent(this, FavPartnersActivity.class);
-                intent.putExtra("favArr", mArrayDemoFav);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", m_user);
                 startActivity(intent);
             }
         }
