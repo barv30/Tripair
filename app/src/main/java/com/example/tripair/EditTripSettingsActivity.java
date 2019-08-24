@@ -2,8 +2,8 @@ package com.example.tripair;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.dataUser.Partner;
 import com.example.dataUser.Trip;
-import com.example.dataUser.TripManager;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.google.firebase.database.DatabaseReference;
@@ -27,30 +26,24 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 
-public class TripSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditTripSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
-    private Spinner spinnerCountry;
-    private Spinner spinnerCity;
+
     private Spinner arriveSpinnerDay;
     private Spinner arriveSpinnerMonth;
     private Spinner arriveSpinnerYear;
     private Spinner leftSpinnerDay;
     private Spinner leftSpinnerMonth;
     private Spinner leftSpinnerYear;
-    private String m_selectedCountry;
-    private int countryIndex;
-    private String m_selectedCity;
+
     private int m_dayArrive;
     private int m_monthArrive;
     private int m_yearArrive;
@@ -61,9 +54,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     Calendar calendar = Calendar.getInstance();
     private String m_uid;
     private User m_user;
-    private String m_mode_edit;
-    private ArrayList<String> countries = new ArrayList<>();
-    private ArrayList<ArrayList<String>> cities = new ArrayList<>();
+
     private int m_tripToEditPosition;
     private Trip m_tripEditMode;
     private ArrayList<ContactPOJO> favPartnerOfTripEdit;
@@ -72,27 +63,41 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip_settings);
+        setContentView(R.layout.activity_edit_trip_settings);
         Intent intent = getIntent();
-        m_mode_edit = intent.getStringExtra("isEditMode");
         m_tripToEditPosition = intent.getIntExtra("tripPosition",-1);
         m_uid = intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
         m_tripEditMode = (Trip) intent.getSerializableExtra("trip");
 
         TextView lineText = findViewById(R.id.headLine);
-        if (m_mode_edit!= null && m_mode_edit.equals("edit")) {
-
-            lineText.setText("Edit Your Trip to " + m_tripEditMode.getCountry() + "," + m_tripEditMode.getCity());
-            partnerSettingOfTripEdit = m_tripEditMode.getPartner();
-            favPartnerOfTripEdit = m_tripEditMode.getFavPartner();
-
+        CheckBox checkBoxArt = findViewById(R.id.checkBoxArt);
+        CheckBox checkBoxNature = findViewById(R.id.checkBoxNature);
+        CheckBox checkBoxRelax = findViewById(R.id.checkBoxRelax);
+        for (String checkboxString : m_tripEditMode.getStyleTrip())
+        {
+            if (checkboxString.equals("Art and History"))
+            {
+                checkBoxArt.setChecked(true);
+            }
+           else if (checkboxString.equals("Tracks and Nature"))
+            {
+                checkBoxNature.setChecked(true);
+            }
+           else if (checkboxString.equals("Relax"))
+            {
+                checkBoxRelax.setChecked(true);
+            }
         }
+        lineText.setText("Edit Your Trip to " + m_tripEditMode.getCountry() + "," + m_tripEditMode.getCity());
+        partnerSettingOfTripEdit = m_tripEditMode.getPartner();
+        favPartnerOfTripEdit = m_tripEditMode.getFavPartner();
+
+
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
         typeTripArr = new ArrayList<>();
-        HandleJsonParsing();
-        InitializeCountries();
+
         InitializeDays();
         InitializeMonths();
         InitializeYears();
@@ -100,114 +105,12 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    private void InitializeCities()
-    {
-
-        Collections.sort(cities.get(countryIndex));
-
-        spinnerCity = (Spinner)findViewById(R.id.citiesSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
-                android.R.layout.simple_spinner_item,cities.get(countryIndex));
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCity.setAdapter(adapter);
-        spinnerCity.setOnItemSelectedListener(this);
-    }
-
-    public void HandleJsonParsing()
-    {
-        JSONObject obj;
-        try {
-            obj = new JSONObject(loadJSONFromAsset(this));
-            Iterator keys = obj.keys();
-            int i=0;
-            while(keys.hasNext()) {
-
-                String countryKey = (String)keys.next();
-                // Log.i("Info" , countryKey);
-                countries.add(i, countryKey);
-
-                JSONArray cityPerCountryKey = obj.getJSONArray(countryKey);
-
-                ArrayList<String> tmp = new ArrayList<>();
-
-                for (int j=0;j<cityPerCountryKey.length();j++){
-                    tmp.add(cityPerCountryKey.getString(j));
-                }
-                cities.add(i,tmp);
-
-                i++;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public String loadJSONFromAsset(Context context) {
-        Log.i("Info","In loadJson");
-        String json = null;
-        try {
-            InputStream is = context.getAssets().open("countries_cities.json");
-
-            int size = is.available();
-
-            byte[] buffer = new byte[size];
-
-            is.read(buffer);
-
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-
-    }
-
-
-
-    private void InitializeCountries()
-    {
-
-        Collections.sort(countries);
-
-        spinnerCountry = (Spinner)findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
-                android.R.layout.simple_spinner_item,countries);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCountry.setAdapter(adapter);
-        spinnerCountry.setOnItemSelectedListener(this);
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         switch(adapterView.getId())
         {
-            case R.id.countrySpinner:
-            {
-                Log.i("Info", "spinnerCountry");
-                m_selectedCountry = adapterView.getSelectedItem().toString();
-                countryIndex = countries.indexOf(m_selectedCountry);
-                Log.i("Info", m_selectedCountry);
-                String str = String.valueOf(countryIndex);
-                Log.i("Info", str);
-                InitializeCities();
-            }
-            case R.id.citiesSpinner:
-            {
-                Log.i("Info", "spinnerCity");
-                m_selectedCity = adapterView.getSelectedItem().toString();
-                Log.i("Info", m_selectedCity);
-                break;
-            }
             case R.id.spinnerArriveDay:
             {
                 Log.i("Info", "spinnerArriveDay");
@@ -271,7 +174,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         arriveSpinnerDay = (Spinner)findViewById(R.id.spinnerArriveDay);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,days);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -279,7 +182,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerDay.setOnItemSelectedListener(this);
 
         leftSpinnerDay = (Spinner)findViewById(R.id.spinnerLeftDay);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,days);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -296,7 +199,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         arriveSpinnerMonth = (Spinner)findViewById(R.id.spinnerArriveMonth);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,months);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -304,7 +207,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerMonth.setOnItemSelectedListener(this);
 
         leftSpinnerMonth = (Spinner)findViewById(R.id.spinnerLeftMonth);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,months);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -322,7 +225,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         arriveSpinnerYear = (Spinner)findViewById(R.id.spinnerArriveYear);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,years);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -330,7 +233,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         arriveSpinnerYear.setOnItemSelectedListener(this);
 
         leftSpinnerYear = (Spinner)findViewById(R.id.spinnerLeftYear);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(TripSettingsActivity.this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(EditTripSettingsActivity.this,
                 android.R.layout.simple_spinner_item,years);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -355,18 +258,14 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             String tripCountryKey = trip.getCountry();
             String tripCityKey = trip.getCity();
 
-            if (m_mode_edit != null &&  m_mode_edit.equals("edit") &&  m_tripToEditPosition != -1)
-            {
-                trip.setFavPartner(favPartnerOfTripEdit);
-                trip.setPartner(partnerSettingOfTripEdit);
-                mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
-                mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
-            }
-            Intent intent = new Intent(this, PartnerSettingsActivity.class);
-            intent.putExtra("trip",trip);
+            trip.setFavPartner(favPartnerOfTripEdit);
+            trip.setPartner(partnerSettingOfTripEdit);
+            mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
+            mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
+
+            Intent intent = new Intent(this, AllTripsActivity.class);
+
             intent.putExtra("userUid", m_uid);
-            intent.putExtra("tripCountryKey", tripCountryKey);
-            intent.putExtra("tripCityKey", tripCityKey);
             intent.putExtra("user", m_user);
             startActivity(intent);
         }
@@ -375,8 +274,8 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private Trip initTrip() {
         Trip trip = new Trip();
         trip.setM_ownerID(m_uid);
-        trip.setCountry(m_selectedCountry);
-        trip.setCity(m_selectedCity);
+        trip.setCountry(m_tripEditMode.getCountry());
+        trip.setCity(m_tripEditMode.getCity());
         trip.setArriveDay(m_dayArrive);
         trip.setArriveMonth(m_monthArrive);
         trip.setArriveYear(m_yearArrive);
