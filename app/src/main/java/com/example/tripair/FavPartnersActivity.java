@@ -24,14 +24,20 @@ import java.util.ArrayList;
 
 public class FavPartnersActivity extends AppCompatActivity {
 
-    private ArrayList<ContactPOJO> mArrayList = new ArrayList<>();
+    private ArrayList<ContactPOJO> m_favoritePartners = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
     private String m_uid;
     private User m_user;
     private int m_tripPosition;
+    private Trip m_trip;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
+
+    @Override
+    public void onBackPressed() {
+     mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +47,13 @@ public class FavPartnersActivity extends AppCompatActivity {
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
         m_tripPosition =  intent.getIntExtra("tripPosition",-1);
+        m_trip = (Trip)intent.getSerializableExtra("trip");
+        m_favoritePartners = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favoritePartners");
+
+
         mRecyclerView1 = findViewById(R.id.recycleView);
 
-        mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
+        mAdapter = new CustomContactAdapter(m_favoritePartners, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
@@ -67,7 +77,7 @@ public class FavPartnersActivity extends AppCompatActivity {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot ds : children) {
                         contact = ds.getValue(ContactPOJO.class);
-                        mArrayList.add(contact);
+                        m_favoritePartners.add(contact);
                         mAdapter.notifyDataSetChanged();
                     }
                 }
