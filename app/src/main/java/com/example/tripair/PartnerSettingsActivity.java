@@ -32,18 +32,23 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     private String m_language;
     private String m_gender;
     private String m_uid;
-     String m_tripCountyKey;
+     String m_tripCountryKey;
      String m_tripCityKey;
     User m_user;
     Trip m_trip;
+    private int m_tripToEditPosition;
+    private String m_mode_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partner_settings);
         Intent intent =getIntent();
+        m_mode_edit = intent.getStringExtra("isEditMode");
+        m_tripToEditPosition = intent.getIntExtra("tripPosition",-1);
         m_trip = (Trip) intent.getSerializableExtra("trip");
         m_uid = intent.getStringExtra("userUid");
-        m_tripCountyKey = intent.getStringExtra("tripCountryKey");
+        m_tripCountryKey = intent.getStringExtra("tripCountryKey");
         m_tripCityKey = intent.getStringExtra("tripCityKey");
         m_user = (User) intent.getSerializableExtra("user");
         InitializeLanguages();
@@ -114,15 +119,23 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
             toast.show();
         }
 
-        else
-        {
+        else {
             //save at database
             Partner settingOfPartner = initPartner();
-            m_trip.setPartner(settingOfPartner);
             DatabaseReference mRef = database.getReference();
-            m_user.getAllTrips().updateTripList(m_trip);
+
+            if (m_mode_edit!= null && m_mode_edit.equals("edit") && m_tripToEditPosition != -1)
+            {
+                m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition, settingOfPartner);
+            }
+            else {
+                m_trip.setPartner(settingOfPartner);
+                m_user.getAllTrips().updateTripList(m_trip);
+            }
+
             mRef.child("usersProfile").child(m_uid).setValue(m_user);
-            mRef.child("Countries").child(m_tripCountyKey).child(m_tripCityKey).push().setValue(m_trip);
+            mRef.child("Countries").child(m_tripCountryKey).child(m_tripCityKey).push().setValue(m_trip);
+
             Intent intent = new Intent(this, AllTripsActivity.class);
             intent.putExtra("userUid", m_uid);
             intent.putExtra("user", m_user);

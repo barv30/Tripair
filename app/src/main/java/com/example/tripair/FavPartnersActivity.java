@@ -36,7 +36,14 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-     mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+
+        m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripPosition,m_favoritePartners);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+        Intent intent = new Intent(this, AllTripsActivity.class);
+        intent.putExtra("userUid", m_uid);
+        intent.putExtra("user", m_user);
+        startActivity(intent);
+        return;
     }
 
     @Override

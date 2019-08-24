@@ -11,8 +11,6 @@ package com.example.tripair;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ImageButton;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -31,7 +29,7 @@ package com.example.tripair;
 
 public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mOptionalPartnersArray = new ArrayList<>();
-    Trip m_trip;
+    Trip m_tripPerOptionalPartner;
     String m_partnerID;
     private RecyclerView mRecyclerView1;
     private CustomContactAdapter mAdapter;
@@ -57,7 +55,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
         m_tripPosition = intent.getIntExtra("tripPosition",-1);
-        m_tripUserObj = (Trip) intent.getSerializableExtra("tripObj");
+        m_tripUserObj = m_user.getAllTrips().getTripByPosition(m_tripPosition);
         TextView lineText = findViewById(R.id.txt_line);
         lineText.setText("Your optional partners to - "+m_tripCountry+","+m_tripCity);
 
@@ -88,8 +86,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot ds : children) {
-                        m_trip = ds.getValue(Trip.class);
-                        m_partnerID = m_trip.getM_ownerID();
+                        m_tripPerOptionalPartner = ds.getValue(Trip.class);
+                        m_partnerID = m_tripPerOptionalPartner.getM_ownerID();
                         if (! (m_partnerID.equals(m_uid))) {
                             getUserPartnerAccordingID(m_partnerID);
                         }
@@ -170,23 +168,31 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId())
-        {
-            case R.id.editTrip:
+        int idItem = item.getItemId();
+        if (idItem == R.id.editTrip)
             {
-                Intent intent = new Intent(this, TripSettingsActivity.class);
+                Intent intent = new Intent(this, EditTripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
+                intent.putExtra("tripPosition",m_tripPosition);
+                intent.putExtra("trip", m_tripUserObj);
                 startActivity(intent);
             }
-
-            case R.id.editPartner:
-            {
-
+        else if (idItem == R.id.editPartner)
+         {
+                Intent intent = new Intent(this, PartnerSettingsActivity.class);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", m_user);
+                intent.putExtra("trip",m_tripUserObj);
+                intent.putExtra("isEditMode", "edit");
+                intent.putExtra("tripPosition",m_tripPosition);
+                intent.putExtra("tripCountryKey", m_tripCountry);
+                intent.putExtra("tripCityKey", m_tripCity);
+                startActivity(intent);
             }
+        else if (idItem == R.id.favPartners)
+        {
 
-            case R.id.favPartners:
-            {
                 Intent intent = new Intent(this, FavPartnersActivity.class);
                 intent.putExtra("favoritePartners", m_tripUserObj.getFavPartner());
                 intent.putExtra("trip",m_tripUserObj);
@@ -195,7 +201,18 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 intent.putExtra("user", m_user);
                 startActivity(intent);
             }
-        }
         return super.onOptionsItemSelected(item);
     }
+/*
+    public void onBackPressed() {
+
+        m_user.getAllTrips().addToFavPartnersInSpecificTrip(m_tripPosition,m_favoritePartners);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+        Intent intent = new Intent(this, AllTripsActivity.class);
+        intent.putExtra("userUid", m_uid);
+        intent.putExtra("user", m_user);
+        startActivity(intent);
+        return;
+    }
+    */
 }

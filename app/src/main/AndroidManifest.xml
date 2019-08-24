@@ -17,6 +17,7 @@
         <activity android:name=".TripSettingsActivity" />
         <activity android:name=".AllTripsActivity" />
         <activity android:name=".SettingProfileActivity" />
+        <activity android:name=".EditTripSettingsActivity" />
         <activity android:name=".PartnerSettingsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
