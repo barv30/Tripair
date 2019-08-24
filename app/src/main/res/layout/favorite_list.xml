@@ -148,18 +148,11 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_Fav"
-                android:layout_width="52dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="40dp"
-                android:background="#03000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:srcCompat="@android:drawable/btn_star" />
-
+                android:id="@+id/btn_deleteFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                app:srcCompat="@android:drawable/ic_delete" />
         </LinearLayout>
 
     </LinearLayout>
