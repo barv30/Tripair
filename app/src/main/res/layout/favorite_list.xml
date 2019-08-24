@@ -150,9 +150,15 @@
             <ImageButton
                 android:id="@+id/btn_deleteFav"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:clickable="false"
                 app:srcCompat="@android:drawable/ic_delete" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="61dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
         </LinearLayout>
 
     </LinearLayout>
