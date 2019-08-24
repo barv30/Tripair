@@ -14,7 +14,6 @@ public class User implements Serializable {
     private int birthMonth;
     private ArrayList<String> languages;
     private boolean isSmoking;
-    private String aboutMe;
     private int age;
     private TripManager allTrips;
 
@@ -28,7 +27,6 @@ public class User implements Serializable {
                 String gender,
                 ArrayList<String> languages,
                 boolean isSmoking,
-                String aboutMe,
                 TripManager allTrips)
     {
         this.firstName = firstName;
@@ -40,7 +38,6 @@ public class User implements Serializable {
         this.languages = new ArrayList<>();
         this.languages = languages;
         this.isSmoking = isSmoking;
-        this.aboutMe = aboutMe;
         this.age = calculateAge();
         this.allTrips = new TripManager();
     }
@@ -54,10 +51,6 @@ public class User implements Serializable {
 
     public ArrayList<String> getLanguages() {
         return languages;
-    }
-
-    public String getAboutMe() {
-        return aboutMe;
     }
 
     public String getFirstName() {
@@ -111,10 +104,6 @@ public class User implements Serializable {
 
     public boolean isSmoking() {
         return isSmoking;
-    }
-
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
     }
 
     public void setFirstName(String firstName) {

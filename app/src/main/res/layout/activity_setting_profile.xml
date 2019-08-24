@@ -212,33 +212,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/aboutMeText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Write here.."
-                android:text="About Me"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
-
-            <EditText
-                android:id="@+id/aboutMeInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Write here.."
-                android:inputType="textPersonName"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textColorHint="@color/common_google_signin_btn_text_dark_default" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 

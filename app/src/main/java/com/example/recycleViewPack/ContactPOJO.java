@@ -17,7 +17,7 @@ public class ContactPOJO implements Serializable {
         mDateDest= aday+"."+amonth+"."+ayear;
         if(lday == 0 && lmonth == 0 && lyear==0)
         {
-            mDateLeft = "Unknown";
+            mDateLeft = "One way";
         }
         else
         {

@@ -53,7 +53,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private String m_userLastName;
     private boolean m_isUserSmoking = false;
     private String m_userGender;
-    private String m_aboutUser;
     private int m_dayBirth;
     private int m_monthBirth;
     private int m_yearBirth;
@@ -251,7 +250,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips);
+            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking, alltrips);
 
             //save at database
             DatabaseReference mRef = database.getReference();
@@ -304,7 +303,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         EditText userLastName = (EditText) findViewById(R.id.LastName);
         String userLastNameText = userLastName.getText().toString();
         EditText userAboutMe = (EditText)findViewById(R.id.aboutMeInput);
-        String userAboutMeText = userAboutMe.getText().toString();
         CheckBox checkBoxSmoking = (CheckBox) findViewById(R.id.smokingBox);
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.groupGender);
@@ -333,10 +331,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 m_isUserSmoking = true;
             }
-            if(userAboutMeText != "")
-            {
-                m_aboutUser = userAboutMeText;
-            }
+
             m_userFirstName = userFirstNameText;
             m_userLastName = userLastNameText;
             m_userGender = radioButton.getText().toString();
