@@ -30,7 +30,7 @@ public class FavPartnersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
-        mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favArr");
+
         mRecyclerView1 = findViewById(R.id.recycleView);
 
         mAdapter = new CustomContactAdapter(mArrayList, new OnRecyclerClickListener() {
