@@ -11,6 +11,7 @@ package com.example.tripair;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
+        import android.view.View;
         import android.widget.ImageButton;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -140,14 +141,13 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
     private void addPartnerToFavorites(int position) {
         TextView name, date, smoke,age,leftDate;
-        ImageButton btnFav,btnDelete;
-
+        RecyclerView.ViewHolder child =mRecyclerView1.findViewHolderForLayoutPosition(position);
+            name=child.itemView.findViewById(R.id.txt_name);
             Log.v("ViewHolder","in View Holder");
-            name = findViewById(R.id.txt_line);
-            date = findViewById(R.id.txt_dest_insert);
-            leftDate = findViewById(R.id.txt_dateL);
-            smoke = findViewById(R.id.txt_smoke_insert);
-            age=findViewById(R.id.txt_age_insert);
+            date = child.itemView.findViewById(R.id.txt_dest_insert);
+            leftDate = child.itemView.findViewById(R.id.txt_dateL);
+            smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
+            age=child.itemView.findViewById(R.id.txt_age_insert);
 
         ContactPOJO contact = new ContactPOJO();
         contact.setmName(name.getText().toString());

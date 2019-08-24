@@ -101,7 +101,7 @@
             <CheckBox
                 android:id="@+id/checkBoxRelax"
                 android:layout_width="94dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Relax"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
@@ -110,7 +110,7 @@
             <CheckBox
                 android:id="@+id/checkBoxArt"
                 android:layout_width="wrap_content"
-                android:layout_height="43dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Art and History"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed"
@@ -230,7 +230,7 @@
 
                                     <Spinner
                                         android:id="@+id/spinnerArriveYear"
-                                        android:layout_width="90dp"
+                                        android:layout_width="100dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1" />
                                 </LinearLayout>
@@ -318,7 +318,7 @@
 
                                 <Spinner
                                     android:id="@+id/spinnerLeftYear"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                         </LinearLayout>
