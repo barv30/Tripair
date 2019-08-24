@@ -260,6 +260,8 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
 
             trip.setFavPartner(favPartnerOfTripEdit);
             trip.setPartner(partnerSettingOfTripEdit);
+            m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition,partnerSettingOfTripEdit);
+            m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripToEditPosition,favPartnerOfTripEdit);
             mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
             mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
 
