@@ -63,7 +63,7 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-        TextView lineText=findViewById(R.id.txt_name);
+        TextView lineText=findViewById(R.id.lineText);
         lineText.setText("Welcome "+ m_user.getFirstName()+" !");
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
