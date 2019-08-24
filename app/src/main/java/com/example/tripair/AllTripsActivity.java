@@ -74,7 +74,7 @@ public class AllTripsActivity extends AppCompatActivity {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         trip = ds.getValue(Trip.class);
 
-                        addTripToList(trip.getCountry(), trip.getCity(), trip.getArriveDay(), trip.getArriveMonth(), trip.getArriveYear());
+                        addTripToList(trip.getCountry(), trip.getCity(), trip.getArriveDay(), trip.getArriveMonth(), trip.getArriveYear(),trip.getLeftDay(),trip.getLeftMonth(),trip.getLeftYear());
                     }
                 }
 
@@ -90,11 +90,11 @@ public class AllTripsActivity extends AppCompatActivity {
     }
 
 
-    private void addTripToList(String country, String city, int day, int month, int year) {
+    private void addTripToList(String country, String city, int day, int month, int year,int leftDay,int leftMonth,int leftYear) {
 
         // get the array of all trips and make array of tripPOJO
         TripPOJO trip = null;
-        trip = new TripPOJO(country, city, day, month, year);
+        trip = new TripPOJO(country, city, day, month, year,leftDay,leftMonth,leftYear);
         mArrayList.add(trip);
         mAdapter.notifyDataSetChanged();
     }
