@@ -31,7 +31,7 @@ public class TripPOJO
         }
         else
         {
-            mFullDate=mADay+"."+mAMonth+"."+mAYear+"-"+mLDay+"."+mLMonth+"."+mLYear;
+            mFullDate=mADay+"."+mAMonth+"."+mAYear+" - "+mLDay+"."+mLMonth+"."+mLYear;
         }
 
     }
