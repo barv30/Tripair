@@ -377,7 +377,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         {
             return "You have to choose style trip!";
         }
-        else if (m_yearLeft < m_yearArrive && m_yearLeft != calendar.get(Calendar.YEAR))
+        else if (m_yearLeft < m_yearArrive &&m_yearLeft !=currentYear || m_yearLeft == m_yearArrive && m_monthLeft<m_monthArrive || m_yearLeft == m_yearArrive &&m_dayLeft<m_dayArrive && m_monthLeft==m_monthArrive)
         {
             return "Your left date is invalid!";
         }
@@ -400,7 +400,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             {
                 typeTripArr.add("Tracks and Nature");
             }
-            if(m_dayLeft == m_dayArrive && m_monthLeft == m_monthArrive && m_yearLeft == m_yearArrive) //the user doesn't choose left date
+            if(m_dayLeft == 1 && m_monthLeft == 1 && m_yearLeft == currentYear) //the user doesn't choose left date
             {
                 m_yearLeft=0;
                 m_dayLeft=0;

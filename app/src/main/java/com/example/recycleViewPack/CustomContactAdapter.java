@@ -38,6 +38,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Log.v("BindViewHolder", "in onBindViewHolder");
         ContactPOJO contact = arrayList.get(position);
+        holder.btnDelete.setVisibility(View.INVISIBLE);
         holder.name.setText(contact.getmName());
         holder.date.setText(contact.getmDateDest());
         holder.smoke.setText(contact.getmSmoking());
@@ -48,7 +49,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnDelete.setClickable(true);
+                holder.btnDelete.setVisibility(View.VISIBLE);
                 listener.onRecyclerViewItemFavClicked(position,view.getId());
             }
         });
@@ -56,7 +57,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnDelete.setClickable(false);
+                holder.btnDelete.setVisibility(View.INVISIBLE);
                 listener.onRecyclerViewItemClicked(position,view.getId());
             }
         });
@@ -76,7 +77,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         public MyViewHolder(View itemView) {
             super(itemView);
             Log.v("ViewHolder","in View Holder");
-            name = itemView.findViewById(R.id.txt_line);
+            name = itemView.findViewById(R.id.txt_name);
             date = itemView.findViewById(R.id.txt_dest_insert);
             leftDate = itemView.findViewById(R.id.txt_dateL);
             smoke = itemView.findViewById(R.id.txt_smoke_insert);

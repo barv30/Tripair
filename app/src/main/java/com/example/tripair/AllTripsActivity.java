@@ -50,6 +50,7 @@ public class AllTripsActivity extends AppCompatActivity {
     });
     private String m_uid;
     private User m_user;
+    Trip m_trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +64,17 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-        TextView lineText=findViewById(R.id.txt_line);
+        TextView lineText=findViewById(R.id.lineText);
         lineText.setText("Welcome "+ m_user.getFirstName()+" !");
         ValueEventListener UserListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Trip trip;
+
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        trip = ds.getValue(Trip.class);
-
-                        addTripToList(trip.getCountry(), trip.getCity(), trip.getArriveDay(), trip.getArriveMonth(), trip.getArriveYear());
+                        m_trip = ds.getValue(Trip.class);
+                        addTripToList(m_trip.getCountry(), m_trip.getCity(), m_trip.getArriveDay(), m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(),m_trip.getLeftMonth(),m_trip.getLeftYear());
                     }
                 }
 
@@ -90,11 +90,11 @@ public class AllTripsActivity extends AppCompatActivity {
     }
 
 
-    private void addTripToList(String country, String city, int day, int month, int year) {
+    private void addTripToList(String country, String city, int day, int month, int year,int leftDay,int leftMonth,int leftYear) {
 
         // get the array of all trips and make array of tripPOJO
         TripPOJO trip = null;
-        trip = new TripPOJO(country, city, day, month, year);
+        trip = new TripPOJO(country, city, day, month, year,leftDay,leftMonth,leftYear);
         mArrayList.add(trip);
         mAdapter.notifyDataSetChanged();
     }
@@ -124,6 +124,8 @@ public class AllTripsActivity extends AppCompatActivity {
     public void onButtonClicked(int position) {
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
+        intent.putExtra("tripObj",m_trip);
+        intent.putExtra("tripPosition", position);
         intent.putExtra("userUid", m_uid);
         intent.putExtra("user", (User) m_user);
         intent.putExtra("tripCountry", tripPojo.getmCountry());

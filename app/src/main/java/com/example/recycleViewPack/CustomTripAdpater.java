@@ -37,7 +37,7 @@ public class CustomTripAdpater extends RecyclerView.Adapter<CustomTripAdpater.My
         Log.v("BindViewHolder", "in onBindViewHolder");
         TripPOJO trip = arrayList.get(position);
         holder.where.setText(trip.getmCountry()+","+trip.getmCity());
-        holder.date.setText(trip.getmDay()+"."+trip.getmMonth()+"."+trip.getmYear());
+        holder.date.setText(trip.getmFullDate());
 
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override

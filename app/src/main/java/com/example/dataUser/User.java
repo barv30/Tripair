@@ -134,6 +134,10 @@ public class User implements Serializable {
     }
 
     public TripManager getAllTrips() {
+        if (allTrips==null)
+        {
+            allTrips = new TripManager();
+        }
         return allTrips;
     }
 
