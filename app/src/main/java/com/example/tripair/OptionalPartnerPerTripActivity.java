@@ -157,7 +157,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         contact.setmSmoking(smoke.getText().toString());
         Integer id  = position;
         m_tripUserObj.updateFavPartner(contact);
-        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
+
+
     }
 
     @Override
@@ -187,6 +188,9 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             case R.id.favPartners:
             {
                 Intent intent = new Intent(this, FavPartnersActivity.class);
+                intent.putExtra("favoritePartners", m_tripUserObj.getFavPartner());
+                intent.putExtra("trip",m_tripUserObj);
+                intent.putExtra("tripPosition", m_tripPosition);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 startActivity(intent);
