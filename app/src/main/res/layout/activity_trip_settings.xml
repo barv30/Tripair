@@ -230,7 +230,7 @@
 
                                     <Spinner
                                         android:id="@+id/spinnerArriveYear"
-                                        android:layout_width="90dp"
+                                        android:layout_width="100dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1" />
                                 </LinearLayout>
@@ -318,7 +318,7 @@
 
                                 <Spinner
                                     android:id="@+id/spinnerLeftYear"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                         </LinearLayout>
