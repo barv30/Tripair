@@ -22,7 +22,6 @@ package com.example.tripair;
         import com.example.recycleViewPack.ContactPOJO;
         import com.example.recycleViewPack.CustomContactAdapter;
         import com.example.recycleViewPack.OnRecyclerClickListener;
-        import com.example.recycleViewPack.TripPOJO;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -55,7 +54,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
 
-        TextView lineText = findViewById(R.id.txt_line);
+        TextView lineText = findViewById(R.id.txt_name);
         lineText.setText("Your optional partners to - "+m_tripCountry+","+m_tripCity);
 
       //  mArrayList = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
@@ -141,7 +140,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         ImageButton btnFav,btnDelete;
 
             Log.v("ViewHolder","in View Holder");
-            name = findViewById(R.id.txt_line);
+            name = findViewById(R.id.txt_name);
             date = findViewById(R.id.txt_dest_insert);
             leftDate = findViewById(R.id.txt_dateL);
             smoke = findViewById(R.id.txt_smoke_insert);
