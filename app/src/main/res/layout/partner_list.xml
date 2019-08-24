@@ -165,7 +165,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                app:srcCompat="@android:drawable/ic_delete" />
+                app:srcCompat="@android:drawable/ic_delete"
+                tools:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>

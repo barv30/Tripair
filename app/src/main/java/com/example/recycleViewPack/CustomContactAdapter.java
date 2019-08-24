@@ -45,7 +45,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnDelete.setClickable(true);
+                holder.btnDelete.setVisibility(View.VISIBLE);
                 listener.onRecyclerViewItemFavClicked(position,view.getId());
             }
         });
@@ -53,7 +53,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnDelete.setClickable(false);
+                holder.btnDelete.setVisibility(View.INVISIBLE);
                 listener.onRecyclerViewItemClicked(position,view.getId());
             }
         });

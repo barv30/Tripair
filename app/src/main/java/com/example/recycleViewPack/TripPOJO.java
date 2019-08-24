@@ -6,30 +6,58 @@ public class TripPOJO
 {
     private String mCountry;
     private String mCity;
-    private int mDay;
-    private int  mMonth;
-    private int mYear;
+    private int mADay;
+    private int  mAMonth;
+    private int mAYear;
+    private int mLDay;
+    private int mLMonth;
+    private int mLYear;
+    private String mFullDate;
 
    public TripPOJO(){}
-    public TripPOJO(String iCountry, String iCity,int iDay,int iMonth, int iYear)
+        public TripPOJO(String iCountry, String iCity,int iADay,int iAMonth, int iAYear,int iLDay ,int iLMonth,int iLYear)
     {
         this.mCountry = iCountry;
         this.mCity = iCity;
-        this.mDay = iDay;
-        this.mMonth = iMonth;
-        this.mYear = iYear;
+        this.mADay = iADay;
+        this.mAMonth = iAMonth;
+        this.mAYear = iAYear;
+        this.mLDay = iLDay;
+        this.mLMonth=iLMonth;
+        this.mAYear=iLYear;
+        if(mLDay == 0 && mLMonth == 0 && mAYear == 0)
+        {
+            mFullDate = mADay+"."+mAMonth+"."+mAYear+"(One way)";
+        }
+        else
+        {
+            mFullDate=mADay+"."+mAMonth+"."+mAYear+"-"+mLDay+"."+mLMonth+"."+mLYear;
+        }
+
     }
 
-    public int getmDay() {
-        return mDay;
+    public int getmADay() {
+        return mADay;
     }
 
-    public int getmMonth() {
-        return mMonth;
+    public int getmAMonth() {
+        return mAMonth;
     }
 
-    public int getmYear() {
-        return mYear;
+    public int getmAYear() {
+        return mAYear;
+    }
+
+    public int getmLDay() {
+        return mLDay;
+    }
+
+    public int getmLMonth() {
+        return mLMonth;
+    }
+
+    public int getmLYear() {
+        return mLYear;
     }
 
     public String getmCity() {
@@ -40,6 +68,13 @@ public class TripPOJO
         return mCountry;
     }
 
+
+
+    public String getmFullDate() {
+        return mFullDate;
+    }
+
+
     public void setmCity(String mCity) {
         this.mCity = mCity;
     }
@@ -48,15 +83,34 @@ public class TripPOJO
         this.mCountry = mCountry;
     }
 
-    public void setmDay(int mDay) {
-        this.mDay = mDay;
+    public void setmADay(int mADay) {
+        this.mADay = mADay;
     }
 
-    public void setmMonth(int mMonth) {
-        this.mMonth = mMonth;
+    public void setmAMonth(int mAMonth) {
+        this.mAMonth = mAMonth;
     }
 
-    public void setmYear(int mYear) {
-        this.mYear = mYear;
+    public void setmAYear(int mAYear) {
+        this.mAYear = mAYear;
     }
+
+    public void setmLDay(int mLDay) {
+        this.mLDay = mLDay;
+    }
+
+    public void setmLMonth(int mLMonth) {
+        this.mLMonth = mLMonth;
+    }
+
+    public void setmLYear(int mLYear) {
+        this.mLYear = mLYear;
+    }
+
+
+    public void setmFullDate(String mFullDate) {
+        this.mFullDate = mFullDate;
+    }
+
+
 }
