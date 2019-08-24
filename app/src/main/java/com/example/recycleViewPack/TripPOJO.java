@@ -24,8 +24,8 @@ public class TripPOJO
         this.mAYear = iAYear;
         this.mLDay = iLDay;
         this.mLMonth=iLMonth;
-        this.mAYear=iLYear;
-        if(mLDay == 0 && mLMonth == 0 && mAYear == 0)
+        this.mLYear=iLYear;
+        if(mLDay == 0 && mLMonth == 0 && mLYear == 0)
         {
             mFullDate = mADay+"."+mAMonth+"."+mAYear+"(One way)";
         }
