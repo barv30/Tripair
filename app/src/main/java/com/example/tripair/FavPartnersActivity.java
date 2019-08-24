@@ -13,6 +13,7 @@ import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomContactAdapter;
+import com.example.recycleViewPack.CustomFavoriteAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     private ArrayList<ContactPOJO> m_favoritePartners = new ArrayList<>();
     private RecyclerView mRecyclerView1;
-    private CustomContactAdapter mAdapter;
+    private CustomFavoriteAdapter mAdapter;
     private String m_uid;
     private User m_user;
     private int m_tripPosition;
@@ -60,14 +61,10 @@ public class FavPartnersActivity extends AppCompatActivity {
 
         mRecyclerView1 = findViewById(R.id.recycleView);
 
-        mAdapter = new CustomContactAdapter(m_favoritePartners, new OnRecyclerClickListener() {
+        mAdapter = new CustomFavoriteAdapter(m_favoritePartners, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-            }
-            public void onRecyclerViewItemFavClicked(int position, int id) {
-                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
-
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

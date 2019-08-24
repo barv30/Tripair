@@ -65,11 +65,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-            }
-            public void onRecyclerViewItemFavClicked(int position, int id) {
-                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
                 addPartnerToFavorites(position);
-
             }
     });
 
