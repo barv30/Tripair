@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String aboutMe;
     private int age;
     private TripManager allTrips;
+    private String imageUrl;
 
     public User(){}
     public User(
@@ -29,7 +30,8 @@ public class User implements Serializable {
                 ArrayList<String> languages,
                 boolean isSmoking,
                 String aboutMe,
-                TripManager allTrips)
+                TripManager allTrips,
+                String imageUrl)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,6 +45,7 @@ public class User implements Serializable {
         this.aboutMe = aboutMe;
         this.age = calculateAge();
         this.allTrips = new TripManager();
+        this.imageUrl=imageUrl;
     }
 
     private int calculateAge() {
@@ -143,6 +146,14 @@ public class User implements Serializable {
 
     public void setAllTrips(TripManager allTrips) {
         this.allTrips = allTrips;
+    }
+
+    public String getImgURL() {
+        return imageUrl;
+    }
+
+    public void setImgURL(String imageURL) {
+        this.imageUrl = imageURL;
     }
 }
 

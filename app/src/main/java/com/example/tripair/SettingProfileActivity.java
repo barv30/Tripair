@@ -69,6 +69,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
+    String imageUrl = "";
     FirebaseStorage storage;
     StorageReference storageReference;
 
@@ -254,11 +255,10 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips);
+            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips,imageUrl);
 
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
 
 
             if(filePath != null)
@@ -307,21 +307,25 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
                         if (task.isSuccessful()) {
                             String downloadUri = task.getResult().toString();
                             // need to change
-
-                            mRef.child("Image").child(mAuth.getCurrentUser().getUid()).child("imageUrl").setValue(downloadUri);
+                            m_userInput.setImgURL(downloadUri);
+                            imageUrl = downloadUri;
+                            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+                            moveToAllTrips();
                         }
                     }
                 });
             }
 
-            // if everything ok - move to home page
-            Intent intent = new Intent(this, AllTripsActivity.class);
-            intent.putExtra("userUid", m_uid_user);
-            intent.putExtra("user", m_userInput);
-            startActivity(intent);
        }
     }
-
+    private void moveToAllTrips(){
+        // if everything ok - move to home page
+        Intent intent = new Intent(this, AllTripsActivity.class);
+        intent.putExtra("userUid", m_uid_user);
+        intent.putExtra("user", m_userInput);
+       // intent.putExtra("imageUrl", imageUrl);
+        startActivity(intent);
+    }
     private String checkIfInputFromUserIsValid() {
         EditText userFirstName = (EditText) findViewById(R.id.firstName);
         String userFirstNameText = userFirstName.getText().toString();
