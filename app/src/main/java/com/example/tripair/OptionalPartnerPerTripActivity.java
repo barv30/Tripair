@@ -15,6 +15,7 @@ package com.example.tripair;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import java.text.SimpleDateFormat;
         import java.util.*;
 
         import com.example.dataUser.Trip;
@@ -110,8 +111,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                     userPartner = dataSnapshot.getValue(User.class);
                     Trip tripOfPartner = userPartner.getAllTrips().findInTripList(m_tripCountry, m_tripCity);
                     if (tripOfPartner != null) {
-                        addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
-                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                        if (filterPartner(userPartner, tripOfPartner)) {
+                            addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
+                                    tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                        }
                     }
                 }
 
@@ -123,6 +126,64 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             }
         };
         mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
+    }
+
+    private boolean matchStyle(Trip tripOfPartner)
+    {
+        for (String styleUser : m_tripUserObj.getStyleTrip())
+        {
+            for (String stylePartner : tripOfPartner.getStyleTrip())
+            {
+                if (styleUser.equals(stylePartner)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isDateMatch (User userPartner, Trip tripOfPartner)
+    {
+        return true;
+    }
+
+    private boolean isLanguageMatch (User userPartner)
+    {
+        for (String lagUser : m_user.getLanguages())
+        {
+            for (String lagPartner : userPartner.getLanguages())
+            {
+                if ( lagUser.equals(lagPartner)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean filterPartner(User userPartner, Trip tripOfPartner)
+    {
+        if (
+                (isDateMatch(userPartner, tripOfPartner)) &&
+                ((m_tripUserObj.getPartner().isSmoking()) || (!(m_tripUserObj.getPartner().isSmoking()) && (!userPartner.isSmoking()))) &&
+                ((tripOfPartner.getPartner().isSmoking()) || (!(tripOfPartner.getPartner().isSmoking()) && (!m_user.isSmoking()))) &&
+                (((m_tripUserObj.getPartner().getGender()).equals("no matter")) || (((!(m_tripUserObj.getPartner().getGender()).equals("no matter"))) && ((m_tripUserObj.getPartner().getGender()).equals(userPartner.getGender())))) &&
+                (((tripOfPartner.getPartner().getGender()).equals("no matter")) || (((!(tripOfPartner.getPartner().getGender()).equals("no matter"))) && ((tripOfPartner.getPartner().getGender()).equals(m_user.getGender())))) &&
+                 (userPartner.getAge() >= m_tripUserObj.getPartner().getMinAge())&&
+                 (userPartner.getAge() <= m_tripUserObj.getPartner().getMaxAge()) &&
+                 (m_user.getAge() >= tripOfPartner.getPartner().getMinAge() &&
+                 (m_user.getAge() <= tripOfPartner.getPartner().getMaxAge()) &&
+                 (matchStyle(tripOfPartner))) &&
+                 (isLanguageMatch(userPartner))
+        )
+
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {

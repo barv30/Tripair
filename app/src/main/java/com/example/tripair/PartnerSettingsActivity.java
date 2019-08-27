@@ -22,14 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class PartnerSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class PartnerSettingsActivity extends AppCompatActivity{
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
-    private Spinner spinnerLanguage;
-    private String selectedLanguage;
     private int m_minAge;
     private int m_maxAge;
     private boolean m_isSmoking;
-    private String m_language;
     private String m_gender;
     private String m_uid;
      String m_tripCountryKey;
@@ -52,49 +49,6 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         m_tripCountryKey = intent.getStringExtra("tripCountryKey");
         m_tripCityKey = intent.getStringExtra("tripCityKey");
         m_user = (User) intent.getSerializableExtra("user");
-        InitializeLanguages();
-    }
-
-
-    public void InitializeLanguages()
-    {
-        ArrayList<String> languages = new ArrayList<String>();
-        languages.add("Hebrew");
-        languages.add("English");
-        languages.add("Arabic");
-        languages.add("Russian");
-        languages.add("Spanish");
-        languages.add("Chinese");
-        languages.add("Japanese");
-        languages.add("Turkish");
-        languages.add("French");
-        languages.add("German");
-        languages.add("Italian");
-
-        Collections.sort(languages);
-
-        spinnerLanguage = (Spinner)findViewById(R.id.languageSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PartnerSettingsActivity.this,
-                android.R.layout.simple_spinner_item,languages);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLanguage.setAdapter(adapter);
-        spinnerLanguage.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-        if(adapterView.getId() == R.id.languageSpinner) {
-            Log.i("Info", "spinnerLanguages");
-            selectedLanguage = adapterView.getSelectedItem().toString();
-            Log.i("Info", selectedLanguage);
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
@@ -105,7 +59,6 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         newPartner.setMaxAge(m_maxAge);
         newPartner.setMinAge(m_minAge);
         newPartner.setSmoking(m_isSmoking);
-        newPartner.setMainLanguage(m_language);
         return newPartner;
     }
 
@@ -144,7 +97,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         else
         {
             m_gender = radioButtonGender.getText().toString();
-            if(radioButtonSmoking.getText().toString() == "I don't care")
+            if((radioButtonSmoking.getText().toString()).equals("I don't care"))
             {
                 m_isSmoking=true;
             }

@@ -20,14 +20,12 @@ public class Trip implements Serializable {
     private int leftMonth;
     private int leftYear;
     private Partner partnerSetting;
-    private PartnerManager partnerList;
     private ArrayList<ContactPOJO> favPartner;
     private String keyOfCountriesFireBase;
 
     public Trip() {
         styleTrip = new ArrayList<>();
         partnerSetting = new Partner();
-        partnerList = new PartnerManager();
         favPartner = new ArrayList<>();
     }
 
@@ -63,9 +61,6 @@ public class Trip implements Serializable {
         return partnerSetting;
     }
 
-    public PartnerManager getPartnerList() {
-        return partnerList;
-    }
 
     public String getCity() {
         return city;
@@ -93,9 +88,6 @@ public class Trip implements Serializable {
         this.styleTrip = styleTrip;
     }
 
-    public void setPartnerList(PartnerManager partnerList) {
-        this.partnerList = partnerList;
-    }
 
     public void setArriveDay(int arriveDay) {
         this.arriveDay = arriveDay;

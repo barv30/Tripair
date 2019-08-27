@@ -7,7 +7,6 @@ public class Partner implements Serializable {
     private int minAge;
     private int maxAge;
     private String gender;
-    private String mainLanguage;
     private boolean isSmoking;
 
 
@@ -25,9 +24,6 @@ public class Partner implements Serializable {
         return minAge;
     }
 
-    public String getMainLanguage() {
-        return mainLanguage;
-    }
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -44,10 +40,6 @@ public class Partner implements Serializable {
 
     public void setSmoking(boolean smoking) {
         isSmoking = smoking;
-    }
-
-    public void setMainLanguage(String mainLanguage) {
-        this.mainLanguage = mainLanguage;
     }
 
     public void setMinAge(int minAge) {
