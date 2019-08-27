@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("userUid" , uid);
         intent.putExtra("userEmail" , userEmail);
         startActivity(intent);
-        this.finish();
     }
 
     private void openAllTripsActivity(String uid, User user)
@@ -135,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("userUid" , uid);
         intent.putExtra("user" , user);
         startActivity(intent);
-        this.finish();
     }
 
     @Override
