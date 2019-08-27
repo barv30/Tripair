@@ -13,7 +13,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="159dp"
+            android:scaleType="fitXY"
+            android:layout_width="140dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -71,7 +72,7 @@
                         android:layout_width="25dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text=" Date at destination:"
+                        android:text="Date at destination:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 
@@ -117,7 +118,7 @@
                         android:layout_width="25dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text=" Smoking:"
+                        android:text="Smoking:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 

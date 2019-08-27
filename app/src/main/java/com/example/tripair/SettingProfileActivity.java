@@ -69,7 +69,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
-    String imageUrl = "";
+    String imageUrl = "https://firebasestorage.googleapis.com/v0/b/tripair-be218.appspot.com/o/profilePic%2FProfilePicture.png?alt=media&token=eb726118-9758-445b-9c77-c017a19ab66d";
     FirebaseStorage storage;
     StorageReference storageReference;
 
@@ -315,6 +315,11 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
                     }
                 });
             }
+            else
+            {
+                mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+                moveToAllTrips();
+            }
 
        }
     }
@@ -323,7 +328,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         Intent intent = new Intent(this, AllTripsActivity.class);
         intent.putExtra("userUid", m_uid_user);
         intent.putExtra("user", m_userInput);
-       // intent.putExtra("imageUrl", imageUrl);
         startActivity(intent);
     }
     private String checkIfInputFromUserIsValid() {
