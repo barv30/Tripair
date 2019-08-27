@@ -51,7 +51,7 @@ public class AllTripsActivity extends AppCompatActivity {
     private String m_uid;
     private User m_user;
     Trip m_trip;
-
+    ValueEventListener UserListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.setAdapter(mAdapter);
         TextView lineText=findViewById(R.id.lineText);
         lineText.setText("Welcome "+ m_user.getFirstName()+" !");
-        ValueEventListener UserListener1 = new ValueEventListener() {
+         UserListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -85,7 +85,7 @@ public class AllTripsActivity extends AppCompatActivity {
 
             }
         };
-        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").addValueEventListener(UserListener1);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").addValueEventListener(UserListener);
 
     }
 
@@ -115,13 +115,16 @@ public class AllTripsActivity extends AppCompatActivity {
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", (User) m_user);
                 startActivity(intent);
-            }
+                this.finish();
 
+            }
+        //add edit profile setting for user
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void onButtonClicked(int position) {
+
         Intent intent = new Intent(this, OptionalPartnerPerTripActivity.class);
         TripPOJO tripPojo = mArrayList.get(position);
         intent.putExtra("tripPosition", position);
@@ -130,6 +133,14 @@ public class AllTripsActivity extends AppCompatActivity {
         intent.putExtra("tripCountry", tripPojo.getmCountry());
         intent.putExtra("tripCity", tripPojo.getmCity());
         startActivity(intent);
+        this.finish();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").removeEventListener(UserListener);
     }
 
 

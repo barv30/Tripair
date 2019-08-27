@@ -22,7 +22,7 @@ public class Trip implements Serializable {
     private Partner partnerSetting;
     private PartnerManager partnerList;
     private ArrayList<ContactPOJO> favPartner;
-
+    private String keyOfCountriesFireBase;
 
     public Trip() {
         styleTrip = new ArrayList<>();
@@ -142,5 +142,13 @@ public class Trip implements Serializable {
     }
     public void updateFavPartner(ContactPOJO favoritePartner) {
         this.favPartner.add(favoritePartner);
+    }
+
+    public String getKeyOfCountriesFireBase() {
+        return keyOfCountriesFireBase;
+    }
+
+    public void setKeyOfCountriesFireBase(String keyOfCountriesFireBase) {
+        this.keyOfCountriesFireBase = keyOfCountriesFireBase;
     }
 }

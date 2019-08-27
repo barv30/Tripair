@@ -38,6 +38,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
     Trip m_trip;
     private int m_tripToEditPosition;
     private String m_mode_edit;
+    String keyOfCountriesFireBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,41 +108,7 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
         newPartner.setMainLanguage(m_language);
         return newPartner;
     }
-    public void onSaveAndFindButtonClicked(View v)
-    {
-        String isValid = checkIfInputFromUserIsValid();
-        if(isValid!= null)
-        {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence text = isValid;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
 
-        else {
-            //save at database
-            Partner settingOfPartner = initPartner();
-            DatabaseReference mRef = database.getReference();
-
-            if (m_mode_edit!= null && m_mode_edit.equals("edit") && m_tripToEditPosition != -1)
-            {
-                m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition, settingOfPartner);
-            }
-            else {
-                m_trip.setPartner(settingOfPartner);
-                m_user.getAllTrips().updateTripList(m_trip);
-            }
-
-            mRef.child("usersProfile").child(m_uid).setValue(m_user);
-            mRef.child("Countries").child(m_tripCountryKey).child(m_tripCityKey).push().setValue(m_trip);
-
-            Intent intent = new Intent(this, AllTripsActivity.class);
-            intent.putExtra("userUid", m_uid);
-            intent.putExtra("user", m_user);
-            startActivity(intent);
-        }
-    }
 
     private String checkIfInputFromUserIsValid() {
         EditText minAge = (EditText) findViewById(R.id.minAge);
@@ -191,6 +158,48 @@ public class PartnerSettingsActivity extends AppCompatActivity implements Adapte
 
         }
         return null;
+    }
+
+    public void onSaveAndFindButtonClicked(View v)
+    {
+        String isValid = checkIfInputFromUserIsValid();
+        if(isValid!= null)
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+            //save at database
+            Partner settingOfPartner = initPartner();
+            DatabaseReference mRef = database.getReference();
+
+            if (m_mode_edit!= null && m_mode_edit.equals("edit") && m_tripToEditPosition != -1)
+            {
+                m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition, settingOfPartner);
+                keyOfCountriesFireBase = m_trip.getKeyOfCountriesFireBase();
+
+            }
+            else {
+
+                keyOfCountriesFireBase  = mRef.child("Countries").child(m_tripCountryKey).child(m_tripCityKey).push().getKey();
+                m_trip.setKeyOfCountriesFireBase(keyOfCountriesFireBase);
+                m_user.getAllTrips().updateTripList(m_trip);
+            }
+
+            m_trip.setPartner(settingOfPartner);
+            mRef.child("usersProfile").child(m_uid).setValue(m_user);
+            mRef.child("Countries").child(m_tripCountryKey).child(m_tripCityKey).child(keyOfCountriesFireBase).setValue(m_trip);
+
+            Intent intent = new Intent(this, AllTripsActivity.class);
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("user", m_user);
+            startActivity(intent);
+            this.finish();
+        }
     }
 }
 

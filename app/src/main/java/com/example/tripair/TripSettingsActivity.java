@@ -61,11 +61,10 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     Calendar calendar = Calendar.getInstance();
     private String m_uid;
     private User m_user;
-    private String m_mode_edit;
+
     private ArrayList<String> countries = new ArrayList<>();
     private ArrayList<ArrayList<String>> cities = new ArrayList<>();
-    private int m_tripToEditPosition;
-    private Trip m_tripEditMode;
+
     private ArrayList<ContactPOJO> favPartnerOfTripEdit;
     private Partner partnerSettingOfTripEdit;
 
@@ -74,20 +73,11 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_settings);
         Intent intent = getIntent();
-        m_mode_edit = intent.getStringExtra("isEditMode");
-        m_tripToEditPosition = intent.getIntExtra("tripPosition",-1);
         m_uid = intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
-        m_tripEditMode = (Trip) intent.getSerializableExtra("trip");
 
         TextView lineText = findViewById(R.id.headLine);
-        if (m_mode_edit!= null && m_mode_edit.equals("edit")) {
 
-            lineText.setText("Edit Your Trip to " + m_tripEditMode.getCountry() + "," + m_tripEditMode.getCity());
-            partnerSettingOfTripEdit = m_tripEditMode.getPartner();
-            favPartnerOfTripEdit = m_tripEditMode.getFavPartner();
-
-        }
         Date currentDate= calendar.getTime();
         calendar.setTime(currentDate);
         typeTripArr = new ArrayList<>();
@@ -338,39 +328,6 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         leftSpinnerYear.setOnItemSelectedListener(this);
     }
 
-    public void onContinueButtonClicked(View v)
-    {
-        String isValid = checkIfInputFromUserIsValid();
-        if(isValid!= null)
-        {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence text = isValid;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-
-        else {
-            Trip trip = initTrip();
-            String tripCountryKey = trip.getCountry();
-            String tripCityKey = trip.getCity();
-
-            if (m_mode_edit != null &&  m_mode_edit.equals("edit") &&  m_tripToEditPosition != -1)
-            {
-                trip.setFavPartner(favPartnerOfTripEdit);
-                trip.setPartner(partnerSettingOfTripEdit);
-                mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
-                mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
-            }
-            Intent intent = new Intent(this, PartnerSettingsActivity.class);
-            intent.putExtra("trip",trip);
-            intent.putExtra("userUid", m_uid);
-            intent.putExtra("tripCountryKey", tripCountryKey);
-            intent.putExtra("tripCityKey", tripCityKey);
-            intent.putExtra("user", m_user);
-            startActivity(intent);
-        }
-    }
 
     private Trip initTrip() {
         Trip trip = new Trip();
@@ -441,6 +398,35 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
         return null;
     }
+    public void onContinueButtonClicked(View v)
+    {
+        String isValid = checkIfInputFromUserIsValid();
+        if(isValid!= null)
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+            Trip trip = initTrip();
+            String tripCountryKey = trip.getCountry();
+            String tripCityKey = trip.getCity();
+
+
+            Intent intent = new Intent(this, PartnerSettingsActivity.class);
+            intent.putExtra("trip",trip);
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("tripCountryKey", tripCountryKey);
+            intent.putExtra("tripCityKey", tripCityKey);
+            intent.putExtra("user", m_user);
+            startActivity(intent);
+            this.finish();
+        }
+    }
+
 }
 
 

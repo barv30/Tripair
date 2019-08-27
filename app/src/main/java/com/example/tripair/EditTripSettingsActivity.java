@@ -241,37 +241,6 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
         leftSpinnerYear.setOnItemSelectedListener(this);
     }
 
-    public void onContinueButtonClicked(View v)
-    {
-        String isValid = checkIfInputFromUserIsValid();
-        if(isValid!= null)
-        {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence text = isValid;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-
-        else {
-            Trip trip = initTrip();
-            String tripCountryKey = trip.getCountry();
-            String tripCityKey = trip.getCity();
-
-            trip.setFavPartner(favPartnerOfTripEdit);
-            trip.setPartner(partnerSettingOfTripEdit);
-            m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition,partnerSettingOfTripEdit);
-            m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripToEditPosition,favPartnerOfTripEdit);
-            mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
-            mRef.child("Countries").child(tripCountryKey).child(tripCityKey).push().setValue(trip);
-
-            Intent intent = new Intent(this, AllTripsActivity.class);
-
-            intent.putExtra("userUid", m_uid);
-            intent.putExtra("user", m_user);
-            startActivity(intent);
-        }
-    }
 
     private Trip initTrip() {
         Trip trip = new Trip();
@@ -342,6 +311,40 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
 
         return null;
     }
+
+    public void onContinueButtonClicked(View v)
+    {
+        String isValid = checkIfInputFromUserIsValid();
+        if(isValid!= null)
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+            Trip trip = initTrip();
+            String tripCountryKey = trip.getCountry();
+            String tripCityKey = trip.getCity();
+            trip.setKeyOfCountriesFireBase(m_tripEditMode.getKeyOfCountriesFireBase());
+            trip.setFavPartner(favPartnerOfTripEdit);
+            trip.setPartner(partnerSettingOfTripEdit);
+            m_user.getAllTrips().updatePartnerInSpecificTrip(m_tripToEditPosition,partnerSettingOfTripEdit);
+            m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripToEditPosition,favPartnerOfTripEdit);
+            mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripToEditPosition)).setValue(trip);
+            mRef.child("Countries").child(tripCountryKey).child(tripCityKey).child(m_tripEditMode.getKeyOfCountriesFireBase()).setValue(trip);
+
+            Intent intent = new Intent(this, AllTripsActivity.class);
+
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("user", m_user);
+            startActivity(intent);
+            this.finish();
+        }
+    }
+
 }
 
 

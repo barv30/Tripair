@@ -1,5 +1,6 @@
 package com.example.tripair;
 
+        import android.app.Activity;
         import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
@@ -39,8 +40,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private String m_tripCity;
     private int m_tripPosition;
     private Trip m_tripUserObj;
-
-
+    ValueEventListener UserListener2;
+    ValueEventListener UserListener;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -79,7 +80,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
 
-        ValueEventListener UserListener2 = new ValueEventListener() {
+         UserListener2 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -104,7 +105,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
 
     private void getUserPartnerAccordingID(String partnerID) {
-        ValueEventListener UserListener = new ValueEventListener() {
+         UserListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User userPartner;
@@ -156,7 +157,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         Integer id  = position;
         m_tripUserObj.updateFavPartner(contact);
 
-
     }
 
     @Override
@@ -171,15 +171,18 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         int idItem = item.getItemId();
         if (idItem == R.id.editTrip)
             {
+                mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
                 Intent intent = new Intent(this, EditTripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 intent.putExtra("tripPosition",m_tripPosition);
                 intent.putExtra("trip", m_tripUserObj);
                 startActivity(intent);
+                this.finish();
             }
         else if (idItem == R.id.editPartner)
          {
+             mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
                 Intent intent = new Intent(this, PartnerSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
@@ -189,30 +192,32 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 intent.putExtra("tripCountryKey", m_tripCountry);
                 intent.putExtra("tripCityKey", m_tripCity);
                 startActivity(intent);
-            }
+                this.finish();
+
+         }
         else if (idItem == R.id.favPartners)
         {
-
-                Intent intent = new Intent(this, FavPartnersActivity.class);
+            mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
+            Intent intent = new Intent(this, FavPartnersActivity.class);
                 intent.putExtra("favoritePartners", m_tripUserObj.getFavPartner());
                 intent.putExtra("trip",m_tripUserObj);
                 intent.putExtra("tripPosition", m_tripPosition);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 startActivity(intent);
-            }
+                this.finish();
+
+        }
         return super.onOptionsItemSelected(item);
     }
-/*
-    public void onBackPressed() {
 
-        m_user.getAllTrips().addToFavPartnersInSpecificTrip(m_tripPosition,m_favoritePartners);
-        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+    public void onBackPressed() {
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
         Intent intent = new Intent(this, AllTripsActivity.class);
         intent.putExtra("userUid", m_uid);
         intent.putExtra("user", m_user);
         startActivity(intent);
-        return;
+        this.finish();
     }
-    */
+
 }

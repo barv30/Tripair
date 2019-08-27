@@ -12,14 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".FavPartnersActivity"></activity>
-        <activity android:name=".OptionalPartnerPerTripActivity" />
-        <activity android:name=".TripSettingsActivity" />
-        <activity android:name=".AllTripsActivity" />
-        <activity android:name=".SettingProfileActivity" />
-        <activity android:name=".EditTripSettingsActivity" />
-        <activity android:name=".PartnerSettingsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FavPartnersActivity" android:noHistory="true"/>
+        <activity android:name=".OptionalPartnerPerTripActivity" android:noHistory="true"/>
+        <activity android:name=".TripSettingsActivity" android:noHistory="true"/>
+        <activity android:name=".AllTripsActivity" android:noHistory="true"/>
+        <activity android:name=".SettingProfileActivity" android:noHistory="true"/>
+        <activity android:name=".EditTripSettingsActivity" android:noHistory="true"/>
+        <activity android:name=".PartnerSettingsActivity" android:noHistory="true"/>
+        <activity android:name=".MainActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

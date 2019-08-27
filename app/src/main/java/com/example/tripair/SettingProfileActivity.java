@@ -230,73 +230,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         spinnerYear.setOnItemSelectedListener(this);
     }
 
-    public void saveButtonClicked(View v)
-    {
-        String isValid = checkIfInputFromUserIsValid();
 
-        if(isValid != null)
-        {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence text = isValid;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-        }
-        else {
-            TripManager alltrips = new TripManager();
-            ArrayList<String> languagesArr = new ArrayList<>();
-            languagesArr.add(selectedLanguageNative);
-            if(!selectedLanguage2.equals("None"))
-            {
-                languagesArr.add(selectedLanguage2);
-            }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips);
-
-            //save at database
-            DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
-
-
-            if(filePath != null)
-            {
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
-
-                StorageReference ref = storageReference.child("images/"+ mAuth.getCurrentUser().getUid());
-                ref.putFile(filePath)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.dismiss();
-                                Toast.makeText(SettingProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(SettingProfileActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                        .getTotalByteCount());
-                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                            }
-                        });
-            }
-
-            // if everything ok - move to home page
-            Intent intent = new Intent(this, AllTripsActivity.class);
-            intent.putExtra("userUid", m_uid_user);
-            intent.putExtra("user", m_userInput);
-            startActivity(intent);
-       }
-    }
 
     private String checkIfInputFromUserIsValid() {
         EditText userFirstName = (EditText) findViewById(R.id.firstName);
@@ -396,6 +330,74 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         return languages;
     }
 
+    public void saveButtonClicked(View v)
+    {
+        String isValid = checkIfInputFromUserIsValid();
+
+        if(isValid != null)
+        {
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text = isValid;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+        }
+        else {
+            TripManager alltrips = new TripManager();
+            ArrayList<String> languagesArr = new ArrayList<>();
+            languagesArr.add(selectedLanguageNative);
+            if(!selectedLanguage2.equals("None"))
+            {
+                languagesArr.add(selectedLanguage2);
+            }
+            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips);
+
+            //save at database
+            DatabaseReference mRef = database.getReference();
+            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+
+
+            if(filePath != null)
+            {
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                StorageReference ref = storageReference.child("images/"+ mAuth.getCurrentUser().getUid());
+                ref.putFile(filePath)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressDialog.dismiss();
+                                Toast.makeText(SettingProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Toast.makeText(SettingProfileActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                        .getTotalByteCount());
+                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            }
+                        });
+            }
+
+            // if everything ok - move to home page
+            Intent intent = new Intent(this, AllTripsActivity.class);
+            intent.putExtra("userUid", m_uid_user);
+            intent.putExtra("user", m_userInput);
+            startActivity(intent);
+            this.finish();
+        }
+    }
 }
 
 
