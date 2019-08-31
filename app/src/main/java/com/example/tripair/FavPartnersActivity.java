@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.dataUser.Trip;
@@ -95,8 +96,14 @@ public class FavPartnersActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void onDeleteButtonFavClicked(View v)
+    {
+
+    }
 
 }
+
+
 
 
 
