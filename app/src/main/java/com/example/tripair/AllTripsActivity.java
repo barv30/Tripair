@@ -118,7 +118,13 @@ public class AllTripsActivity extends AppCompatActivity {
                 this.finish();
 
             }
-        //add edit profile setting for user
+            case R.id.editMyProfile:{
+                Intent intent = new Intent(this, SettingProfileActivity.class);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", (User) m_user);
+                startActivity(intent);
+                this.finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

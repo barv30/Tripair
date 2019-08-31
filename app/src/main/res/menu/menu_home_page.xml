@@ -11,6 +11,9 @@
             <item
                 android:id="@+id/addTrip"
                 android:title="Add new trip"/>
+            <item
+                android:id="@+id/editMyProfile"
+                android:title="Edit profile"/>
 
         </menu>
     </item>
