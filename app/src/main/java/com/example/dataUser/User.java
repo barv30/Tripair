@@ -16,9 +16,11 @@ public class User implements Serializable {
     private boolean isSmoking;
     private int age;
     private TripManager allTrips;
+    private String id;
 
     public User(){}
     public User(
+                String uid,
                 String firstName,
                 String lastName,
                 int day,
@@ -29,6 +31,7 @@ public class User implements Serializable {
                 boolean isSmoking,
                 TripManager allTrips)
     {
+        this.id = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = day;
@@ -133,6 +136,14 @@ public class User implements Serializable {
 
     public void setAllTrips(TripManager allTrips) {
         this.allTrips = allTrips;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

@@ -52,8 +52,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_optional_partner_per_trip);
         Intent intent = getIntent();
-        m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
+        m_uid = m_user.getId();
         m_tripCountry = intent.getStringExtra("tripCountry");
         m_tripCity = intent.getStringExtra("tripCity");
         m_tripPosition = intent.getIntExtra("tripPosition",-1);
@@ -111,8 +111,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                     userPartner = dataSnapshot.getValue(User.class);
                     Trip tripOfPartner = userPartner.getAllTrips().findInTripList(m_tripCountry, m_tripCity);
                     if (tripOfPartner != null) {
-                        if (filterPartner(userPartner, tripOfPartner)) {
-                            addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
+                        if (filterPartner(userPartner, tripOfPartner) && isInFavAlready(userPartner)) {
+                            addUserPartnerToList(userPartner.getId(),userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
                                     tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
                         }
                     }
@@ -126,7 +126,25 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             }
         };
         mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
+
+        if (mOptionalPartnersArray.size() == 0)
+        {
+
+        }
     }
+
+    private boolean isInFavAlready(User userPartner)
+    {
+        if (m_tripUserObj.getFavPartner().size() != 0) {
+            for (ContactPOJO usr : m_tripUserObj.getFavPartner()) {
+                if (usr.getId().equals(userPartner.getId())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     private boolean matchStyle(Trip tripOfPartner)
     {
@@ -186,11 +204,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         return false;
     }
 
-    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
+    private void addUserPartnerToList(String id,String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
 
         // get the array of all trips and make array of tripPOJO
         ContactPOJO UserPartner = null;
-        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
+        UserPartner = new ContactPOJO(id ,firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
         mOptionalPartnersArray.add(UserPartner);
         mAdapter.notifyDataSetChanged();
     }
@@ -206,12 +224,13 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             age=child.itemView.findViewById(R.id.txt_age_insert);
 
         ContactPOJO contact = new ContactPOJO();
+        Integer id  = position;
+        contact.setId(mOptionalPartnersArray.get(position).getId());
         contact.setmName(name.getText().toString());
         contact.setmAge(Integer.parseInt(age.getText().toString()));
         contact.setmDateDest(date.getText().toString());
         contact.setmDateLeft(leftDate.getText().toString());
         contact.setmSmoking(smoke.getText().toString());
-        Integer id  = position;
         m_tripUserObj.updateFavPartner(contact);
 
     }
@@ -241,7 +260,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
          {
              mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
                 Intent intent = new Intent(this, PartnerSettingsActivity.class);
-                intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 intent.putExtra("trip",m_tripUserObj);
                 intent.putExtra("isEditMode", "edit");
@@ -254,12 +272,10 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
          }
         else if (idItem == R.id.favPartners)
         {
-            mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
             Intent intent = new Intent(this, FavPartnersActivity.class);
                 intent.putExtra("favoritePartners", m_tripUserObj.getFavPartner());
                 intent.putExtra("trip",m_tripUserObj);
                 intent.putExtra("tripPosition", m_tripPosition);
-                intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", m_user);
                 startActivity(intent);
                 this.finish();
@@ -271,7 +287,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     public void onBackPressed() {
         mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_tripUserObj);
         Intent intent = new Intent(this, AllTripsActivity.class);
-        intent.putExtra("userUid", m_uid);
         intent.putExtra("user", m_user);
         startActivity(intent);
         this.finish();

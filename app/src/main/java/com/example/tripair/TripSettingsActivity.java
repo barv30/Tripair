@@ -73,8 +73,9 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_settings);
         Intent intent = getIntent();
-        m_uid = intent.getStringExtra("userUid");
+
         m_user = (User) intent.getSerializableExtra("user");
+        m_uid = m_user.getId();
 
         TextView lineText = findViewById(R.id.headLine);
 
@@ -418,7 +419,6 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
 
             Intent intent = new Intent(this, PartnerSettingsActivity.class);
             intent.putExtra("trip",trip);
-            intent.putExtra("userUid", m_uid);
             intent.putExtra("tripCountryKey", tripCountryKey);
             intent.putExtra("tripCityKey", tripCityKey);
             intent.putExtra("user", m_user);

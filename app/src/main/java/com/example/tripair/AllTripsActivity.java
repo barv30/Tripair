@@ -57,14 +57,14 @@ public class AllTripsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_trips);
         Intent intent = getIntent();
-        m_uid = (String) intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
+        m_uid = m_user.getId();
         mRecyclerView1 = findViewById(R.id.recycleView);
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
-        TextView lineText=findViewById(R.id.lineText);
+        TextView lineText = findViewById(R.id.lineText);
         lineText.setText("Welcome "+ m_user.getFirstName()+" !");
          UserListener = new ValueEventListener() {
             @Override
