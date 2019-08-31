@@ -37,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -65,8 +67,9 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
-    FirebaseStorage storage;
-    StorageReference storageReference;
+   private FirebaseStorage storage;
+   private StorageReference storageReference;
+   private Calendar calendar = Calendar.getInstance();
 
 
 
@@ -79,6 +82,8 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         m_uid_user = intent.getStringExtra("userUid");
         m_user_mail = intent.getStringExtra("userEmail");
         //m_user = intent.getExtras();
+        Date currentDate= calendar.getTime();
+        calendar.setTime(currentDate);
         InitializeDays();
         InitializeMonths();
         InitializeYears();
@@ -214,8 +219,10 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
     private void InitializeYears()
     {
+        Integer currentYear=calendar.get(Calendar.YEAR);
+
         ArrayList<String> years = new ArrayList<>();
-        for(Integer i=1950;i<=2019;i++)
+        for(Integer i=currentYear;i>=1950;i--)
         {
             years.add(i.toString());
         }

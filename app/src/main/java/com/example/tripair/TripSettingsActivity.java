@@ -58,7 +58,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     private int m_monthLeft;
     private int m_yearLeft;
     private ArrayList<String> typeTripArr;
-    Calendar calendar = Calendar.getInstance();
+    private Calendar calendar = Calendar.getInstance();
     private String m_uid;
     private User m_user;
 
