@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dataUser.Partner;
@@ -49,6 +50,49 @@ public class PartnerSettingsActivity extends AppCompatActivity{
         m_tripCountryKey = intent.getStringExtra("tripCountryKey");
         m_tripCityKey = intent.getStringExtra("tripCityKey");
         m_user = (User) intent.getSerializableExtra("user");
+
+        if (m_mode_edit!= null && m_mode_edit.equals("edit") && m_tripToEditPosition != -1)
+        {
+            EditText minText = findViewById(R.id.minAge);
+            EditText maxText = findViewById(R.id.maxAge);
+            RadioButton female =  findViewById(R.id.female);
+            RadioButton male =  findViewById(R.id.male);
+            RadioButton no_metter =  findViewById(R.id.noMatter);
+            RadioButton dontWantSmoking =  findViewById(R.id.dontWant);
+            RadioButton dontCareSmoking =  findViewById(R.id.dontCare);
+            Partner partner = m_user.getAllTrips().getTripByPosition(m_tripToEditPosition).getPartner();
+            minText.setText(Integer.toString(partner.getMinAge()));
+            maxText.setText(Integer.toString(partner.getMaxAge()));
+            if (partner.isSmoking()) {
+                dontCareSmoking.setChecked(true);
+                dontWantSmoking.setChecked(false);
+            }
+            else {
+                dontCareSmoking.setChecked(false);
+                dontWantSmoking.setChecked(true);
+            }
+
+            if (partner.getGender().equals("Female"))
+            {
+                female.setChecked(true);
+                male.setChecked(false);
+                no_metter.setChecked(false);
+            }
+            else if (partner.getGender().equals("Male"))
+            {
+                female.setChecked(false);
+                male.setChecked(true);
+                no_metter.setChecked(false);
+            }
+            else if (partner.getGender().equals("no matter"))
+            {
+                female.setChecked(false);
+                male.setChecked(false);
+                no_metter.setChecked(true);
+            }
+                keyOfCountriesFireBase = m_trip.getKeyOfCountriesFireBase();
+
+        }
 
     }
 
