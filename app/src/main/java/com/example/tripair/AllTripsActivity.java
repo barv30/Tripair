@@ -39,7 +39,7 @@ public class AllTripsActivity extends AppCompatActivity {
     private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
         @Override
         public void onRecyclerViewItemClicked(int position, int id) {
-            Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
             onButtonClicked(position);
         }
 
