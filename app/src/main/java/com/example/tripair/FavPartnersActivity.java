@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
-import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.CustomFavoriteAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +31,7 @@ public class FavPartnersActivity extends AppCompatActivity {
     private User m_user;
     private int m_tripPosition;
     private Trip m_trip;
+    private int m_favPosition;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -65,6 +65,7 @@ public class FavPartnersActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+                onButtonClicked(position, id);
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -92,6 +93,26 @@ public class FavPartnersActivity extends AppCompatActivity {
             }
         };
         mRef.child("userProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).child("favPartner").addValueEventListener(UserListener2);
+    }
+
+    public void onButtonClicked(int position, int btnId) {
+        switch (btnId){
+            case R.id.message_btn:{
+                m_favPosition=position;
+                Intent intent = new Intent(this, MessageSendActivity.class);
+                intent.putExtra("favoritePartners", m_favoritePartners);
+                intent.putExtra("trip",m_trip);
+                intent.putExtra("tripPosition", m_tripPosition);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", m_user);
+                intent.putExtra("favoritePartnerPosition",m_favPosition);
+                startActivity(intent);
+            }
+            case R.id.btn_deleteFav:{
+
+            }
+        }
+
     }
 
 }

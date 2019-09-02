@@ -109,15 +109,20 @@ public class AllTripsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.addTrip: {
+        int idItem = item.getItemId();
+        if(idItem ==R.id.addTrip)
+             {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
                 intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", (User) m_user);
                 startActivity(intent);
             }
-
-        }
+            if (idItem == R.id.messagesPage){
+                Intent intent = new Intent(this, ContactMsgActivity.class);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", (User) m_user);
+                startActivity(intent);
+            }
         return super.onOptionsItemSelected(item);
     }
 

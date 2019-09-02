@@ -154,11 +154,13 @@
                 android:clickable="false"
                 app:srcCompat="@android:drawable/ic_delete" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="61dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_dialog_email" />
+            <ImageButton
+                android:id="@+id/message_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:onClick="onMessageBtnClick"
+                app:srcCompat="@android:drawable/ic_input_get" />
+
         </LinearLayout>
 
     </LinearLayout>

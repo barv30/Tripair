@@ -9,12 +9,14 @@ public class ContactPOJO implements Serializable {
     private String mDateLeft;
     private String mSmoking;
     private int mAge;
+    private  String mContactId;
 
     public ContactPOJO() {}
     public ContactPOJO(String firstName,String lastName, int aday,int amonth,int ayear,
-                       int lday,int lmonth,int lyear,boolean isSmoking,int age) {
+                       int lday,int lmonth,int lyear,boolean isSmoking,int age,String contactId) {
         mName =firstName +" " +lastName ;
         mDateDest= aday+"."+amonth+"."+ayear;
+        mContactId=contactId;
         if(lday == 0 && lmonth == 0 && lyear==0)
         {
             mDateLeft = "One way";
@@ -33,6 +35,14 @@ public class ContactPOJO implements Serializable {
         }
         mAge=age;
 
+    }
+
+    public String getmContactId() {
+        return mContactId;
+    }
+
+    public void setmContactId(String mContactId) {
+        this.mContactId = mContactId;
     }
 
     public String getmDateLeft() {

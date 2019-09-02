@@ -12,6 +12,10 @@
                 android:id="@+id/addTrip"
                 android:title="Add new trip"/>
 
+            <item
+                android:id="@+id/messagesPage"
+                android:title="Messages"/>
+
         </menu>
     </item>
 </menu>

@@ -110,7 +110,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                     Trip tripOfPartner = userPartner.getAllTrips().findInTripList(m_tripCountry, m_tripCity);
                     if (tripOfPartner != null) {
                         addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(), tripOfPartner.getArriveDay(),
-                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge());
+                                tripOfPartner.getArriveMonth(), tripOfPartner.getArriveYear(), tripOfPartner.getLeftDay(), tripOfPartner.getLeftMonth(), tripOfPartner.getLeftYear(), userPartner.isSmoking(), userPartner.getAge(),tripOfPartner.getM_ownerID());
                     }
                 }
 
@@ -124,11 +124,11 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
     }
 
-    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age) {
+    private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age,String userId) {
 
         // get the array of all trips and make array of tripPOJO
         ContactPOJO UserPartner = null;
-        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age);
+        UserPartner = new ContactPOJO(firstName,lastName, arriveDay, arriveMonth, arriveYear, leftDay, leftMonth, leftYear, smoking, age, userId);
         mOptionalPartnersArray.add(UserPartner);
         mAdapter.notifyDataSetChanged();
     }
@@ -143,12 +143,14 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
             age=child.itemView.findViewById(R.id.txt_age_insert);
 
+
         ContactPOJO contact = new ContactPOJO();
         contact.setmName(name.getText().toString());
         contact.setmAge(Integer.parseInt(age.getText().toString()));
         contact.setmDateDest(date.getText().toString());
         contact.setmDateLeft(leftDate.getText().toString());
         contact.setmSmoking(smoke.getText().toString());
+        contact.setmContactId(mOptionalPartnersArray.get(position).getmContactId());
         Integer id  = position;
         m_tripUserObj.updateFavPartner(contact);
 
