@@ -120,6 +120,10 @@ public class PartnerSettingsActivity extends AppCompatActivity{
         }
         int minAgeNumber = Integer.parseInt(minAge.getText().toString());
         int maxAgeNumber = Integer.parseInt(maxAge.getText().toString());
+        if(maxAgeNumber > 120)
+        {
+            return "You have to enter maximum age below 120!";
+        }
         RadioGroup radioGroup1 = (RadioGroup) findViewById(R.id.genderGroup);
         int radioButtonGenderID = radioGroup1.getCheckedRadioButtonId();
         RadioButton radioButtonGender = (RadioButton)radioGroup1.findViewById(radioButtonGenderID);
