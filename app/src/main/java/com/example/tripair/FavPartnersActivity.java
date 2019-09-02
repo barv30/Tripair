@@ -41,8 +41,8 @@ public class FavPartnersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav_partners);
         Intent intent = getIntent();
-        m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
+        m_uid = m_user.getId();
         m_tripPosition =  intent.getIntExtra("tripPosition",-1);
         m_trip = (Trip)intent.getSerializableExtra("trip");
         m_favoritePartners = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favoritePartners");
@@ -86,11 +86,10 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-       // m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripPosition,m_favoritePartners);
-        //mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
+        
+        m_user.getAllTrips().updateFavPartnersInSpecificTrip(m_tripPosition,m_favoritePartners);
+        mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").child(Integer.toString(m_tripPosition)).setValue(m_trip);
         Intent intent = new Intent(this, AllTripsActivity.class);
-        intent.putExtra("userUid", m_uid);
         intent.putExtra("user", m_user);
         startActivity(intent);
         this.finish();

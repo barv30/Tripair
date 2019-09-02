@@ -352,7 +352,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking, alltrips);
+            m_userInput = new User(m_uid_user,m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking, alltrips);
 
             //save at database
             DatabaseReference mRef = database.getReference();
@@ -393,7 +393,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
             // if everything ok - move to home page
             Intent intent = new Intent(this, AllTripsActivity.class);
-            intent.putExtra("userUid", m_uid_user);
             intent.putExtra("user", m_userInput);
             startActivity(intent);
             this.finish();

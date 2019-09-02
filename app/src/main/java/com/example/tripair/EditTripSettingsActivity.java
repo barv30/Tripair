@@ -66,8 +66,8 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
         setContentView(R.layout.activity_edit_trip_settings);
         Intent intent = getIntent();
         m_tripToEditPosition = intent.getIntExtra("tripPosition",-1);
-        m_uid = intent.getStringExtra("userUid");
         m_user = (User) intent.getSerializableExtra("user");
+        m_uid = m_user.getId();
         m_tripEditMode = (Trip) intent.getSerializableExtra("trip");
 
         TextView lineText = findViewById(R.id.headLine);
@@ -337,8 +337,6 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
             mRef.child("Countries").child(tripCountryKey).child(tripCityKey).child(m_tripEditMode.getKeyOfCountriesFireBase()).setValue(trip);
 
             Intent intent = new Intent(this, AllTripsActivity.class);
-
-            intent.putExtra("userUid", m_uid);
             intent.putExtra("user", m_user);
             startActivity(intent);
             this.finish();
