@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,6 @@ public class AllTripsActivity extends AppCompatActivity {
             onButtonClicked(position);
         }
 
-        public void onRecyclerViewItemFavClicked(int position, int id) {
-
-        }
 
     });
     private String m_uid;
@@ -148,6 +146,11 @@ public class AllTripsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").removeEventListener(UserListener);
+    }
+
+    public void onDeleteButtonClicked(View v)
+    {
+
     }
 
 

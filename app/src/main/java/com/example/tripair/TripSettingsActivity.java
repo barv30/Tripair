@@ -427,10 +427,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    public void onDeleteButtonClicked(View v)
-    {
 
-    }
 
 }
 
