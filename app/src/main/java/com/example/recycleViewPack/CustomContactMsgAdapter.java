@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.tripair.R;
 import java.util.ArrayList;
-import java.util.*;
 public class CustomContactMsgAdapter extends RecyclerView.Adapter<CustomContactMsgAdapter.MyViewHolder> {
     private ArrayList<ContactPOJO> arrayList = new ArrayList<>();
     private OnRecyclerClickListener listener;
@@ -34,6 +33,13 @@ public class CustomContactMsgAdapter extends RecyclerView.Adapter<CustomContactM
         Log.v("BindViewHolder", "in onBindViewHolder");
         ContactPOJO contact = arrayList.get(position);
         holder.name.setText(contact.getmName());
+        holder.btntoMsg.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                listener.onRecyclerViewItemClicked(position, view.getId());
+            }
+        });
     }
 
     @Override
@@ -49,6 +55,7 @@ public class CustomContactMsgAdapter extends RecyclerView.Adapter<CustomContactM
             Log.v("ViewHolder","in View Holder");
             name = itemView.findViewById(R.id.username);
             btntoMsg = itemView.findViewById(R.id.imageButton);
+
         }
     }
 }

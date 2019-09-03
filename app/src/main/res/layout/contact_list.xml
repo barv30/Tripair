@@ -9,18 +9,21 @@
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="59dp"
         android:src="@mipmap/ic_launcher" />
+
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username"
-        android:layout_toRightOf="@id/profile_image"
+        android:layout_alignBottom="@+id/profile_image"
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginBottom="15dp"
         android:layout_toEndOf="@id/profile_image"
-        android:layout_marginLeft="10dp"
-        android:layout_centerVertical="true"
-        android:textSize="10sp"/>
+        android:layout_toRightOf="@id/profile_image"
+        android:text="username"
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/imageButton"

@@ -16,7 +16,10 @@ import com.example.recycleViewPack.ContactPOJO;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MessageSendActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> m_favoritePartners = new ArrayList<>();
@@ -31,6 +34,7 @@ public class MessageSendActivity extends AppCompatActivity {
     private String content;
     private String senderFirstName;
     private String senderLastName;
+    private String m_dateAndTime;
     private int m_favPartnerPosition;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
@@ -67,7 +71,9 @@ public class MessageSendActivity extends AppCompatActivity {
             senderName = senderFirstName +" "+ senderLastName;
             senderId=  m_uid;
             reciverId = m_favoritePartners.get(m_favPartnerPosition).getmContactId();
-            m_message= new Message(senderName,senderId,content);
+            DateFormat df = new SimpleDateFormat("dd MM yyyy, HH:mm");
+            m_dateAndTime = df.format(Calendar.getInstance().getTime());
+            m_message= new Message(senderName,senderId,content,m_dateAndTime, time);
             mRef.child("Messages").child(reciverId).child(senderId).child(time).setValue(m_message);
             moveToFavPartners();
         }

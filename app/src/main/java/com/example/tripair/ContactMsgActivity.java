@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class ContactMsgActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> m_contactMsgArray = new ArrayList<>();
-    String m_contactId;
+    //String m_contactId;
     private RecyclerView mRecyclerView1;
     private CustomContactMsgAdapter mAdapter;
     private String m_uid;
@@ -45,7 +45,6 @@ public class ContactMsgActivity extends AppCompatActivity {
         mAdapter=new CustomContactMsgAdapter(m_contactMsgArray, new OnRecyclerClickListener(){
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
-                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
                 onBtnClicked(position, id);
             }
         });
@@ -59,26 +58,32 @@ public class ContactMsgActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String contactId;
                 if (dataSnapshot.exists()) {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot ds : children) {
-                        m_contactId = ds.getValue(String.class);
-                        if (!(m_contactId.equals(m_uid))) {
-                            getUserContactAccordingID(m_contactId);
-                        }
+                        contactId = (String) ds.getKey();
+                        getUserContactAccordingID(contactId);
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
         mRef.child("Messages").child(m_uid).addValueEventListener(UserListener2);
     }
 
     private void onBtnClicked(int position, int id) {
+        String contactName = m_contactMsgArray.get(position).getmName();
+        String contactId = m_contactMsgArray.get(position).getmContactId();
+        Intent intent = new Intent(this, MessageContentPerSenderActivity.class);
+        intent.putExtra("userUid", m_uid);
+        intent.putExtra("user", m_user);
+        intent.putExtra("ContactId",contactId);
+        intent.putExtra("ContactName", contactName);
+        startActivity(intent);
     }
 
 
@@ -91,21 +96,17 @@ public class ContactMsgActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     userPartner = dataSnapshot.getValue(User.class);
                     addUserPartnerToList(userPartner.getFirstName(), userPartner.getLastName(),contactId);
-
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
-        mRef.child("usersProfile").child(m_contactId).addValueEventListener(UserListener);
+        mRef.child("usersProfile").child(contactId).addValueEventListener(UserListener);
     }
 
     private void addUserPartnerToList(String firstName, String lastName, String contactId) {
-
         ContactPOJO UserPartner = null;
         UserPartner = new ContactPOJO(firstName,lastName,-1,-1,-1,-1,-1,-1,false,-1,contactId);
         m_contactMsgArray.add(UserPartner);

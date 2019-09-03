@@ -6,16 +6,38 @@ public class Message implements Serializable {
     private String senderName;
     private String senderId;
     private String content;
+    private String date;
+    private String msgNum;
 
     public Message(){}
     public Message(
             String senderName,
             String senderId,
-            String content)
+            String content,
+            String date,
+            String msgNum)
     {
         this.senderName=senderName;
         this.senderId=senderId;
         this.content=content;
+        this.date=date;
+        this.msgNum=msgNum;
+    }
+
+    public String getMsgNum() {
+        return msgNum;
+    }
+
+    public void setMsgNum(String msgNum) {
+        this.msgNum = msgNum;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getSenderName() {
