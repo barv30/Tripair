@@ -339,7 +339,6 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             intent.putExtra("userUid", m_uid);
             intent.putExtra("tripCountryKey", tripCountryKey);
             intent.putExtra("tripCityKey", tripCityKey);
-            m_user.setImgURL(m_user.getImgURL());
             intent.putExtra("user", m_user);
             startActivity(intent);
         }

@@ -285,8 +285,6 @@ public class SingUpActivity extends AppCompatActivity implements AdapterView.OnI
         // TODO Auto-generated method stub
     }
 
-
-
     private void InitializeDays()
     {
             ArrayList<String> days = new ArrayList<>();
