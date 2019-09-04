@@ -212,7 +212,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         return false;
     }
 
-        private void addUserPartnerToList(String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age, String image)
+        private void addUserPartnerToList(String id, String firstName, String lastName, int arriveDay, int arriveMonth, int arriveYear, int leftDay, int leftMonth, int leftYear, boolean smoking, int age, String image)
         {
 
         // get the array of all trips and make array of tripPOJO

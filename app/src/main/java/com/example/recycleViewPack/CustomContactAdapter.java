@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 import com.example.tripair.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.*;
+
+import java.util.ArrayList;
 
 public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdapter.MyViewHolder> {
 

@@ -71,9 +71,9 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     String imageUrl = "https://firebasestorage.googleapis.com/v0/b/tripair-be218.appspot.com/o/profilePic%2FProfilePicture.png?alt=media&token=eb726118-9758-445b-9c77-c017a19ab66d";
-   private FirebaseStorage storage;
-   private StorageReference storageReference;
-   private Calendar calendar = Calendar.getInstance();
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private Calendar calendar = Calendar.getInstance();
 
 
     @Override
@@ -355,7 +355,7 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
             //save at database
             DatabaseReference mRef = database.getReference();
-            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+           // mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
 
 
             if(filePath != null)
