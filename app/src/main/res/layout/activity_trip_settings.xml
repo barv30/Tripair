@@ -240,6 +240,15 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <CheckBox
+                    android:id="@+id/checkBoxWay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onOneWayClicked"
+                    android:text="One - Way"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"

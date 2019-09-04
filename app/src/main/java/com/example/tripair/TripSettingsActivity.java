@@ -356,6 +356,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         CheckBox checkBoxRelax = (CheckBox) findViewById(R.id.checkBoxRelax);
         CheckBox checkBoxTracks = (CheckBox) findViewById(R.id.checkBoxNature);
         CheckBox checkBoxArt = (CheckBox) findViewById(R.id.checkBoxArt);
+        CheckBox checkBoxOneWay  = (CheckBox)findViewById(R.id.checkBoxWay);
         boolean checkedRelax = checkBoxRelax.isChecked();
         boolean checkedArt = checkBoxArt.isChecked();
         boolean checkedTracks = checkBoxTracks.isChecked();
@@ -363,13 +364,17 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         {
             return "You have to choose style trip!";
         }
-        else if (m_yearLeft < m_yearArrive &&m_yearLeft !=currentYear || m_yearLeft == m_yearArrive && m_monthLeft<m_monthArrive || m_yearLeft == m_yearArrive &&m_dayLeft<m_dayArrive && m_monthLeft==m_monthArrive)
+        else if ((m_yearLeft < m_yearArrive &&m_yearLeft !=currentYear || m_yearLeft == m_yearArrive && m_monthLeft<m_monthArrive || m_yearLeft == m_yearArrive &&m_dayLeft<m_dayArrive && m_monthLeft==m_monthArrive) && !checkBoxOneWay.isChecked())
         {
             return "Your left date is invalid!";
         }
         else  if(m_dayArrive < currentDay && m_monthArrive == currentMonth &&  m_yearArrive ==currentYear|| m_monthArrive <currentMonth && m_yearArrive == currentYear)
         {
             return "Your arrive date is invalid!";
+        }
+        else if ((m_dayLeft == 1 && m_monthLeft == 1 && m_yearLeft == currentYear) && !checkBoxOneWay.isChecked())
+        {
+            return "You have to enter left date or click on One-Way option.";
         }
         else
         {
@@ -386,7 +391,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             {
                 typeTripArr.add("Tracks and Nature");
             }
-            if(m_dayLeft == 1 && m_monthLeft == 1 && m_yearLeft == currentYear) //the user doesn't choose left date
+            if(checkBoxOneWay.isChecked() ) //the user doesn't choose left date
             {
                 m_yearLeft=0;
                 m_dayLeft=0;
@@ -427,7 +432,26 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
+    public void onOneWayClicked(View v)
+    {
+        Spinner spinnerDayLeft = (Spinner)findViewById(R.id.spinnerLeftDay);
+        Spinner spinnerMonthLeft = (Spinner)findViewById(R.id.spinnerLeftMonth);
+        Spinner spinnerYearLeft = (Spinner)findViewById(R.id.spinnerLeftYear);
 
+        boolean checked = ((CheckBox) v).isChecked();
+        if(checked)
+        {
+        spinnerDayLeft.setEnabled(false);
+        spinnerMonthLeft.setEnabled(false);
+        spinnerYearLeft.setEnabled(false);
+        }
+        else
+        {
+            spinnerDayLeft.setEnabled(true);
+            spinnerMonthLeft.setEnabled(true);
+            spinnerYearLeft.setEnabled(true);
+        }
+    }
 
 }
 
