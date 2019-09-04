@@ -63,7 +63,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="57dp"
             android:orientation="horizontal">
 
             <TextView
@@ -95,35 +95,18 @@
                     android:layout_weight="1"
                     android:text="Female"
                     android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+                <RadioButton
+                    android:id="@+id/noMatter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No matter"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
             </RadioGroup>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/languages"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Main Language"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Spinner
-                    android:id="@+id/languageSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp" />
-
-            </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

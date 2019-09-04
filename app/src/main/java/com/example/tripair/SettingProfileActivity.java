@@ -40,6 +40,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -56,7 +58,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private String m_userLastName;
     private boolean m_isUserSmoking = false;
     private String m_userGender;
-    private String m_aboutUser;
     private int m_dayBirth;
     private int m_monthBirth;
     private int m_yearBirth;
@@ -70,10 +71,9 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     String imageUrl = "https://firebasestorage.googleapis.com/v0/b/tripair-be218.appspot.com/o/profilePic%2FProfilePicture.png?alt=media&token=eb726118-9758-445b-9c77-c017a19ab66d";
-    FirebaseStorage storage;
-    StorageReference storageReference;
-
-
+   private FirebaseStorage storage;
+   private StorageReference storageReference;
+   private Calendar calendar = Calendar.getInstance();
 
 
     @Override
@@ -84,6 +84,8 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         m_uid_user = intent.getStringExtra("userUid");
         m_user_mail = intent.getStringExtra("userEmail");
         //m_user = intent.getExtras();
+        Date currentDate= calendar.getTime();
+        calendar.setTime(currentDate);
         InitializeDays();
         InitializeMonths();
         InitializeYears();
@@ -181,8 +183,6 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         // TODO Auto-generated method stub
     }
 
-
-
     private void InitializeDays()
     {
             ArrayList<String> days = new ArrayList<>();
@@ -219,8 +219,10 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
 
     private void InitializeYears()
     {
+        Integer currentYear=calendar.get(Calendar.YEAR);
+
         ArrayList<String> years = new ArrayList<>();
-        for(Integer i=1950;i<=2019;i++)
+        for(Integer i=currentYear;i>=1950;i--)
         {
             years.add(i.toString());
         }
@@ -232,6 +234,100 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerYear.setAdapter(adapter);
         spinnerYear.setOnItemSelectedListener(this);
+    }
+
+
+    private String checkIfInputFromUserIsValid() {
+        EditText userFirstName = (EditText) findViewById(R.id.firstName);
+        String userFirstNameText = userFirstName.getText().toString();
+        EditText userLastName = (EditText) findViewById(R.id.LastName);
+        String userLastNameText = userLastName.getText().toString();
+        CheckBox checkBoxSmoking = (CheckBox) findViewById(R.id.smokingBox);
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.groupGender);
+        int radioButtonID = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton)radioGroup.findViewById(radioButtonID);
+        if(radioButton ==  null) {
+            return "You have to choose gender!";
+        }
+        else if (userFirstNameText == null || isContainsNumbers(userFirstNameText))
+        {
+           return "First name invalid! Only letters allowed";
+        }
+        else if(userLastNameText == null || isContainsNumbers(userLastNameText))
+        {
+             return "Last name invalid! Only letters allowed";
+        }
+        else if(selectedLanguageNative.equals("None"))
+        {
+            return "You have to choose a native language!";
+        }
+
+        else
+            {
+            boolean checked = checkBoxSmoking.isChecked();
+            if(checked)
+            {
+                m_isUserSmoking = true;
+            }
+
+            m_userFirstName = userFirstNameText;
+            m_userLastName = userLastNameText;
+            m_userGender = radioButton.getText().toString();
+
+
+        }
+        return null;
+    }
+
+    private boolean isContainsNumbers(String str)
+    {
+        char[] chars = str.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void InitializeLanguages()
+    {
+        ArrayList<String> languages = getLanguagesArr();
+        languagesSpinner1 = (Spinner)findViewById(R.id.languagesSpinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingProfileActivity.this,
+                android.R.layout.simple_spinner_item,languages);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languagesSpinner1.setAdapter(adapter);
+        languagesSpinner1.setOnItemSelectedListener(this);
+
+        languagesSpinner2 = (Spinner)findViewById(R.id.languageSpinner2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SettingProfileActivity.this,
+                android.R.layout.simple_spinner_item,languages);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languagesSpinner2.setAdapter(adapter2);
+        languagesSpinner2.setOnItemSelectedListener(this);
+    }
+
+    private ArrayList<String> getLanguagesArr()
+    {
+        ArrayList<String> languages = new ArrayList<String>();
+        languages.add("None");
+        languages.add("Hebrew");
+        languages.add("English");
+        languages.add("Arabic");
+        languages.add("Russian");
+        languages.add("Spanish");
+        languages.add("Chinese");
+        languages.add("Japanese");
+        languages.add("Turkish");
+        languages.add("French");
+        languages.add("German");
+        languages.add("Italian");
+        return languages;
     }
 
     public void saveButtonClicked(View v)
@@ -255,10 +351,11 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips,imageUrl);
+            m_userInput = new User(m_uid_user,m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking, alltrips, imageUrl);
 
             //save at database
             DatabaseReference mRef = database.getReference();
+            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
 
 
             if(filePath != null)
@@ -321,113 +418,17 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
                 moveToAllTrips();
             }
 
-       }
+        }
     }
-    private void moveToAllTrips(){
-        // if everything ok - move to home page
-        Intent intent = new Intent(this, AllTripsActivity.class);
-        intent.putExtra("userUid", m_uid_user);
-        intent.putExtra("user", m_userInput);
-        startActivity(intent);
-    }
-    private String checkIfInputFromUserIsValid() {
-        EditText userFirstName = (EditText) findViewById(R.id.firstName);
-        String userFirstNameText = userFirstName.getText().toString();
-        EditText userLastName = (EditText) findViewById(R.id.LastName);
-        String userLastNameText = userLastName.getText().toString();
-        EditText userAboutMe = (EditText)findViewById(R.id.aboutMeInput);
-        String userAboutMeText = userAboutMe.getText().toString();
-        CheckBox checkBoxSmoking = (CheckBox) findViewById(R.id.smokingBox);
 
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.groupGender);
-        int radioButtonID = radioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton)radioGroup.findViewById(radioButtonID);
-        if(radioButton ==  null) {
-            return "You have to choose gender!";
-        }
-        else if (userFirstNameText == null || isContainsNumbers(userFirstNameText))
-        {
-           return "First name invalid! Only letters allowed";
-        }
-        else if(userLastNameText == null || isContainsNumbers(userLastNameText))
-        {
-             return "Last name invalid! Only letters allowed";
-        }
-        else if(selectedLanguageNative.equals("None"))
-        {
-            return "You have to choose a native language!";
-        }
 
-        else
-            {
-            boolean checked = checkBoxSmoking.isChecked();
-            if(checked)
-            {
-                m_isUserSmoking = true;
+        private void moveToAllTrips(){
+                // if everything ok - move to home page
+                Intent intent = new Intent(this, AllTripsActivity.class);
+                intent.putExtra("user", m_userInput);
+                startActivity(intent);
+                this.finish();
             }
-            if(userAboutMeText != "")
-            {
-                m_aboutUser = userAboutMeText;
-            }
-            m_userFirstName = userFirstNameText;
-            m_userLastName = userLastNameText;
-            m_userGender = radioButton.getText().toString();
-
-
-        }
-        return null;
     }
-
-    private boolean isContainsNumbers(String str)
-    {
-        char[] chars = str.toCharArray();
-
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void InitializeLanguages()
-    {
-        ArrayList<String> languages = getLanguagesArr();
-        languagesSpinner1 = (Spinner)findViewById(R.id.languagesSpinner1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingProfileActivity.this,
-                android.R.layout.simple_spinner_item,languages);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languagesSpinner1.setAdapter(adapter);
-        languagesSpinner1.setOnItemSelectedListener(this);
-
-        languagesSpinner2 = (Spinner)findViewById(R.id.languageSpinner2);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SettingProfileActivity.this,
-                android.R.layout.simple_spinner_item,languages);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languagesSpinner2.setAdapter(adapter2);
-        languagesSpinner2.setOnItemSelectedListener(this);
-    }
-
-    private ArrayList<String> getLanguagesArr()
-    {
-        ArrayList<String> languages = new ArrayList<String>();
-        languages.add("None");
-        languages.add("Hebrew");
-        languages.add("English");
-        languages.add("Arabic");
-        languages.add("Russian");
-        languages.add("Spanish");
-        languages.add("Chinese");
-        languages.add("Japanese");
-        languages.add("Turkish");
-        languages.add("French");
-        languages.add("German");
-        languages.add("Italian");
-        return languages;
-    }
-
-}
 
 

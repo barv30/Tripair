@@ -112,7 +112,7 @@ public class SingUpActivity extends AppCompatActivity implements AdapterView.OnI
             {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking,m_aboutUser, alltrips,"");
+
 
             //save at database
             DatabaseReference mRef = database.getReference();

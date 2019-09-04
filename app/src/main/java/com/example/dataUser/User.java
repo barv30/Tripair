@@ -14,13 +14,14 @@ public class User implements Serializable {
     private int birthMonth;
     private ArrayList<String> languages;
     private boolean isSmoking;
-    private String aboutMe;
     private int age;
     private TripManager allTrips;
     private String imageUrl;
+    private String id;
 
     public User(){}
     public User(
+                String uid,
                 String firstName,
                 String lastName,
                 int day,
@@ -29,10 +30,10 @@ public class User implements Serializable {
                 String gender,
                 ArrayList<String> languages,
                 boolean isSmoking,
-                String aboutMe,
                 TripManager allTrips,
                 String imageUrl)
     {
+        this.id = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = day;
@@ -42,7 +43,6 @@ public class User implements Serializable {
         this.languages = new ArrayList<>();
         this.languages = languages;
         this.isSmoking = isSmoking;
-        this.aboutMe = aboutMe;
         this.age = calculateAge();
         this.allTrips = new TripManager();
         this.imageUrl=imageUrl;
@@ -59,9 +59,6 @@ public class User implements Serializable {
         return languages;
     }
 
-    public String getAboutMe() {
-        return aboutMe;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -116,10 +113,6 @@ public class User implements Serializable {
         return isSmoking;
     }
 
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -154,6 +147,14 @@ public class User implements Serializable {
 
     public void setImgURL(String imageURL) {
         this.imageUrl = imageURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 
