@@ -353,11 +353,11 @@ public class SingUpActivity extends AppCompatActivity implements AdapterView.OnI
         if(radioButton ==  null) {
             return "You have to choose gender!";
         }
-        else if (userFirstNameText == null || isContainsNumbers(userFirstNameText))
+        else if (userFirstNameText.equals("") || isContainsNumbers(userFirstNameText))
         {
            return "First name invalid! Only letters allowed";
         }
-        else if(userLastNameText == null || isContainsNumbers(userLastNameText))
+        else if(userLastNameText.equals("") || isContainsNumbers(userLastNameText))
         {
              return "Last name invalid! Only letters allowed";
         }
