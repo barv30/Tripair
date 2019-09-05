@@ -39,6 +39,7 @@ public class ContactPOJO implements Serializable {
 
     }
 
+
     public String getmImage() {
         return mImage;
     }

@@ -124,6 +124,13 @@ public class AllTripsActivity extends AppCompatActivity {
                 startActivity(intent);
                 this.finish();
             }
+            case R.id.messages:{
+                Intent intent = new Intent(this, ContactMsgActivity.class);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", (User) m_user);
+                startActivity(intent);
+                this.finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

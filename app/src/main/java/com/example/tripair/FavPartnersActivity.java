@@ -33,6 +33,7 @@ public class FavPartnersActivity extends AppCompatActivity {
     private User m_user;
     private int m_tripPosition;
     private Trip m_trip;
+    private int m_favPosition;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -54,6 +55,7 @@ public class FavPartnersActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+                onButtonsClicked(position, id);
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -93,6 +95,25 @@ public class FavPartnersActivity extends AppCompatActivity {
         intent.putExtra("user", m_user);
         startActivity(intent);
         this.finish();
+    }
+
+
+    public void onButtonsClicked(int position,int btnId){
+        switch (btnId){
+            case R.id.message_btn:{
+                m_favPosition=position;
+                Intent intent = new Intent(this, MessageSendActivity.class);
+                intent.putExtra("favoritePartners", m_favoritePartners);
+                intent.putExtra("userUid", m_uid);
+                intent.putExtra("user", m_user);
+                intent.putExtra("favoritePartnerPosition",m_favPosition);
+                startActivity(intent);
+            }
+            case R.id.btn_deleteFav:{
+
+            }
+        }
+
     }
 
     public void onDeleteButtonFavClicked(View v)
