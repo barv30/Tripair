@@ -159,7 +159,7 @@
                 android:layout_width="57dp"
                 android:layout_height="37dp"
                 android:onClick="onMessageBtnClick"
-                app:srcCompat="@drawable/message-image-png-4" />
+                app:srcCompat="@android:drawable/ic_dialog_email" />
 
         </LinearLayout>
 
