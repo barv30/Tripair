@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:hint="@string/first_name"
             android:inputType="textPersonName"
+            android:text="@string/first_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
             android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
 
@@ -38,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/last_name"
             android:inputType="textPersonName"
+            android:text="@string/last_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
             android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
 
@@ -47,7 +47,7 @@
             android:id="@+id/smokingBox"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Smoking"
+            android:text="@string/edit_profile"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
         <LinearLayout
@@ -73,11 +73,10 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Choose Picture" />
+                android:text="@String/Choose Picture" />
 
 
         </LinearLayout>
-
 
 
         <Button
@@ -85,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="saveButtonClicked"
-            android:text="Save" />
+            android:text="@string/Save Changes" />
 
     </LinearLayout>
 </ScrollView>
