@@ -31,7 +31,8 @@
             android:inputType="textPersonName"
             android:text="@string/first_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
+            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
+            tools:ignore="Autofill,LabelFor" />
 
         <EditText
             android:id="@+id/LastName"
@@ -41,7 +42,8 @@
             android:inputType="textPersonName"
             android:text="@string/last_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed" />
+            android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
+            tools:ignore="Autofill,LabelFor" />
 
         <CheckBox
             android:id="@+id/smokingBox"
