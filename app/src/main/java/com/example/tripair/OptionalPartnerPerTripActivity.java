@@ -15,6 +15,7 @@ package com.example.tripair;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.*;
 
@@ -169,10 +170,100 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean isDateMatch (User userPartner, Trip tripOfPartner)
-    {
-        return true;
+    private boolean isDateMatch (User userPartner, Trip tripOfPartner) {
+        boolean oneWayPartner=false;
+        boolean oneWayUser=false;
+
+        Date userArriveDate=null;
+        Date userLeavevDate=null;
+        Date partnerArriveDate=null;
+        Date partnerLeaveDate=null;
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+
+        String arriveDayUser = Integer.toString(m_tripUserObj.getArriveDay());
+        String arriveMonthUser = Integer.toString(m_tripUserObj.getArriveMonth());
+        String arriveYearUser = Integer.toString(m_tripUserObj.getArriveYear());
+        String arriveDateUser = arriveDayUser + "-" + arriveMonthUser + "-" + arriveYearUser; //string date  example: 1-11-2018
+        try {
+            userArriveDate = format.parse(arriveDateUser);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(m_tripUserObj.getLeftDay()==0 && m_tripUserObj.getLeftMonth()==0 && m_tripUserObj.getLeftYear()==0){  //one-way
+            oneWayUser = true;
+        }
+        else {
+            String leaveDayUser = Integer.toString(m_tripUserObj.getLeftDay());
+            String leaveMonthUser = Integer.toString(m_tripUserObj.getLeftMonth());
+            String leaveYearUser = Integer.toString(m_tripUserObj.getLeftYear());
+            String leftDateUser = leaveDayUser + "-" + leaveMonthUser + "-" + leaveYearUser;
+            try {
+                userLeavevDate = format.parse(leftDateUser);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        String arriveDayPartner = Integer.toString(tripOfPartner.getArriveDay());
+        String arriveMonthPartner = Integer.toString(tripOfPartner.getArriveMonth());
+        String arriveYearPartner = Integer.toString(tripOfPartner.getArriveYear());
+        String  arriveDatePartner = arriveDayPartner + "-"  + arriveMonthPartner+"-"+ arriveYearPartner;
+        try {
+            partnerArriveDate = format.parse(arriveDatePartner);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(tripOfPartner.getLeftDay()==0 &&tripOfPartner.getLeftMonth()==0 && tripOfPartner.getLeftYear()==0){
+            oneWayPartner = true;
+        }
+        else { //there's leave date
+            String leaveDayPartner = Integer.toString(tripOfPartner.getLeftDay());
+            String leaveMonthPartner = Integer.toString(tripOfPartner.getLeftMonth());
+            String leaveYearPartner = Integer.toString(tripOfPartner.getLeftYear());
+            String leaveDatePartner = leaveDayPartner + "-" + leaveMonthPartner + "-" + leaveYearPartner;
+            try {
+                partnerLeaveDate = format.parse(leaveDatePartner);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (oneWayPartner==false && oneWayUser==false){ //both have leaving date
+            if ((partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate))) ||
+                    (partnerArriveDate.after(userArriveDate) && (partnerLeaveDate.before(userLeavevDate) || partnerLeaveDate.equals(userLeavevDate))) ||
+                    (partnerArriveDate.equals(userArriveDate) && (partnerLeaveDate.after(userLeavevDate) || partnerLeaveDate.after(userLeavevDate)))) {
+                return true;
+
+            }
+        }
+
+        else {
+            if (oneWayPartner == true && oneWayUser == true) { //both no leave date
+                if (partnerArriveDate.before(userArriveDate) || partnerArriveDate.equals(userArriveDate)){
+                    return true;
+                }
+            }
+            else if (oneWayUser == true && oneWayPartner == false) { //partner has leaving date, user no
+                if(partnerArriveDate.after(userArriveDate)||(partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate)))){
+                    return true;
+                }
+            }
+            else if (oneWayUser == false && oneWayPartner == true) { //user has leaving date, partner no
+                if(userArriveDate.after(partnerArriveDate)||(userArriveDate.before(partnerArriveDate) && (userLeavevDate.after(partnerArriveDate) || userLeavevDate.equals(partnerArriveDate)))){
+                    return true;
+                }
+            }
+        }
+        // if reached here- means partner has no matching dates- returning false.
+        return false;
+
+
+
     }
+
 
     private boolean isLanguageMatch (User userPartner)
     {
