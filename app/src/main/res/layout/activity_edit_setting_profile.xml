@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
+            android:hint="@string/first_name"
             android:inputType="textPersonName"
-            android:text="@string/first_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
             android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
             tools:ignore="Autofill,LabelFor" />
@@ -39,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/last_name"
             android:inputType="textPersonName"
-            android:text="@string/last_name"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed"
             android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
             tools:ignore="Autofill,LabelFor" />
