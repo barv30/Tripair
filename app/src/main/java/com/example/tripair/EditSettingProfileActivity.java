@@ -69,6 +69,20 @@ public class EditSettingProfileActivity extends AppCompatActivity {
         Intent intent=getIntent();
         m_user = (User)intent.getSerializableExtra("user");
         m_uid_user = m_user.getId();
+        EditText firstNameText = findViewById(R.id.firstName);
+        firstNameText.setHint(m_user.getFirstName());
+        EditText lastNameText = findViewById(R.id.LastName);
+        lastNameText.setHint(m_user.getLastName());
+        CheckBox smokingBox = findViewById(R.id.smokingBox);
+        if (m_user.isSmoking())
+        {
+            smokingBox.setChecked(true);
+        }
+        else
+        {
+            smokingBox.setChecked(false);
+        }
+
         initializedPicture();
 
     }
