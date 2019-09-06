@@ -78,7 +78,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
             smoke = itemView.findViewById(R.id.txt_smoke_insert);
             age=itemView.findViewById(R.id.txt_age_insert);
             btnFav = itemView.findViewById(R.id. btn_Fav);
-
+            userPic = itemView.findViewById(R.id.imageView);
         }
 
 

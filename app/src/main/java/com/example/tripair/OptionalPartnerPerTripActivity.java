@@ -195,8 +195,8 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 (isDateMatch(userPartner, tripOfPartner)) &&
                 ((m_tripUserObj.getPartner().isSmoking()) || (!(m_tripUserObj.getPartner().isSmoking()) && (!userPartner.isSmoking()))) &&
                 ((tripOfPartner.getPartner().isSmoking()) || (!(tripOfPartner.getPartner().isSmoking()) && (!m_user.isSmoking()))) &&
-                (((m_tripUserObj.getPartner().getGender()).equals("no matter")) || (((!(m_tripUserObj.getPartner().getGender()).equals("no matter"))) && ((m_tripUserObj.getPartner().getGender()).equals(userPartner.getGender())))) &&
-                (((tripOfPartner.getPartner().getGender()).equals("no matter")) || (((!(tripOfPartner.getPartner().getGender()).equals("no matter"))) && ((tripOfPartner.getPartner().getGender()).equals(m_user.getGender())))) &&
+                (((m_tripUserObj.getPartner().getGender()).equals("No matter")) || (((!(m_tripUserObj.getPartner().getGender()).equals("No matter"))) && ((m_tripUserObj.getPartner().getGender()).equals(userPartner.getGender())))) &&
+                (((tripOfPartner.getPartner().getGender()).equals("No matter")) || (((!(tripOfPartner.getPartner().getGender()).equals("No matter"))) && ((tripOfPartner.getPartner().getGender()).equals(m_user.getGender())))) &&
                  (userPartner.getAge() >= m_tripUserObj.getPartner().getMinAge())&&
                  (userPartner.getAge() <= m_tripUserObj.getPartner().getMaxAge()) &&
                  (m_user.getAge() >= tripOfPartner.getPartner().getMinAge() &&
