@@ -49,7 +49,7 @@
             android:id="@+id/smokingBox"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="@string/edit_profile"
+            android:text="@string/smoking"
             android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
         <LinearLayout
