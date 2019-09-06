@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                                             user = dataSnapshot.child("usersProfile").child(uid).getValue(User.class);
                                             openAllTripsActivity(uid, user);
                                         }
+                                        else {
+                                            openSettingsProfileActivity(uid);// move to edit profile
+
+                                        }
 
                                     }
 
