@@ -110,7 +110,6 @@ public class AllTripsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.addTrip: {
                 Intent intent = new Intent(this, TripSettingsActivity.class);
-                intent.putExtra("userUid", m_uid);
                 intent.putExtra("user", (User) m_user);
                 startActivity(intent);
                 this.finish();
@@ -118,8 +117,7 @@ public class AllTripsActivity extends AppCompatActivity {
 
             }
             case R.id.editMyProfile:{
-                Intent intent = new Intent(this, SettingProfileActivity.class);
-                intent.putExtra("userUid", m_uid);
+                Intent intent = new Intent(this, EditSettingProfileActivity.class);
                 intent.putExtra("user", (User) m_user);
                 startActivity(intent);
                 this.finish();

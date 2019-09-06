@@ -20,6 +20,7 @@
         <activity android:name=".SettingProfileActivity" android:noHistory="false"/>
         <activity android:name=".EditTripSettingsActivity" android:noHistory="false"/>
         <activity android:name=".PartnerSettingsActivity" android:noHistory="false"/>
+        <activity android:name=".EditSettingProfileActivity" android:noHistory="false"/>
         <activity android:name=".MainActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

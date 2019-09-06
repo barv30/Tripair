@@ -136,10 +136,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         };
         mRef.child("usersProfile").child(m_partnerID).addValueEventListener(UserListener);
 
-        if (mOptionalPartnersArray.size() == 0)
-        {
-
-        }
     }
 
     private boolean isInFavAlready(User userPartner)
