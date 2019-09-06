@@ -68,26 +68,23 @@
             <ImageView
                 android:id="@+id/imgView"
                 android:layout_width="150dp"
-                android:layout_height="match_parent"
-                tools:ignore="ContentDescription" />
+                android:layout_height="match_parent" />
 
             <Button
                 android:id="@+id/btnChoose"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="Choose Picture" />
+                android:text="Choose Picture" />
 
 
         </LinearLayout>
-
-
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="saveButtonClicked"
-            tools:text="Save Changes" />
+            android:text="Save Changes" />
 
     </LinearLayout>
 </ScrollView>

@@ -52,7 +52,6 @@ public class EditSettingProfileActivity extends AppCompatActivity {
     private String m_image;
     FirebaseDatabase database =  FirebaseDatabase.getInstance();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
-    User m_userInput;
     private Button btnChoose;
     private ImageView imageView;
     private Uri filePath;
@@ -237,7 +236,7 @@ public class EditSettingProfileActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String downloadUri = task.getResult().toString();
                             // need to change
-                            m_userInput.setImgURL(downloadUri);
+                            m_user.setImgURL(downloadUri);
                             imageUrl = downloadUri;
                             mRef.child("usersProfile").child(m_uid_user).setValue(m_user);
                             moveToAllTrips();
@@ -258,7 +257,7 @@ public class EditSettingProfileActivity extends AppCompatActivity {
         private void moveToAllTrips(){
                 // if everything ok - move to home page
                 Intent intent = new Intent(this, AllTripsActivity.class);
-                intent.putExtra("user", m_userInput);
+                intent.putExtra("user", m_user);
                 startActivity(intent);
                 this.finish();
             }
