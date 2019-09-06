@@ -44,8 +44,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.smoke.setText(contact.getmSmoking());
         holder.leftDate.setText(contact.getmDateLeft());
         holder.age.setText(String.valueOf(contact.getmAge()));
-        Picasso.get().load(contact.getmImage()).into(holder.userPic);
-
+      //  Picasso.get().load(contact.getmImage()).into(holder.userPic);
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
