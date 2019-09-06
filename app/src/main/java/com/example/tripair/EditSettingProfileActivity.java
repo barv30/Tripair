@@ -65,7 +65,7 @@ public class EditSettingProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting_profile);
+        setContentView(R.layout.activity_edit_setting_profile);
         Intent intent=getIntent();
         m_user = (User)intent.getSerializableExtra("user");
         m_uid_user = m_user.getId();
