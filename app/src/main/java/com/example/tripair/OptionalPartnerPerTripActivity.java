@@ -242,7 +242,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
                 }
             }
             else if (oneWayUser == true && oneWayPartner == false) { //partner has leaving date, user no
-                if(partnerArriveDate.after(userArriveDate)||(partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate)))){
+                if(partnerArriveDate.equals(userArriveDate)||partnerArriveDate.after(userArriveDate)||(partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate)))){
                     return true;
                 }
             }
