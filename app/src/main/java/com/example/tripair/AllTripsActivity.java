@@ -148,6 +148,8 @@ public class AllTripsActivity extends AppCompatActivity {
 
     public void onDeleteButtonClicked(View v)
     {
+        //mArrayList.remove(position);
+        //mAdapter.notifyDataSetChanged();
 
     }
 

@@ -97,6 +97,8 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     public void onDeleteButtonFavClicked(View v)
     {
+        //m_favoritePartners.remove(position);
+        //mAdapter.notifyDataSetChanged();
 
     }
 
