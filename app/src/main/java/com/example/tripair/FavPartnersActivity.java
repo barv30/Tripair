@@ -57,7 +57,6 @@ public class FavPartnersActivity extends AppCompatActivity {
             @Override
             public void onRecycleViewItemDeleteClicked(int position, int id) {
             m_trip.getFavPartner().remove(position);
-           // m_user.getAllTrips().getTripByPosition(m_tripPosition).getFavPartner().remove(position);
             m_favoritePartners.remove(position);
             mAdapter.notifyDataSetChanged();
             }
