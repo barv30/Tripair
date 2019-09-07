@@ -41,14 +41,14 @@ public class AllTripsActivity extends AppCompatActivity {
     private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerTripClickListener() {
         @Override
         public void onRecyclerViewItemClicked(int position, int id) {
-          //  Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
             onButtonClicked(position);
         }
 
         @Override
         public void onRecycleViewItemDeleteClicked(int position, int id) {
-        mArrayList.remove(position);
-        mAdapter.notifyDataSetChanged();
+            mArrayList.remove(position);
+            mAdapter.notifyDataSetChanged();
         }
 
 
@@ -57,6 +57,7 @@ public class AllTripsActivity extends AppCompatActivity {
     private User m_user;
     Trip m_trip;
     ValueEventListener UserListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +71,8 @@ public class AllTripsActivity extends AppCompatActivity {
         mRecyclerView1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView1.setAdapter(mAdapter);
         TextView lineText = findViewById(R.id.lineText);
-        lineText.setText("Welcome "+ m_user.getFirstName()+" !");
-         UserListener = new ValueEventListener() {
+        lineText.setText("Welcome " + m_user.getFirstName() + " !");
+        UserListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -79,7 +80,7 @@ public class AllTripsActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         m_trip = ds.getValue(Trip.class);
-                        addTripToList(m_trip.getCountry(), m_trip.getCity(), m_trip.getArriveDay(), m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(),m_trip.getLeftMonth(),m_trip.getLeftYear());
+                        addTripToList(m_trip.getCountry(), m_trip.getCity(), m_trip.getArriveDay(), m_trip.getArriveMonth(), m_trip.getArriveYear(), m_trip.getLeftDay(), m_trip.getLeftMonth(), m_trip.getLeftYear());
                     }
                 }
 
@@ -95,11 +96,11 @@ public class AllTripsActivity extends AppCompatActivity {
     }
 
 
-    private void addTripToList(String country, String city, int day, int month, int year,int leftDay,int leftMonth,int leftYear) {
+    private void addTripToList(String country, String city, int day, int month, int year, int leftDay, int leftMonth, int leftYear) {
 
         // get the array of all trips and make array of tripPOJO
         TripPOJO trip = null;
-        trip = new TripPOJO(country, city, day, month, year,leftDay,leftMonth,leftYear);
+        trip = new TripPOJO(country, city, day, month, year, leftDay, leftMonth, leftYear);
         mArrayList.add(trip);
         mAdapter.notifyDataSetChanged();
     }
@@ -123,7 +124,7 @@ public class AllTripsActivity extends AppCompatActivity {
                 break;
 
             }
-            case R.id.editMyProfile:{
+            case R.id.editMyProfile: {
                 Intent intent = new Intent(this, EditSettingProfileActivity.class);
                 intent.putExtra("user", (User) m_user);
                 startActivity(intent);
@@ -152,6 +153,4 @@ public class AllTripsActivity extends AppCompatActivity {
         super.onDestroy();
         mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").removeEventListener(UserListener);
     }
-
-
 }
