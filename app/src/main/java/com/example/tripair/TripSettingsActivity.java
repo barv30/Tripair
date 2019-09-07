@@ -407,6 +407,7 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
     public void onContinueButtonClicked(View v)
     {
         String isValid = checkIfInputFromUserIsValid();
+        boolean tripExist = false;
         if(isValid!= null)
         {
             Context context = getApplicationContext();
@@ -420,15 +421,34 @@ public class TripSettingsActivity extends AppCompatActivity implements AdapterVi
             Trip trip = initTrip();
             String tripCountryKey = trip.getCountry();
             String tripCityKey = trip.getCity();
+            ArrayList<Trip> trips = m_user.getAllTrips().getTripList();
+            if (!trips.isEmpty()) {
+                for (int j = 0; j < trips.size(); j++) {
+                    if (
+                            m_selectedCountry.equals(trips.get(j).getCountry()) &&
+                                    m_selectedCity.equals(trips.get(j).getCity()) &&
+                                    m_yearArrive == trips.get(j).getArriveYear() &&
+                                    m_monthArrive == trips.get(j).getArriveMonth() &&
+                                    m_dayArrive == trips.get(j).getArriveDay() &&
+                                    m_yearLeft == trips.get(j).getLeftYear() &&
+                                    m_monthLeft == trips.get(j).getLeftMonth() &&
+                                    m_dayLeft == trips.get(j).getLeftDay()
+                    ) {
+                        tripExist = true;
+                        Toast.makeText(TripSettingsActivity.this, "You already have this trip! Please choose different dates/ country/ city", Toast.LENGTH_SHORT).show();
 
-
-            Intent intent = new Intent(this, PartnerSettingsActivity.class);
-            intent.putExtra("trip",trip);
-            intent.putExtra("tripCountryKey", tripCountryKey);
-            intent.putExtra("tripCityKey", tripCityKey);
-            intent.putExtra("user", m_user);
-            startActivity(intent);
-            this.finish();
+                    }
+                }
+            }
+            if (tripExist == false) {
+                Intent intent = new Intent(this, PartnerSettingsActivity.class);
+                intent.putExtra("trip", trip);
+                intent.putExtra("tripCountryKey", tripCountryKey);
+                intent.putExtra("tripCityKey", tripCityKey);
+                intent.putExtra("user", m_user);
+                startActivity(intent);
+                this.finish();
+            }
         }
     }
 

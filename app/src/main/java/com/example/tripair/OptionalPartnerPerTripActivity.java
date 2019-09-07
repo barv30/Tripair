@@ -1,41 +1,54 @@
 package com.example.tripair;
 
-        import android.app.Activity;
         import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.support.v7.widget.DefaultItemAnimator;
-        import android.support.v7.widget.DividerItemDecoration;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.util.Log;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
-        import java.text.ParseException;
-        import java.text.SimpleDateFormat;
-        import java.util.*;
+import com.example.dataUser.Trip;
+import com.example.dataUser.User;
+import com.example.recycleViewPack.ContactPOJO;
+import com.example.recycleViewPack.CustomContactAdapter;
+import com.example.recycleViewPack.OnRecyclerClickListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-        import com.example.dataUser.Trip;
-        import com.example.dataUser.User;
-        import com.example.recycleViewPack.ContactPOJO;
-        import com.example.recycleViewPack.CustomContactAdapter;
-        import com.example.recycleViewPack.OnRecyclerClickListener;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class OptionalPartnerPerTripActivity extends AppCompatActivity {
     private ArrayList<ContactPOJO> mOptionalPartnersArray = new ArrayList<>();
     Trip m_tripPerOptionalPartner;
     String m_partnerID;
     private RecyclerView mRecyclerView1;
-    private CustomContactAdapter mAdapter;
+    private CustomContactAdapter mAdapter = new CustomContactAdapter(mOptionalPartnersArray, new OnRecyclerClickListener() {
+        @Override
+        public void onRecyclerViewItemClicked(int position, int id) {
+           // Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+            addPartnerToFavorites(position);
+
+        }
+
+        @Override
+        public void onRecycleViewItemDeleteClicked(int position, int id) {
+
+        }
+    });
     private String m_uid;
     private User m_user;
     private String m_tripCountry;
@@ -64,16 +77,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
       //  mOptionalPartnersArray = (ArrayList<ContactPOJO>) intent.getSerializableExtra("arrayPartner");
         mRecyclerView1 = findViewById(R.id.recycleView);
-        mAdapter = new CustomContactAdapter(mOptionalPartnersArray, new OnRecyclerClickListener() {
-            @Override
-            public void onRecyclerViewItemClicked(int position, int id) {
-               // Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-                addPartnerToFavorites(position);
-             //   mOptionalPartnersArray.remove(mOptionalPartnersArray.get(position));
-               // mAdapter.notifyDataSetChanged();
-
-            }
-    });
 
 
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -238,12 +241,12 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
         else {
             if (oneWayPartner == true && oneWayUser == true) { //both no leave date
-                if (partnerArriveDate.before(userArriveDate) || partnerArriveDate.equals(userArriveDate)){
+                if (partnerArriveDate.before(userArriveDate) || partnerArriveDate.equals(userArriveDate) || userArriveDate.before(partnerArriveDate)){
                     return true;
                 }
             }
             else if (oneWayUser == true && oneWayPartner == false) { //partner has leaving date, user no
-                if(partnerArriveDate.after(userArriveDate)||(partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate)))){
+                if(partnerArriveDate.equals(userArriveDate)||partnerArriveDate.after(userArriveDate)||(partnerArriveDate.before(userArriveDate) && (partnerLeaveDate.after(userArriveDate) || partnerLeaveDate.equals(userArriveDate)))){
                     return true;
                 }
             }
@@ -311,14 +314,16 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
     private void addPartnerToFavorites(int position) {
         TextView name, date, smoke,age,leftDate;
+        ImageButton star;
         RecyclerView.ViewHolder child =mRecyclerView1.findViewHolderForLayoutPosition(position);
-            name=child.itemView.findViewById(R.id.txt_name);
-            Log.v("ViewHolder","in View Holder");
-            date = child.itemView.findViewById(R.id.txt_dest_insert);
-            leftDate = child.itemView.findViewById(R.id.txt_dateL);
-            smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
-            age=child.itemView.findViewById(R.id.txt_age_insert);
-
+        name=child.itemView.findViewById(R.id.txt_name);
+        Log.v("ViewHolder","in View Holder");
+        star = child.itemView.findViewById(R.id.btn_Fav);
+        date = child.itemView.findViewById(R.id.txt_dest_insert);
+        leftDate = child.itemView.findViewById(R.id.txt_dateL);
+        smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
+        age=child.itemView.findViewById(R.id.txt_age_insert);
+        star.setBackgroundColor(Color.rgb(255,155,153));
         ContactPOJO contact = new ContactPOJO();
         Integer id  = position;
         contact.setId(mOptionalPartnersArray.get(position).getId());
