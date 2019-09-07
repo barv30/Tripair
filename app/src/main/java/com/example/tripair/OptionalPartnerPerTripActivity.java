@@ -2,6 +2,7 @@ package com.example.tripair;
 
         import android.app.Activity;
         import android.content.Intent;
+        import android.graphics.Color;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.support.v7.widget.DefaultItemAnimator;
@@ -320,7 +321,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         leftDate = child.itemView.findViewById(R.id.txt_dateL);
         smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
         age=child.itemView.findViewById(R.id.txt_age_insert);
-        star.setVisibility(View.INVISIBLE);
+        star.setBackgroundColor(Color.rgb(255,155,153));
         ContactPOJO contact = new ContactPOJO();
         Integer id  = position;
         contact.setId(mOptionalPartnersArray.get(position).getId());
