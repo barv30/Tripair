@@ -135,11 +135,11 @@ public class EditSettingProfileActivity extends AppCompatActivity {
         String userLastNameText = userLastName.getText().toString();
         CheckBox checkBoxSmoking = (CheckBox) findViewById(R.id.smokingBox);
 
-        if (userFirstNameText.equals("") || isContainsNumbers(userFirstNameText))
+        if (!userFirstNameText.equals("") && isContainsNumbers(userFirstNameText))
         {
            return "First name invalid! Only letters allowed";
         }
-        else if(userLastNameText.equals("") || isContainsNumbers(userLastNameText))
+        else if(!userLastNameText.equals("") && isContainsNumbers(userLastNameText))
         {
              return "Last name invalid! Only letters allowed";
         }
@@ -185,8 +185,12 @@ public class EditSettingProfileActivity extends AppCompatActivity {
 
         }
         else {
-            m_user.setFirstName(m_userFirstName);
-            m_user.setLastName(m_userLastName);
+            if (!m_userFirstName.equals("")) {
+                m_user.setFirstName(m_userFirstName);
+            }
+            if (!m_userLastName.equals("")){
+                m_user.setLastName(m_userLastName);
+            }
             m_user.setSmoking(m_isUserSmoking);
             //save at database
             DatabaseReference mRef = database.getReference();
