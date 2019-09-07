@@ -53,7 +53,7 @@ public class FavPartnersActivity extends AppCompatActivity {
         mAdapter = new CustomFavoriteAdapter(m_favoritePartners, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
-                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

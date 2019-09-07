@@ -12,6 +12,8 @@ package com.example.tripair;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.ImageButton;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -69,8 +71,6 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
             public void onRecyclerViewItemClicked(int position, int id) {
                // Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
                 addPartnerToFavorites(position);
-             //   mOptionalPartnersArray.remove(mOptionalPartnersArray.get(position));
-               // mAdapter.notifyDataSetChanged();
 
             }
     });
@@ -311,14 +311,16 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
 
     private void addPartnerToFavorites(int position) {
         TextView name, date, smoke,age,leftDate;
+        ImageButton star;
         RecyclerView.ViewHolder child =mRecyclerView1.findViewHolderForLayoutPosition(position);
-            name=child.itemView.findViewById(R.id.txt_name);
-            Log.v("ViewHolder","in View Holder");
-            date = child.itemView.findViewById(R.id.txt_dest_insert);
-            leftDate = child.itemView.findViewById(R.id.txt_dateL);
-            smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
-            age=child.itemView.findViewById(R.id.txt_age_insert);
-
+        name=child.itemView.findViewById(R.id.txt_name);
+        Log.v("ViewHolder","in View Holder");
+        star = child.itemView.findViewById(R.id.btn_Fav);
+        date = child.itemView.findViewById(R.id.txt_dest_insert);
+        leftDate = child.itemView.findViewById(R.id.txt_dateL);
+        smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
+        age=child.itemView.findViewById(R.id.txt_age_insert);
+        star.setVisibility(View.INVISIBLE);
         ContactPOJO contact = new ContactPOJO();
         Integer id  = position;
         contact.setId(mOptionalPartnersArray.get(position).getId());
