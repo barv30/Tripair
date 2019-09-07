@@ -45,6 +45,8 @@ public class AllTripsActivity extends AppCompatActivity {
         @Override
         public void onRecycleViewItemDeleteClicked(int position, int id) {
             mArrayList.remove(position);
+            m_user.getAllTrips().getTripList().remove(position);
+            mRef.child("usersProfile").child(m_uid).child("allTrips").setValue(m_user.getAllTrips());
             mAdapter.notifyDataSetChanged();
         }
 
