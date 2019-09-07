@@ -12,6 +12,7 @@ package com.example.tripair;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
+        import android.view.View;
         import android.widget.ImageButton;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -319,7 +320,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         leftDate = child.itemView.findViewById(R.id.txt_dateL);
         smoke = child.itemView.findViewById(R.id.txt_smoke_insert);
         age=child.itemView.findViewById(R.id.txt_age_insert);
-
+        star.setVisibility(View.INVISIBLE);
         ContactPOJO contact = new ContactPOJO();
         Integer id  = position;
         contact.setId(mOptionalPartnersArray.get(position).getId());
