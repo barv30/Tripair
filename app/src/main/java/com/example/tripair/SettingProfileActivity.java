@@ -346,79 +346,86 @@ public class SettingProfileActivity extends AppCompatActivity implements Adapter
             TripManager alltrips = new TripManager();
             ArrayList<String> languagesArr = new ArrayList<>();
             languagesArr.add(selectedLanguageNative);
-            if(!selectedLanguage2.equals("None"))
-            {
+            if (!selectedLanguage2.equals("None")) {
                 languagesArr.add(selectedLanguage2);
             }
-            m_userInput = new User(m_uid_user,m_userFirstName,m_userLastName,m_dayBirth,m_monthBirth,m_yearBirth,m_userGender,languagesArr,m_isUserSmoking, alltrips, imageUrl);
+            m_userInput = new User(m_uid_user, m_userFirstName, m_userLastName, m_dayBirth, m_monthBirth, m_yearBirth, m_userGender, languagesArr, m_isUserSmoking, alltrips, imageUrl);
 
             //save at database
             DatabaseReference mRef = database.getReference();
-           // mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+            // mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
 
 
-            if(filePath != null)
-            {
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
+                if (filePath != null) {
+                        final ProgressDialog progressDialog = new ProgressDialog(this);
+                        progressDialog.setTitle("Uploading...");
+                        progressDialog.show();
 
-                StorageReference ref = storageReference.child("images/"+ mAuth.getCurrentUser().getUid());
-                ref.putFile(filePath)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        StorageReference ref = storageReference.child("images/" + mAuth.getCurrentUser().getUid());
+                        ref.putFile(filePath)
+                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        try {
+                                            progressDialog.dismiss();
+                                        }
+                                        catch (IllegalArgumentException e) {
+                                            Toast.makeText(SettingProfileActivity.this, "error with upload", Toast.LENGTH_SHORT).show();
+                                        }
+                                        Toast.makeText(SettingProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(SettingProfileActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                                .getTotalByteCount());
+                                        progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                                    }
+                                });
+                        Task<Uri> urlTask = ref.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.dismiss();
-                                Toast.makeText(SettingProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                }
+
+                                // Continue with the task to get the download URL
+                                return ref.getDownloadUrl();
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(SettingProfileActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                        .getTotalByteCount());
-                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    String downloadUri = task.getResult().toString();
+                                    // need to change
+                                    m_userInput.setImgURL(downloadUri);
+                                    imageUrl = downloadUri;
+                                    mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+                                      moveToAllTrips();
+                                }
                             }
                         });
-                Task<Uri> urlTask = ref.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
 
-                        // Continue with the task to get the download URL
-                        return ref.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            String downloadUri = task.getResult().toString();
-                            // need to change
-                            m_userInput.setImgURL(downloadUri);
-                            imageUrl = downloadUri;
-                            mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
-                            moveToAllTrips();
-                        }
-                    }
-                });
+
+                } else {
+                    mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
+                    moveToAllTrips();
+                }
+
+
             }
-            else
-            {
-                mRef.child("usersProfile").child(m_uid_user).setValue(m_userInput);
-                moveToAllTrips();
-            }
+
 
         }
-    }
+
 
 
         private void moveToAllTrips(){

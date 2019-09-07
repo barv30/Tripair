@@ -21,6 +21,7 @@ import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomTripAdpater;
 import com.example.recycleViewPack.OnRecyclerClickListener;
+import com.example.recycleViewPack.OnRecyclerTripClickListener;
 import com.example.recycleViewPack.TripPOJO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,11 +38,17 @@ public class AllTripsActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
-    private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
+    private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerTripClickListener() {
         @Override
         public void onRecyclerViewItemClicked(int position, int id) {
           //  Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
             onButtonClicked(position);
+        }
+
+        @Override
+        public void onRecycleViewItemDeleteClicked(int position, int id) {
+        mArrayList.remove(position);
+        mAdapter.notifyDataSetChanged();
         }
 
 
@@ -144,11 +151,6 @@ public class AllTripsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mRef.child("usersProfile").child(m_uid).child("allTrips").child("tripList").removeEventListener(UserListener);
-    }
-
-    public void onDeleteButtonClicked(View v)
-    {
-
     }
 
 

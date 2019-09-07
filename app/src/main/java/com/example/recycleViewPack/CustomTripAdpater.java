@@ -15,9 +15,9 @@ package com.example.recycleViewPack;
 public class CustomTripAdpater extends RecyclerView.Adapter<CustomTripAdpater.MyViewHolder> {
 
     private ArrayList<TripPOJO> arrayList = new ArrayList<>();
-    private OnRecyclerClickListener listener;
+    private  OnRecyclerTripClickListener listener;
 
-    public CustomTripAdpater(ArrayList<TripPOJO> arrayList, OnRecyclerClickListener listener) {
+    public CustomTripAdpater(ArrayList<TripPOJO> arrayList, OnRecyclerTripClickListener listener) {
         this.listener = listener;
         this.arrayList = arrayList;
     }
@@ -46,6 +46,13 @@ public class CustomTripAdpater extends RecyclerView.Adapter<CustomTripAdpater.My
                 Log.i("Info",holder.where.toString());
             }
         });
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRecycleViewItemDeleteClicked(position,view.getId());
+                Log.i("Info",holder.where.toString());
+            }
+        });
     }
 
 
@@ -57,13 +64,14 @@ public class CustomTripAdpater extends RecyclerView.Adapter<CustomTripAdpater.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView where,date;
-        ImageButton button;
+        ImageButton button, deleteButton;
         public MyViewHolder(View itemView) {
             super(itemView);
             Log.v("ViewHolder","in View Holder");
             where = itemView.findViewById(R.id.txt_trip_insert);
             date = itemView.findViewById(R.id.txt_date);
             button=itemView.findViewById(R.id.btn_open);
+            deleteButton = itemView.findViewById(R.id.btn_deleteTrip);
 
         }
 
