@@ -15,9 +15,9 @@ package com.example.recycleViewPack;
 public class CustomTripAdpater extends RecyclerView.Adapter<CustomTripAdpater.MyViewHolder> {
 
     private ArrayList<TripPOJO> arrayList = new ArrayList<>();
-    private  OnRecyclerTripClickListener listener;
+    private  OnRecyclerClickListener listener;
 
-    public CustomTripAdpater(ArrayList<TripPOJO> arrayList, OnRecyclerTripClickListener listener) {
+    public CustomTripAdpater(ArrayList<TripPOJO> arrayList, OnRecyclerClickListener listener) {
         this.listener = listener;
         this.arrayList = arrayList;
     }

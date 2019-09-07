@@ -1,19 +1,17 @@
 package com.example.tripair;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.dataUser.Trip;
 import com.example.dataUser.User;
 import com.example.recycleViewPack.ContactPOJO;
-import com.example.recycleViewPack.CustomContactAdapter;
 import com.example.recycleViewPack.CustomFavoriteAdapter;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +52,12 @@ public class FavPartnersActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 //Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRecycleViewItemDeleteClicked(int position, int id) {
+            m_favoritePartners.remove(position);
+            mAdapter.notifyDataSetChanged();
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

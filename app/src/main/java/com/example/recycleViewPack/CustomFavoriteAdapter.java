@@ -43,7 +43,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onRecyclerViewItemClicked(position, view.getId());
+                listener.onRecycleViewItemDeleteClicked(position, view.getId());
             }
         });
 
