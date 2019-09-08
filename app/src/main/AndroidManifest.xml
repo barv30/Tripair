@@ -44,7 +44,7 @@
             android:noHistory="false" />
         <activity
             android:name=".MainActivity"
-            android:noHistory="true">
+            android:noHistory="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

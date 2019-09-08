@@ -50,7 +50,7 @@
                         android:layout_width="25dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Age:"
+                        android:text=" Age:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 
@@ -69,10 +69,10 @@
 
                     <TextView
                         android:id="@+id/txt_dated"
-                        android:layout_width="25dp"
+                        android:layout_width="28dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Date at destination:"
+                        android:text=" Date at  destination:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Left date:"
+                        android:text=" Left date:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 
@@ -118,7 +118,7 @@
                         android:layout_width="25dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Smoking:"
+                        android:text=" Smoking:"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textSize="12sp" />
 
