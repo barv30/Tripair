@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripair.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
         holder.smoke.setText(contact.getmSmoking());
         holder.leftDate.setText(contact.getmDateLeft());
         holder.age.setText(String.valueOf(contact.getmAge()));
+        Picasso.get().load(contact.getmImage()).into(holder.userPic);
 
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, date, smoke, age, leftDate;
+         ImageView userPic;
         ImageButton btnDelete;
 
         public MyViewHolder(View itemView) {
@@ -68,6 +72,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
             smoke = itemView.findViewById(R.id.txt_smoke_insert);
             age = itemView.findViewById(R.id.txt_age_insert);
             btnDelete = itemView.findViewById(R.id.btn_deleteFav);
+            userPic=itemView.findViewById(R.id.imageView1);
 
         }
     }

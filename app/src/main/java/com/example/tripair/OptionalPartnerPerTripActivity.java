@@ -332,6 +332,7 @@ public class OptionalPartnerPerTripActivity extends AppCompatActivity {
         contact.setmDateDest(date.getText().toString());
         contact.setmDateLeft(leftDate.getText().toString());
         contact.setmSmoking(smoke.getText().toString());
+        contact.setmImage(mOptionalPartnersArray.get(position).getmImage());
         m_tripUserObj.updateFavPartner(contact);
 
     }

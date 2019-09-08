@@ -1,7 +1,9 @@
 package com.example.tripair;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,11 +20,15 @@ import com.example.recycleViewPack.ContactPOJO;
 import com.example.recycleViewPack.CustomTripAdpater;
 import com.example.recycleViewPack.OnRecyclerClickListener;
 import com.example.recycleViewPack.TripPOJO;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -34,6 +40,8 @@ public class AllTripsActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
+
+
 
     private CustomTripAdpater mAdapter = new CustomTripAdpater(mArrayList, new OnRecyclerClickListener() {
         @Override
@@ -55,6 +63,8 @@ public class AllTripsActivity extends AppCompatActivity {
     private String m_uid;
     private User m_user;
     Trip m_trip;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
     ValueEventListener UserListener;
 
     @Override
@@ -64,6 +74,7 @@ public class AllTripsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_user = (User) intent.getSerializableExtra("user");
         m_uid = m_user.getId();
+        changePic();
         mRecyclerView1 = findViewById(R.id.recycleView);
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mRecyclerView1.setItemAnimator(new DefaultItemAnimator());
@@ -94,6 +105,23 @@ public class AllTripsActivity extends AppCompatActivity {
 
     }
 
+   private void changePic() {
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        storageReference.child("images/").child(m_uid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+            public void onSuccess(Uri uri) {
+               String imgUrl=uri.toString();
+                m_user.setImgURL(imgUrl);
+                mRef.child("usersProfile").child(m_uid).setValue(m_user);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
 
     private void addTripToList(String country, String city, int day, int month, int year, int leftDay, int leftMonth, int leftYear) {
 
