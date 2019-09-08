@@ -44,7 +44,7 @@ public class ContactMsgActivity extends AppCompatActivity {
         mAdapter=new CustomContactMsgAdapter(m_contactMsgArray, new OnRecyclerClickListener(){
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
-              //  onBtnClicked(position, id);
+                onBtnClicked(position, id);
             }
 
             @Override
@@ -79,7 +79,7 @@ public class ContactMsgActivity extends AppCompatActivity {
         mRef.child("Messages").child(m_uid).addValueEventListener(UserListener2);
     }
 
-    /*private void onBtnClicked(int position, int id) {
+    private void onBtnClicked(int position, int id) {
         String contactName = m_contactMsgArray.get(position).getmName();
         String contactId = m_contactMsgArray.get(position).getId();
         Intent intent = new Intent(this, MessageContentPerSenderActivity.class);
@@ -88,7 +88,7 @@ public class ContactMsgActivity extends AppCompatActivity {
         intent.putExtra("ContactId",contactId);
         intent.putExtra("ContactName", contactName);
         startActivity(intent);
-    }*/
+    }
 
 
     private void getUserContactAccordingID(String contactId) {

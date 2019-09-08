@@ -17,6 +17,8 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#F1C531"
+        android:textStyle="bold"
         android:layout_alignBottom="@+id/profile_image"
         android:layout_marginStart="33dp"
         android:layout_marginLeft="33dp"
