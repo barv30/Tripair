@@ -23,8 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/date"
-        android:layout_marginStart="33dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@id/date"
         android:layout_toRightOf="@id/date"
         android:text="the date is: "
@@ -36,12 +37,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="40dp"
-        android:textStyle="bold"
+        android:text="Message"
         android:textColor="#F1C531"
-        android:text="Message:"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
     />
 
     <TextView
@@ -54,17 +55,5 @@
         android:text="hello"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="16sp" />
-
-    <ImageButton
-        android:id="@+id/deleteBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:srcCompat="@android:drawable/ic_delete" />
 
 </RelativeLayout>

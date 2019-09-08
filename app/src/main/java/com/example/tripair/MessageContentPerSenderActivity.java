@@ -51,15 +51,10 @@ public class MessageContentPerSenderActivity extends AppCompatActivity {
         mAdapter = new CustomMessagesAdapter(m_MsgArray, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
-
             }
 
             @Override
             public void onRecycleViewItemDeleteClicked(int position, int id) {
-                m_MsgArray.remove(position);
-                String msgNum = m_MsgArray.get(position).getMsgNum();
-                ref.child("Messages").child(m_uid).child(m_contactId).child(msgNum).removeValue();
-                mAdapter.notifyDataSetChanged();
             }
         });
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

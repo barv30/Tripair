@@ -40,13 +40,6 @@ public class CustomMessagesAdapter extends RecyclerView.Adapter<CustomMessagesAd
         Message message = arrayList.get(position);
         holder.date.setText(message.getDate());
         holder.contactMsg.setText(message.getContent());
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onRecycleViewItemDeleteClicked(position, view.getId());
-
-            }
-        });
     }
 
     @Override
@@ -62,15 +55,6 @@ public class CustomMessagesAdapter extends RecyclerView.Adapter<CustomMessagesAd
             Log.v("ViewHolder","in View Holder");
             date=itemView.findViewById(R.id.recivedDate);
             contactMsg=itemView.findViewById(R.id.messageContent);
-            btnDelete = itemView.findViewById(R.id.deleteBtn);
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                    ref.removeValue();
-                }
-            });
-
         }
     }
 }
