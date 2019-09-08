@@ -72,7 +72,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
             smoke = itemView.findViewById(R.id.txt_smoke_insert);
             age = itemView.findViewById(R.id.txt_age_insert);
             btnDelete = itemView.findViewById(R.id.btn_deleteFav);
-            userPic=itemView.findViewById(R.id.imageView1);
+            userPic=itemView.findViewById(R.id.imageView);
 
         }
     }
