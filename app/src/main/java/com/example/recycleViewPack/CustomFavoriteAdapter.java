@@ -49,6 +49,12 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
                 listener.onRecycleViewItemDeleteClicked(position, view.getId());
             }
         });
+        holder.btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRecyclerViewItemClicked(position, view.getId());
+            }
+        });
 
     }
 
@@ -61,7 +67,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, date, smoke, age, leftDate;
          ImageView userPic;
-        ImageButton btnDelete;
+        ImageButton btnDelete, btnMessage;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +79,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
             age = itemView.findViewById(R.id.txt_age_insert);
             btnDelete = itemView.findViewById(R.id.btn_deleteFav);
             userPic=itemView.findViewById(R.id.imageView1);
+            btnMessage=itemView.findViewById(R.id.btn_message);
 
         }
     }

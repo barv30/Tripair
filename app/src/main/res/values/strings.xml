@@ -20,4 +20,6 @@
     <string name="man">Man</string>
     <string name="enter_first_name">Enter first name</string>
     <string name="female">Female</string>
+    <string name="message">Message</string>
+    <string name="messageTo">Message To</string>
 </resources>

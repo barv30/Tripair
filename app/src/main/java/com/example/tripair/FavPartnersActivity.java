@@ -31,6 +31,7 @@ public class FavPartnersActivity extends AppCompatActivity {
     private User m_user;
     private int m_tripPosition;
     private Trip m_trip;
+    private int m_favPosition;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -52,6 +53,7 @@ public class FavPartnersActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
                 //Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+                onMsgClicked(position, id);
             }
 
             @Override
@@ -105,6 +107,17 @@ public class FavPartnersActivity extends AppCompatActivity {
         //m_favoritePartners.remove(position);
         //mAdapter.notifyDataSetChanged();
 
+    }
+    public void onMsgClicked(int position, int id){
+        m_favPosition=position;
+        Intent intent = new Intent(this, MessageSendActivity.class);
+        intent.putExtra("favoritePartners", m_favoritePartners);
+        intent.putExtra("trip",m_trip);
+        intent.putExtra("tripPosition", m_tripPosition);
+        intent.putExtra("userUid", m_uid);
+        intent.putExtra("user", m_user);
+        intent.putExtra("favoritePartnerPosition",m_favPosition);
+        startActivity(intent);
     }
 
 }

@@ -14,6 +14,11 @@
             <item
                 android:id="@+id/editMyProfile"
                 android:title="Edit profile"/>
+            <item
+                android:id="@+id/messagesPage"
+                android:title="Messages"/>
+
+
 
         </menu>
     </item>
