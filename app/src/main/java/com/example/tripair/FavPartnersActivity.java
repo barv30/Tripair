@@ -31,7 +31,6 @@ public class FavPartnersActivity extends AppCompatActivity {
     private User m_user;
     private int m_tripPosition;
     private Trip m_trip;
-    private int m_favPosition;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -109,14 +108,18 @@ public class FavPartnersActivity extends AppCompatActivity {
 
     }
     public void onMsgClicked(int position, int id){
-        m_favPosition=position;
+        String receiverId = m_favoritePartners.get(position).getId();
+        String receiverName = m_favoritePartners.get(position).getmName();
+        String activityName = "FavPartnersActivity";
         Intent intent = new Intent(this, MessageSendActivity.class);
         intent.putExtra("favoritePartners", m_favoritePartners);
         intent.putExtra("trip",m_trip);
         intent.putExtra("tripPosition", m_tripPosition);
         intent.putExtra("userUid", m_uid);
         intent.putExtra("user", m_user);
-        intent.putExtra("favoritePartnerPosition",m_favPosition);
+        intent.putExtra("receiverId",receiverId);
+        intent.putExtra("receiverName",receiverName);
+        intent.putExtra("activityName",activityName);
         startActivity(intent);
     }
 

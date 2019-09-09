@@ -18,8 +18,6 @@
                 android:id="@+id/messagesPage"
                 android:title="Messages"/>
 
-
-
         </menu>
     </item>
 </menu>

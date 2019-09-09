@@ -23,20 +23,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MessageSendActivity extends AppCompatActivity {
-    private ArrayList<ContactPOJO> m_favoritePartners = new ArrayList<>();
     private String m_uid;
     private User m_user;
+    private String receiverName;
+    private String receiverId;
+    private String returnNameActivity;
+    //for favorites
+    private ArrayList<ContactPOJO> m_favoritePartners = new ArrayList<>();
     private Trip m_trip;
     private Message m_message;
-    private String reciverId;
+    private int m_tripPosition;
+
+    //for messages
+
+
     private String senderName;
     private String senderId;
     private String content;
     private String senderFirstName;
     private String senderLastName;
     private String m_dateAndTime;
-    private int m_favPartnerPosition;
-    private int m_tripPosition;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference();
 
@@ -47,12 +54,18 @@ public class MessageSendActivity extends AppCompatActivity {
         Intent intent = getIntent();
         m_uid = intent.getStringExtra("userUid");
         m_user = (User)intent.getSerializableExtra("user");
-        m_favPartnerPosition = intent.getIntExtra("favoritePartnerPosition",-1);
-        m_favoritePartners = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favoritePartners");
-        m_trip = (Trip)intent.getSerializableExtra("trip");
-        m_tripPosition =  intent.getIntExtra("tripPosition",-1);
+        receiverId = intent.getStringExtra("receiverId");
+        receiverName = intent.getStringExtra("receiverName");
+        returnNameActivity=intent.getStringExtra("activityName");
+        if(returnNameActivity.equals("FavPartnersActivity"))
+        {
+            m_favoritePartners = (ArrayList<ContactPOJO>) intent.getSerializableExtra("favoritePartners");
+            m_trip = (Trip)intent.getSerializableExtra("trip");
+            m_tripPosition =  intent.getIntExtra("tripPosition",-1);
+        }
+
         TextView lineText = findViewById(R.id.messageTo);
-        lineText.setText("Your optional partners to - "+ m_favoritePartners.get(m_favPartnerPosition).getmName());
+        lineText.setText("Message To - "+ receiverName);
     }
 
     public void SendButtonClicked (View v){
@@ -73,12 +86,11 @@ public class MessageSendActivity extends AppCompatActivity {
             senderLastName=m_user.getLastName();
             senderName = senderFirstName +" "+ senderLastName;
             senderId=  m_uid;
-            reciverId = m_favoritePartners.get(m_favPartnerPosition).getId();
             DateFormat df = new SimpleDateFormat("dd MM yyyy, HH:mm");
             m_dateAndTime = df.format(Calendar.getInstance().getTime());
             m_message= new Message(senderName,senderId,content,m_dateAndTime, time);
-            mRef.child("Messages").child(reciverId).child(senderId).child(time).setValue(m_message);
-            moveToFavPartners();
+            mRef.child("Messages").child(receiverId).child(senderId).child(time).setValue(m_message);
+            moveToActivity();
         }
 
 
@@ -97,14 +109,24 @@ public class MessageSendActivity extends AppCompatActivity {
         return null;
     }
 
-    private void moveToFavPartners() {
+    private void   moveToActivity() {
         // if everything is ok, return toFavPartners page
-        Intent intent = new Intent(this, FavPartnersActivity.class);
-        intent.putExtra("favoritePartners", m_favoritePartners);
-        intent.putExtra("trip",m_trip);
-        intent.putExtra("tripPosition", m_tripPosition);
-        intent.putExtra("user", m_user);
-        startActivity(intent);
-        this.finish();
+        if (returnNameActivity.equals("FavPartnersActivity")) {
+            Intent intent = new Intent(this, FavPartnersActivity.class);
+            intent.putExtra("favoritePartners", m_favoritePartners);
+            intent.putExtra("trip", m_trip);
+            intent.putExtra("tripPosition", m_tripPosition);
+            intent.putExtra("user", m_user);
+            startActivity(intent);
+            this.finish();
+        }
+        else
+        {
+            Intent intent = new Intent(this, MessageContentPerSenderActivity.class);
+            intent.putExtra("user", m_user);
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("ContactId",receiverId);
+            intent.putExtra("ContactName",receiverName);
+        }
     }
 }

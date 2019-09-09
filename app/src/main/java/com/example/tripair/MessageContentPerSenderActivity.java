@@ -9,6 +9,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.dataUser.Message;
@@ -92,4 +95,28 @@ public class MessageContentPerSenderActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.message_page, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int idItem=item.getItemId();
+
+        if(idItem == R.id.sendMsgBack) {
+            String activityName = "MessageContentPerSenderActivity";
+            Intent intent = new Intent(this, MessageSendActivity.class);
+            intent.putExtra("userUid", m_uid);
+            intent.putExtra("user", (User) m_user);
+            intent.putExtra("receiverName",m_contactName);
+            intent.putExtra("receiverId",m_contactId);
+            intent.putExtra("activityName",activityName);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
