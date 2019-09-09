@@ -80,7 +80,6 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
             btnDelete = itemView.findViewById(R.id.btn_deleteFav);
             userPic=itemView.findViewById(R.id.imageView1);
             btnMessage=itemView.findViewById(R.id.btn_message);
-
         }
     }
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.tripair.R;
 import com.squareup.picasso.Picasso;
-import java.util.*;
 
 import java.util.ArrayList;
 
@@ -48,6 +47,7 @@ public class CustomContactAdapter extends RecyclerView.Adapter<CustomContactAdap
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.btnFav.setClickable(false);
                 listener.onRecyclerViewItemClicked(position,view.getId());
             }
         });
