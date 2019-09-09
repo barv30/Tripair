@@ -20,17 +20,9 @@ import com.example.recycleViewPack.ContactPOJO;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 
 public class EditTripSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -265,6 +257,7 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
         Integer currentDay=calendar.get(Calendar.DATE);
         Integer currentMonth=calendar.get(Calendar.MONTH) +1 ;
         Integer currentYear=calendar.get(Calendar.YEAR);
+        CheckBox checkBoxOneWay  = (CheckBox)findViewById(R.id.oneway_ch);
         CheckBox checkBoxRelax = (CheckBox) findViewById(R.id.checkBoxRelax);
         CheckBox checkBoxTracks = (CheckBox) findViewById(R.id.checkBoxNature);
         CheckBox checkBoxArt = (CheckBox) findViewById(R.id.checkBoxArt);
@@ -283,6 +276,11 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
         {
             return "Your arrive date is invalid!";
         }
+        else if ((m_dayLeft == 1 && m_monthLeft == 1 && m_yearLeft == currentYear) && !checkBoxOneWay.isChecked())
+        {
+            return "You have to enter left date or click on One-Way option.";
+        }
+        
         else
         {
             if(checkedArt)
@@ -298,7 +296,7 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
             {
                 typeTripArr.add("Tracks and Nature");
             }
-            if(m_dayLeft == 1 && m_monthLeft == 1 && m_yearLeft == currentYear) //the user doesn't choose left date
+            if(checkBoxOneWay.isChecked() ) //the user doesn't choose left date
             {
                 m_yearLeft=0;
                 m_dayLeft=0;
@@ -342,7 +340,26 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
             this.finish();
         }
     }
+    public void onOneWayClicked(View v)
+    {
+        Spinner spinnerDayLeft = (Spinner)findViewById(R.id.spinnerLeftDay);
+        Spinner spinnerMonthLeft = (Spinner)findViewById(R.id.spinnerLeftMonth);
+        Spinner spinnerYearLeft = (Spinner)findViewById(R.id.spinnerLeftYear);
 
+        boolean checked = ((CheckBox) v).isChecked();
+        if(checked)
+        {
+            spinnerDayLeft.setEnabled(false);
+            spinnerMonthLeft.setEnabled(false);
+            spinnerYearLeft.setEnabled(false);
+        }
+        else
+        {
+            spinnerDayLeft.setEnabled(true);
+            spinnerMonthLeft.setEnabled(true);
+            spinnerYearLeft.setEnabled(true);
+        }
+    }
 }
 
 
