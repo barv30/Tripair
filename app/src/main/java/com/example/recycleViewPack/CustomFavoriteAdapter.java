@@ -81,6 +81,7 @@ public class CustomFavoriteAdapter extends RecyclerView.Adapter<CustomFavoriteAd
             userPic=itemView.findViewById(R.id.imageView1);
             btnMessage=itemView.findViewById(R.id.btn_message);
 
+
         }
     }
 }

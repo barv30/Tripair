@@ -7,7 +7,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.dataUser.Trip;
 import com.example.dataUser.User;
@@ -101,12 +100,7 @@ public class FavPartnersActivity extends AppCompatActivity {
         this.finish();
     }
 
-    public void onDeleteButtonFavClicked(View v)
-    {
-        //m_favoritePartners.remove(position);
-        //mAdapter.notifyDataSetChanged();
 
-    }
     public void onMsgClicked(int position, int id){
         String receiverId = m_favoritePartners.get(position).getId();
         String receiverName = m_favoritePartners.get(position).getmName();
@@ -122,6 +116,7 @@ public class FavPartnersActivity extends AppCompatActivity {
         intent.putExtra("activityName",activityName);
         startActivity(intent);
     }
+
 
 }
 

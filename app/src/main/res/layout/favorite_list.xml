@@ -144,7 +144,6 @@
                 android:id="@+id/btn_deleteFav"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:clickable="false"
                 android:onClick="onDeleteButtonFavClicked"
                 app:srcCompat="@android:drawable/ic_delete" />
 
