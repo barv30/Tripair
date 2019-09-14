@@ -280,7 +280,7 @@ public class EditTripSettingsActivity extends AppCompatActivity implements Adapt
         {
             return "You have to enter left date or click on One-Way option.";
         }
-        
+
         else
         {
             if(checkedArt)
